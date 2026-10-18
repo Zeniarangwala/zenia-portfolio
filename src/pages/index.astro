@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout
+  title="Zenia Rangwala — UX + Graphic Designer"
+  description="Zenia Rangwala is a UX and graphic designer with a digital marketing background. I've been the user nobody designed for. Now I design for them."
+>
+  <section class="hero" aria-labelledby="hero-name">
+    <h1 id="hero-name">Zenia Rangwala</h1>
+    <p class="punchline">I've been the user nobody designed for. Now I design for them.</p>
+    <p>UX + Graphic Designer · Digital Marketing Enthusiast · AI-Curious Creative</p>
+    <p><a href="#work">Explore my work ↓</a></p>
+  </section>
+
+  <section id="work" aria-labelledby="work-heading" tabindex="-1">
+    <h2 id="work-heading">Selected work</h2>
+    <ol class="project-list">
+      {projects.map((project, i) => (
+        <li>
+          <article>
+            {project.data.cover ? (
+              <img
+                src={project.data.cover.src}
+                alt={project.data.coverAlt}
+                width={project.data.cover.width}
+                height={project.data.cover.height}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            ) : (
+              <div class="placeholder-box">
+                <p><strong>Cover image placeholder</strong></p>
+                <p>TODO: Zenia to confirm — supply cover image</p>
+              </div>
+            )}
+            <p>{project.data.name} · {project.data.discipline}</p>
+            <h3>
+              <a href={`/work/${project.data.slug}/`}>{project.data.title}</a>
+            </h3>
+            <p>{project.data.problem}</p>
+          </article>
+        </li>
+      ))}
+    </ol>
+  </section>
+</BaseLayout>

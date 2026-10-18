@@ -1,0 +1,156 @@
+---
+slug: clearspace
+order: 2
+name: Clearspace
+title: Designing a task app for brains that get overwhelmed
+discipline: UX and UI design
+problem: "How do you design a task app for people who get overwhelmed by a long list of tasks? TODO: Zenia to confirm the one-line problem."
+role: "TODO: Zenia to confirm"
+team: "TODO: Zenia to confirm"
+tools: "TODO: Zenia to confirm"
+timeline: "TODO: Zenia to confirm"
+inclusion:
+  audience: "People whose brains get overwhelmed. TODO: Zenia to confirm who specifically you designed for."
+  decisions:
+    - "The home screen shows one focus task first (“One thing first. The rest can wait.”), with the rest under “Up next”. TODO: Zenia to confirm the reasoning."
+    - "Account sign-up is split into three short steps with a progress bar, instead of one long form. TODO: Zenia to confirm the reasoning."
+    - "Type specs: Atkinson Hyperlegible for body text, Plus Jakarta Sans for headings, 1.7× line height, 55–75 character line length, +0.01–0.04em letter spacing. TODO: Zenia to confirm the reasoning."
+    - "Inputs, errors and alerts each say what's happening in plain words (for example “Please include a full email address”, “Auto-save is on”). TODO: Zenia to confirm the reasoning."
+inclusionStatus: "TODO: Zenia to confirm — design intention only, or was any of this tested?"
+cover:
+  src: /images/clearspace/before-after.png
+  width: 1041
+  height: 839
+coverAlt: "Two phone screens side by side. Left: a dense task list with tabs, filters, colour tags and an overdue warning. Right: a calm screen that says “Good morning, Jordan. One thing first. The rest can wait.” with one focus task and two tasks up next."
+assetRequest: "Directions explored and trade-offs, tools, timeline, and any testing or critique. Higher-resolution exports would help some small spec images."
+---
+import Figure from '../../components/Figure.astro';
+import Gallery from '../../components/Gallery.astro';
+
+<Figure
+  src="/images/clearspace/before-after.png"
+  width={1041}
+  height={839}
+  eager
+  alt="Two phone screens side by side. Left: a dense task list with tabs, filters, colour tags and an overdue warning. Right: a calm screen that says “Good morning, Jordan. One thing first. The rest can wait.” with one focus task and two tasks up next."
+  caption="Before and after: from a full list to one thing first."
+/>
+
+## Where it started
+
+Clearspace is a task app for brains that get overwhelmed.
+
+**TODO: Zenia to confirm — the story: where the idea came from and what “overwhelmed” looks like for the people you designed for.**
+
+## Directions I explored
+
+**TODO: Zenia to confirm — two or three real directions you tried, the trade-offs of each, and why you chose this one. The before/after images below show where you started and ended, but not the reasoning.**
+
+### Sign-up: one long form vs. three steps
+
+<Gallery>
+  <Figure
+    src="/images/clearspace/form-before.png"
+    width={672}
+    height={1110}
+    alt="Before: a single “Create Account” screen with many fields stacked together and one Submit button."
+    caption="Before: everything on one screen."
+  />
+  <Figure
+    src="/images/clearspace/form-after-step1.png"
+    width={538}
+    height={888}
+    alt="After, step 1: “What should we call you?” with a single Display name field and a Continue button."
+    caption="Step 1: your name."
+  />
+  <Figure
+    src="/images/clearspace/form-after-step2.png"
+    width={538}
+    height={888}
+    alt="After, step 2: “How can we reach you?” with an email field, Back and Continue buttons."
+    caption="Step 2: your email."
+  />
+  <Figure
+    src="/images/clearspace/form-after-step3.png"
+    width={538}
+    height={888}
+    alt="After, step 3: “Secure your account” with a password field, a “Strong password” confirmation, Back and Create account buttons."
+    caption="Step 3: your password."
+  />
+</Gallery>
+
+## Final design
+
+### Type
+
+<Gallery>
+  <Figure src="/images/clearspace/heading-font.png" width={566} height={134} alt="Spec: heading font, Plus Jakarta Sans." caption="Headings: Plus Jakarta Sans." />
+  <Figure src="/images/clearspace/body-font.png" width={650} height={156} alt="Spec: body font, Atkinson Hyperlegible." caption="Body: Atkinson Hyperlegible." />
+  <Figure src="/images/clearspace/line-height.png" width={426} height={142} alt="Spec: line height (body), 1.7×." caption="Line height: 1.7×." />
+  <Figure src="/images/clearspace/line-length.png" width={512} height={150} alt="Spec: line length, 55–75 characters." caption="Line length: 55–75 characters." />
+  <Figure src="/images/clearspace/letter-spacing.png" width={524} height={130} alt="Spec: letter spacing, +0.01–0.04em." caption="Letter spacing: +0.01–0.04em." />
+</Gallery>
+
+### Components
+
+<Gallery>
+  <Figure
+    src="/images/clearspace/input-display-name.png"
+    width={706}
+    height={227}
+    alt="A Display name field with the hint “This is shown to other members”, filled in with Jordan Lee and a visible focus outline."
+    caption="Input with a hint and a clear focus state."
+  />
+  <Figure
+    src="/images/clearspace/input-email-error.png"
+    width={706}
+    height={278}
+    alt="An Email address field with the hint “Used for sign-in only, never shared”, containing “jordan@” with a red border and the error “Please include a full email address”."
+    caption="Input error that says what to fix."
+  />
+  <Figure
+    src="/images/clearspace/progress-step2.png"
+    width={790}
+    height={108}
+    alt="A progress bar labelled “Step 2 of 3 — Contact info”, about two-thirds full."
+    caption="Progress: step 2 of 3."
+  />
+  <Figure
+    src="/images/clearspace/progress-complete.png"
+    width={677}
+    height={92}
+    alt="A full green progress bar labelled “Step 3 of 3 — All done”, 100%."
+    caption="Progress: done."
+  />
+</Gallery>
+
+<Gallery>
+  <Figure src="/images/clearspace/button-save-continue.png" width={561} height={183} alt="A blue button reading “Save and continue”." caption="Primary button." />
+  <Figure src="/images/clearspace/button-delete.png" width={454} height={152} alt="A red button reading “Delete account”." caption="Destructive button: “Delete account”." />
+  <Figure src="/images/clearspace/button-remove.png" width={512} height={147} alt="A red button reading “Remove from account”." caption="Destructive button: “Remove from account”." />
+</Gallery>
+
+**TODO: Zenia to confirm — what the two red buttons are comparing (wording? when each is used?).**
+
+<Gallery>
+  <Figure
+    src="/images/clearspace/alert-autosave.png"
+    width={522}
+    height={92}
+    alt="A light blue info alert: “Auto-save is on. Your work saves every 30 seconds.”"
+    caption="Info alert."
+  />
+  <Figure
+    src="/images/clearspace/alert-error.png"
+    width={530}
+    height={108}
+    alt="A light red error alert: “Could not save. Check your connection and try again.”"
+    caption="Error alert."
+  />
+</Gallery>
+
+## Outcome and reflection
+
+**TODO: Zenia to confirm — any real critique feedback, testing or lessons.**
+
+What I'd test or improve next: **TODO: Zenia to confirm.**
