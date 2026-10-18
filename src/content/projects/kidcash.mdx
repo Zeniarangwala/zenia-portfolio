@@ -4,22 +4,26 @@ order: 5
 name: KidCash
 title: Making a first banking app make sense to kids
 discipline: Mobile banking app design for children
-problem: "How do you make savings, chequing and goals make sense to a kid opening their first bank account? TODO: Zenia to confirm the one-line problem."
+problem: "Kids form habits around money really early, but most of us were never taught how money actually works."
 role: "UX designer"
 team: "Solo project"
 tools: "Figma"
 timeline: "June–July 2025"
 inclusion:
-  audience: "Kids using a banking app for the first time. TODO: Zenia to confirm the age range."
+  audience: "Kids learning to earn, save and spend for the first time. TODO: Zenia to confirm the age range."
   decisions:
-    - "TODO: Zenia to confirm — the specific decisions made for kids (e.g. the savings tree, goals, games), and why."
-inclusionStatus: "TODO: Zenia to confirm — design intention only, or was any of this tested with kids or parents?"
+    - "A Savings Tree that grows as you save, so progress you can't see (money in an account) becomes something visible."
+    - "Savings goals with progress bars and amounts in plain numbers (“$25 of $100 saved”)."
+    - "Chores with dollar values, so kids can see exactly how money is earned."
+    - "Small learning games, so financial education feels less overwhelming."
+    - "“Ask a parent to set up your KidCash account” on the login screen, so kids aren't expected to handle sign-up alone."
+inclusionStatus: "Design intention, based on secondary research. Not tested with kids or parents. TODO: Zenia to confirm."
 cover:
   src: /images/kidcash/screen-home.png
   width: 432
   height: 888
-coverAlt: "KidCash home screen: “Hello, Zenia!” with savings, chequing and goals balances, and a Savings Tree below."
-assetRequest: "Directions and trade-offs, the source of the research insights, and any testing. A wider cover image would help the home page layout."
+coverAlt: "KidCash home screen: “Hello, Zenia!” with savings, checking and goals balances shown as piggy banks, and a Savings Tree below."
+assetRequest: "Real alternative directions with trade-offs, the kids' age range, and any testing. A wider cover image would help the home page layout."
 ---
 import Figure from '../../components/Figure.astro';
 import Gallery from '../../components/Gallery.astro';
@@ -29,29 +33,49 @@ import Gallery from '../../components/Gallery.astro';
   width={432}
   height={888}
   eager
-  alt="KidCash home screen: “Hello, Zenia!” with savings, chequing and goals balances, and a Savings Tree below."
-  caption="The KidCash home screen."
+  alt="KidCash home screen: “Hello, Zenia!” with savings, checking and goals balances shown as piggy banks, and a Savings Tree below."
+  caption="KidCash: teaching kids about money through play."
 />
 
-## Where it started
+## Why I made KidCash
 
-KidCash is a first banking app for kids, covering savings, chequing and goals.
+I've always wished I'd learned how to manage money earlier. Growing up, I spent without thinking and saved without really understanding why, mostly because nobody ever taught me how money works.
 
-**TODO: Zenia to confirm — the story: where the idea came from, and who it's for.**
+So I designed KidCash, a mobile app that helps kids learn to earn, save and spend through fun, interactive tasks. Kids do chores to earn virtual cash they can spend, save or donate. I wanted it to feel fun without being too childish or boring.
+
+## What the research said
+
+- Kids start forming attitudes and emotions around money really young, and that shapes how they spend and save later.
+- Kids can develop very different relationships with money early on, so guidance, structure and real-life learning matter.
+- As spending goes digital, money can feel less real to kids.
+- A TD survey found 86% of Canadian parents agreed that interactive games that teach finances could make learning about money more fun for kids. That pushed me to make KidCash more interactive, reward-based and visual.
+
+Sources: TD Stories, “Your Kid's Digital Spending Habits”; Michigan Ross, “New Research Shows Children Form Attitudes About Money at a Young Age”; Benjamin Talks, “Spendthrift or Penny Pincher? The Psychology Behind Your Kid and Money”.
 
 <Figure
   src="/images/kidcash/research-insights.png"
   width={720}
   height={578}
   alt="Three insight cards. Digital Spending: kids are growing up around online purchases, subscriptions and digital transactions from an early age. Interactive Learning: interactive experiences can make financial education feel more engaging and easier for younger users to connect with. Money Habits: children begin forming emotional relationships with spending and saving from a young age."
-  caption="Three insights: digital spending, interactive learning and money habits."
+  caption="Three insights that shaped KidCash. They led me to reward-based motivation, visual savings goals, interactive learning tasks and accessible design."
 />
 
-**TODO: Zenia to confirm — where these insights came from (your own research, articles, interviews?).**
+## Directions explored
 
-## Directions I explored
+**TODO: Zenia to confirm — did you try two or three real directions (for example layouts, reward systems or visual styles)? What were the trade-offs?**
 
-**TODO: Zenia to confirm — two or three real directions, the trade-offs of each, and why you chose this one.**
+### What I drew from
+
+I looked at gamified banking and savings app designs on Pinterest, and at three apps:
+
+- **Greenlight:** the spend / save / give system.
+- **GoHenry:** chore rewards and earning.
+- **Duolingo:** a friendly mascot and progress loops.
+
+### Look and feel
+
+- **Colour:** teal #2A7F8E, yellow #F4C660, pink #F4A2A2, white #FFFFFF, cream #FBEFD9 and dark navy #1B2A33.
+- **Type:** Nunito as the primary font.
 
 ## Final design
 
@@ -60,15 +84,15 @@ KidCash is a first banking app for kids, covering savings, chequing and goals.
     src="/images/kidcash/screen-login.png"
     width={432}
     height={888}
-    alt="KidCash login screen: “Hey there! Ready to grow your savings?” with name and password fields and a Log in button."
-    caption="Log in."
+    alt="KidCash login screen: “Hey there! Ready to grow your savings?” with name and password fields, a Log In button, “Ask a parent to set up your KidCash account” and “Continue without an account”."
+    caption="Log in, or ask a parent to set up an account."
   />
   <Figure
     src="/images/kidcash/screen-chores.png"
     width={486}
     height={969}
-    alt="Chores screen with a list of chores, checkboxes and dollar amounts."
-    caption="Chores."
+    alt="Chores screen: today's earnings $5 of $13, 2 of 5 done, with chores like make your bed, walk the dog and read for 20 minutes, each with a dollar amount."
+    caption="Chores show exactly what each one earns."
   />
   <Figure
     src="/images/kidcash/screen-goals-and-games.png"
@@ -79,32 +103,34 @@ KidCash is a first banking app for kids, covering savings, chequing and goals.
   />
 </Gallery>
 
+### Key features
+
 <Gallery>
-  <Figure
-    src="/images/kidcash/feature-savings-tree.png"
-    width={688}
-    height={534}
-    alt="Savings Tree card, Level 3: “Watch it grow as you save!” with a small tree, $150 saved and a progress bar to $50 to Level 4."
-    caption="Savings Tree."
-  />
   <Figure
     src="/images/kidcash/feature-goals.png"
     width={450}
     height={578}
     alt="Goals card: Game Console 25% ($25 of $100), Book Fair 17% ($5 of $30), Sports Gear 20% ($8 of $40), and an Add goals button."
-    caption="Goals."
+    caption="Goals and rewards: set savings goals and see your progress in a way that feels motivating."
   />
   <Figure
     src="/images/kidcash/feature-learning-games.png"
     width={661}
     height={598}
     alt="“Play game” card with two learning games, Coin Quest and Budget Builder, each with a reward and a Play button."
-    caption="Learning games."
+    caption="Learning games make financial education feel more interactive and less overwhelming."
+  />
+  <Figure
+    src="/images/kidcash/feature-savings-tree.png"
+    width={688}
+    height={534}
+    alt="Savings Tree card, Level 3: “Watch it grow as you save!” with a small tree, $150 saved and a progress bar showing $50 to Level 4."
+    caption="The Savings Tree grows as you save, so progress feels visible over time."
   />
 </Gallery>
 
 ## Outcome and reflection
 
-**TODO: Zenia to confirm — any real critique feedback, testing or lessons.**
+**TODO: Zenia to confirm — any real critique feedback or lessons from this project.**
 
 What I'd test or improve next: **TODO: Zenia to confirm.**

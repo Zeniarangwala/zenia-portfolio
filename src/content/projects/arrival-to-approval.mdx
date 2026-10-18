@@ -3,53 +3,164 @@ slug: arrival-to-approval
 order: 3
 name: Arrival to Approval
 title: Making Canadian credit make sense for newcomers
-discipline: Service design · IBM capstone, Waterloo
-problem: "How might we make Canadian credit make sense for people who are new to Canada? TODO: Zenia to confirm the one-line problem."
-role: "UX designer. TODO: Zenia to confirm — your individual contributions"
+discipline: Service design · IBM capstone, University of Waterloo
+problem: "Newcomers are expected to understand Canadian credit almost right away, but nobody really teaches them how it works."
+role: "UX designer (group capstone). TODO: Zenia to confirm — what you personally designed vs. the team"
 team: "Group project. TODO: Zenia to confirm — team size and members’ roles"
 tools: "Figma, Canva"
 timeline: "January–April 2025"
 inclusion:
-  audience: "Newcomers to Canada trying to understand and build credit. TODO: Zenia to confirm who specifically."
+  audience: "Newcomers to Canada who don't have a Canadian credit history yet. We designed around Priya, a persona who just moved here for grad school, has savings and a part-time job, and keeps getting turned down for housing and phone plans."
   decisions:
-    - "TODO: Zenia to confirm — the specific design decisions made for newcomers, and why."
-inclusionStatus: "TODO: Zenia to confirm — design intention only, or was any of this tested with newcomers?"
-coverAlt: "TODO: Zenia to confirm — no cover image yet"
-assetRequest: "All images (cover, process, final), your individual contributions vs. the team's output, directions explored, and any outcome evidence from the capstone."
+    - "Information is broken into small lessons, because most financial resources we found were long, formal and hard to follow."
+    - "Plain, conversational language instead of banking jargon, because so much of what's out there assumes you already know the system."
+    - "A multilingual AI chat where you can ask questions in your own language and get simpler answers that link back to lessons."
+    - "Guided onboarding and a progress page with lessons completed, a streak and badges, so learning feels encouraging instead of like you're behind."
+inclusionStatus: "Design intention. It's based on our research and a persona, not testing with newcomers. TODO: Zenia to confirm whether any of it was tested or reviewed by IBM."
+cover:
+  src: /images/arrival-to-approval/cover-homepage-monitor.png
+  width: 924
+  height: 540
+coverAlt: "The Credit System Education homepage on a desktop monitor: “Credit Awareness for a Better Start” with cards for “Your Credit Score” and “Improve Your Credit Score”."
+assetRequest: "Your individual contributions vs. the team's, team size, real alternative directions with trade-offs, and any feedback from IBM or the capstone."
 ---
-import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
+import Figure from '../../components/Figure.astro';
+import Gallery from '../../components/Gallery.astro';
 
-<ImagePlaceholder label="Cover image for Arrival to Approval" />
+<Figure
+  src="/images/arrival-to-approval/cover-homepage-monitor.png"
+  width={924}
+  height={540}
+  eager
+  alt="The Credit System Education homepage on a desktop monitor: “Credit Awareness for a Better Start” with cards for “Your Credit Score” and “Improve Your Credit Score”."
+  caption="Arrival to Approval: a multilingual platform for learning how Canadian credit works."
+/>
 
-## Where it started
+## Why this one was personal
 
-This was my IBM service design capstone at Waterloo, a group project from January to April 2025. We looked at how newcomers make sense of Canadian credit.
+I immigrated to Canada too, and I remember how confusing and stressful the financial system felt at first. Credit scores, loans and banking expectations get treated like common knowledge. When you're new, it feels like everyone else already understands a system nobody taught you.
 
-**TODO: Zenia to confirm — the story: the brief from IBM, what the team found, and what you personally did versus what the team did together.**
+For our 4th-year IBM service design capstone, our team designed Arrival to Approval. It's a multilingual learning platform that helps newcomers understand credit scores, how the system works and how to build credit history, with AI-supported guidance along the way.
 
-## My part vs. the team's
+## What we found
 
-- **What I did:** TODO: Zenia to confirm.
-- **What the team did together:** TODO: Zenia to confirm.
+Lots of newcomers can't access important financial services because they don't have a Canadian credit history yet. That affects housing, loans, education and overall stability.
 
-## Directions we explored
+We also noticed that most financial education resources assume you already know banking terms and how things work in Canada. They lean on long explanations, formal language and information-heavy layouts, so learning ends up feeling intimidating instead of supportive.
 
-**TODO: Zenia to confirm — two or three real directions, the trade-offs of each, and why the team chose the final one.**
+## Designing around Priya
 
-<ImagePlaceholder label="Direction 1" />
+We built a persona, Priya, to think through what this actually feels like. She just moved to Canada for grad school, has savings and a part-time job, and keeps getting rejected for housing and phone plans because she has no Canadian credit score. She doesn't know where to start, so she relies on friends, Reddit and social media.
 
-<ImagePlaceholder label="Direction 2" />
+<Figure
+  src="/images/arrival-to-approval/journey-map-priya.png"
+  width={1383}
+  height={922}
+  alt="Priya's user journey in five stages: arrives in Canada, tries to understand credit, faces roadblocks, seeks guidance everywhere, uses Arrival to Approval. For each stage it lists what she's doing, how she feels (from hopeful but nervous, down to stressed and discouraged, then up to more confident and in control), pain points, opportunities and touchpoints."
+  caption="Priya's journey. Her confidence drops when she hits roadblocks and only recovers once she has clear, step-by-step guidance."
+/>
+
+## Turning research into design
+
+We landed on four things the platform had to do:
+
+1. **Make information easier to understand.** Break things into smaller lessons that are easier to follow.
+2. **Make it feel supportive.** Onboarding should feel guided, not like you're expected to already know the system.
+3. **Accessibility and language.** Newcomers come from all kinds of backgrounds, so it has to be clear and easy to navigate for a wide range of people.
+4. **Help people feel progress.** It should build confidence over time instead of making people feel stressed or behind.
+
+## Directions explored
+
+**TODO: Zenia to confirm — were there two or three real alternative directions the team considered (for example a different structure, or no AI chat)? What were the trade-offs and why did you pick this one?**
+
+### From wireframes to the final screens
+
+We mapped the flow first: a dashboard, a lesson page, AI support and progress tracking.
+
+<Gallery>
+  <Figure
+    src="/images/arrival-to-approval/wireframe-dashboard.png"
+    width={719}
+    height={393}
+    alt="Wireframe of the dashboard: logo, navigation, a title with call-to-action buttons, a hero image placeholder and three topic cards."
+    caption="Dashboard: featured lessons, financial topics and quick access to learning."
+  />
+  <Figure
+    src="/images/arrival-to-approval/wireframe-lesson.png"
+    width={740}
+    height={432}
+    alt="Wireframe of a lesson page: lesson title, text blocks and an image on the left, a lessons list with the current lesson highlighted on the right, and Previous and Next buttons."
+    caption="Lesson page: a structured layout with guided navigation."
+  />
+  <Figure
+    src="/images/arrival-to-approval/wireframe-ai-support.png"
+    width={817}
+    height={446}
+    alt="Wireframe of AI support: lesson context on the left, a chat with bot and user messages, quick replies and an input field on the right."
+    caption="AI support: ask questions and get simpler answers."
+  />
+  <Figure
+    src="/images/arrival-to-approval/wireframe-progress.png"
+    width={740}
+    height={432}
+    alt="Wireframe of the progress page: rating, streak and badge boxes, progress bars for each section, and a row of badge circles."
+    caption="Progress: completed lessons, milestones and activity."
+  />
+</Gallery>
 
 ## Final design
 
-**TODO: Zenia to confirm — what the final service or product is, and short captions for each image.**
+<Figure
+  src="/images/arrival-to-approval/hifi-sign-in.png"
+  width={1286}
+  height={666}
+  alt="Sign-in page. Left: a dark blue panel with credit cards, “Welcome Back to a Better Start” and “Pick up where you left off in your credit learning path.” Right: email and password fields, a red Sign In button and Sign in with Google."
+  caption="Sign in picks up where you left off in your learning path."
+/>
 
-<ImagePlaceholder label="Final design, image 1" />
+<Gallery>
+  <Figure
+    src="/images/arrival-to-approval/hifi-register.png"
+    width={749}
+    height={434}
+    alt="Register page with “Join newcomers learning the Canadian credit system, in your language.” on the left and a Register Today form on the right."
+    caption="Registering: “in your language” is part of the promise from the start."
+  />
+  <Figure
+    src="/images/arrival-to-approval/hifi-lesson.png"
+    width={723}
+    height={559}
+    alt="Lesson 1: Benefits of Credit, with short paragraphs and a photo of credit cards, a lesson list in a dark sidebar, and a “Use the Chat Bot, ask questions in your language” prompt above it."
+    caption="Short lessons, with the chat one click away."
+  />
+</Gallery>
 
-<ImagePlaceholder label="Final design, image 2" />
+<Gallery>
+  <Figure
+    src="/images/arrival-to-approval/hifi-ai-chat.png"
+    width={1128}
+    height={638}
+    alt="AI Chat page: “What can I help with?” with a search box reading “What is Credit Score” and the hint “Try asking about credit scores, loans, or any banking term you don't get.”"
+    caption="AI chat: ask about any banking term you don't get."
+  />
+  <Figure
+    src="/images/arrival-to-approval/hifi-ai-chat-answer.png"
+    width={794}
+    height={447}
+    alt="AI Chat answering “What is Credit Score?” in plain language, explaining the 300 to 900 range, and linking to Lesson 2: Credit Score."
+    caption="Answers stay short and point back to the matching lesson."
+  />
+  <Figure
+    src="/images/arrival-to-approval/hifi-progress.png"
+    width={772}
+    height={427}
+    alt="Your Progress page for Priya: 4 of 12 lessons completed, a 3-day streak, 2 of 4 badges, progress bars for three sections, and “Up next: Lesson 3: Building Credit” with a Continue button."
+    caption="Progress shows what's done and what's next."
+  />
+</Gallery>
 
 ## Outcome and reflection
 
-**TODO: Zenia to confirm — any real feedback from IBM or the capstone, testing, recognition, or lessons.**
+**TODO: Zenia to confirm — any real feedback from IBM, your instructors or classmates, and what you learned working as a team.**
 
 What I'd test or improve next: **TODO: Zenia to confirm.**
