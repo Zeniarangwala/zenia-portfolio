@@ -1,0 +1,57 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+  return projects.map((project, i) => ({
+    params: { slug: project.data.slug },
+    props: { project, prev: projects[i - 1], next: projects[i + 1] },
+  }));
+}
+
+const { project, prev, next } = Astro.props;
+const { data } = project;
+const { Content } = await render(project);
+---
+<BaseLayout title={`${data.name} — Zenia Rangwala`} description={`${data.title}. ${data.problem}`}>
+  <article>
+    <header>
+      <p>{data.name} · {data.discipline}</p>
+      <h1>{data.title}</h1>
+      <p class="prose">{data.problem}</p>
+    </header>
+
+    <section aria-labelledby="facts-heading">
+      <h2 id="facts-heading">Quick facts</h2>
+      <dl class="facts">
+        <dt>My role</dt>
+        <dd>{data.role}</dd>
+        <dt>Team</dt>
+        <dd>{data.team}</dd>
+        <dt>Tools</dt>
+        <dd>{data.tools}</dd>
+        <dt>Timeline</dt>
+        <dd>{data.timeline}</dd>
+      </dl>
+    </section>
+
+    <section class="inclusion" aria-labelledby="inclusion-heading">
+      <h2 id="inclusion-heading">Who this design includes and how</h2>
+      <p><strong>Who:</strong> {data.inclusion.audience}</p>
+      <ul>
+        {data.inclusion.decisions.map((d) => <li>{d}</li>)}
+      </ul>
+      <p><strong>Evidence status:</strong> {data.inclusionStatus}</p>
+    </section>
+
+    <div class="prose-wrap">
+      <Content />
+    </div>
+  </article>
+
+  <nav class="case-nav" aria-label="More projects">
+    {prev ? <a href={`/work/${prev.data.slug}/`}>← Previous: {prev.data.name}</a> : <span />}
+    {next ? <a href={`/work/${next.data.slug}/`}>Next: {next.data.name} →</a> : <a href="/#work">Back to all work</a>}
+  </nav>
+</BaseLayout>
