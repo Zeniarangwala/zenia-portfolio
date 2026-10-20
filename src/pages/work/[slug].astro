@@ -15,43 +15,45 @@ const { data } = project;
 const { Content } = await render(project);
 ---
 <BaseLayout title={`${data.name} — Zenia Rangwala`} description={`${data.title}. ${data.problem}`}>
-  <article>
-    <header>
-      <p>{data.name} · {data.discipline}</p>
+  <article class="wrap">
+    <header class="case-header">
+      <p class="label">{data.name} · {data.discipline}</p>
       <h1>{data.title}</h1>
-      <p class="prose">{data.problem}</p>
+      <p class="problem">{data.problem}</p>
     </header>
 
-    <section aria-labelledby="facts-heading">
-      <h2 id="facts-heading">Quick facts</h2>
-      <dl class="facts">
-        <dt>My role</dt>
-        <dd>{data.role}</dd>
-        <dt>Team</dt>
-        <dd>{data.team}</dd>
-        <dt>Tools</dt>
-        <dd>{data.tools}</dd>
-        <dt>Timeline</dt>
-        <dd>{data.timeline}</dd>
-      </dl>
-    </section>
+    <div class="case-intro">
+      <section class="facts" aria-labelledby="facts-heading">
+        <h2 id="facts-heading">Quick facts</h2>
+        <dl>
+          <dt>My role</dt>
+          <dd>{data.role}</dd>
+          <dt>Team</dt>
+          <dd>{data.team}</dd>
+          <dt>Tools</dt>
+          <dd>{data.tools}</dd>
+          <dt>Timeline</dt>
+          <dd>{data.timeline}</dd>
+        </dl>
+      </section>
 
-    <section class="inclusion" aria-labelledby="inclusion-heading">
-      <h2 id="inclusion-heading">Who this design includes and how</h2>
-      <p><strong>Who:</strong> {data.inclusion.audience}</p>
-      <ul>
-        {data.inclusion.decisions.map((d) => <li>{d}</li>)}
-      </ul>
-      <p><strong>Evidence status:</strong> {data.inclusionStatus}</p>
-    </section>
+      <section class="inclusion" aria-labelledby="inclusion-heading">
+        <h2 id="inclusion-heading">Who this design includes and how</h2>
+        <p><strong>Who:</strong> {data.inclusion.audience}</p>
+        <ul>
+          {data.inclusion.decisions.map((d) => <li>{d}</li>)}
+        </ul>
+        <p><strong>Evidence status:</strong> {data.inclusionStatus}</p>
+      </section>
+    </div>
 
-    <div class="prose-wrap">
+    <div class="case-body">
       <Content />
     </div>
-  </article>
 
-  <nav class="case-nav" aria-label="More projects">
-    {prev ? <a href={`/work/${prev.data.slug}/`}>← Previous: {prev.data.name}</a> : <span />}
-    {next ? <a href={`/work/${next.data.slug}/`}>Next: {next.data.name} →</a> : <a href="/#work">Back to all work</a>}
-  </nav>
+    <nav class="case-nav" aria-label="More projects">
+      {prev ? <a class="btn btn-ghost" href={`/work/${prev.data.slug}/`}><span aria-hidden="true">←</span> Previous: {prev.data.name}</a> : <span />}
+      {next ? <a class="btn" href={`/work/${next.data.slug}/`}>Next: {next.data.name} <span aria-hidden="true">→</span></a> : <a class="btn" href="/#work">Back to all work</a>}
+    </nav>
+  </article>
 </BaseLayout>
