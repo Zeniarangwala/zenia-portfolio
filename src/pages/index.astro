@@ -2,82 +2,22 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WorkCard from '../components/WorkCard.astro';
-import { stickers } from '../data/site';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
-
-// The hero sentence, split so each word can fade in on its own.
-type Part =
-  | { word: string; soft?: boolean }
-  | { sticker: keyof typeof stickers; after: string; tilt: string; width: string; soft?: boolean };
-const words = (text: string, soft = false): Part[] => text.split(' ').map((word) => ({ word, soft }));
-const parts: Part[] = [
-  ...words("Hey, I'm Zenia"),
-  { sticker: 'greyhound', after: '.', tilt: '-7deg', width: '1.6em' },
-  ...words("I've been the user nobody designed for"),
-  { sticker: 'kidcash', after: ',', tilt: '6deg', width: '0.8em' },
-  ...words('so now I design for them', true),
-  { sticker: 'noise', after: '.', tilt: '-4deg', width: '0.85em', soft: true },
-];
 ---
 <BaseLayout
-  title="Zenia Rangwala — UX + Graphic Designer"
-  description="Zenia Rangwala is a UX and graphic designer with a digital marketing background. I've been the user nobody designed for. Now I design for them."
+  title="Zenia Rangwala — Graphic + UX Designer"
+  description="Zenia Rangwala is a graphic and UX designer doing an MFA at SCAD. I've been the user nobody designed for. Now I design for them."
 >
-  <section class="hero" aria-labelledby="hero-title">
-    <svg class="hero-route" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-      <defs>
-        <mask id="route-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1200" height="600">
-          <path
-            class="route-draw"
-            d="M-20 470 C 120 430, 170 300, 300 320 S 470 520, 600 470 S 720 250, 850 260 S 1010 420, 1090 330 S 1180 150, 1230 120"
-            fill="none"
-            stroke="#fff"
-            stroke-width="12"
-            pathLength="1"
-            stroke-dasharray="1"
-            stroke-dashoffset="0"
-          />
-        </mask>
-      </defs>
-      <g mask="url(#route-mask)">
-        <path
-          d="M-20 470 C 120 430, 170 300, 300 320 S 470 520, 600 470 S 720 250, 850 260 S 1010 420, 1090 330 S 1180 150, 1230 120"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-dasharray="0 11"
-        />
-      </g>
-    </svg>
-
-    <div class="wrap">
-      <p class="hero-kicker">UX + Graphic Designer · Digital Marketing Enthusiast · AI-Curious Creative</p>
-      <h1 class="hero-title" id="hero-title">
-        {parts.map((part, i) =>
-          'word' in part ? (
-            <Fragment>
-              <span class:list={['w', { soft: part.soft }]} style={`--i:${i}`}>{part.word}</span>{' '}
-            </Fragment>
-          ) : (
-            <Fragment>
-              {/* Decorative shortcut: the same case studies are linked from the work cards below. */}
-              <a
-                class="sticker"
-                href={stickers[part.sticker].href}
-                tabindex="-1"
-                aria-hidden="true"
-                style={`--i:${i};--tilt:${part.tilt};--w:${part.width}`}
-              >
-                <img src={stickers[part.sticker].src} alt="" width="120" height="110" decoding="async" />
-              </a><span class:list={['w', { soft: part.soft }]} style={`--i:${i}`}>{part.after}</span>{' '}
-            </Fragment>
-          ),
-        )}
-      </h1>
-      <p class="hero-cta"><a href="#work">Explore my work <span aria-hidden="true">↓</span></a></p>
-    </div>
+  <section class="hero wrap" aria-labelledby="hero-title">
+    {/* Line 1 starts faint and blurred (overlooked), then sharpens (seen). The text is
+        always in the page, so screen readers get both lines straight away. */}
+    <h1 class="hero-title" id="hero-title">
+      <span class="hero-line hero-line-1">I've been the user nobody designed for.</span>
+      <span class="hero-line hero-line-2">Now I design for <span class="hero-mark">them</span>.</span>
+    </h1>
+    <p class="hero-meta">Graphic + UX Designer · MFA at SCAD · Atlanta</p>
+    <p class="hero-cta"><a href="#work">Explore my work <span aria-hidden="true">↓</span></a></p>
   </section>
 
   <section id="work" class="section wrap" aria-labelledby="work-heading" tabindex="-1">

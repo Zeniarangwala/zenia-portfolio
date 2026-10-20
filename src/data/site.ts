@@ -54,16 +54,3 @@ export const cards: Record<string, Card> = {
     hover: { src: '/images/kidcash/screen-goals-and-games.png', fit: 'contain' },
   },
 };
-
-// Little image stickers in the hero sentence. Each links to its case study.
-export const stickers = {
-  greyhound: {
-    src: asset('/images/greyhound/final/logo-final.jpg', '/images/greyhound/logo-final.jpg'),
-    href: '/work/greyhound/',
-  },
-  kidcash: { src: '/images/kidcash/screen-home.png', href: '/work/kidcash/' },
-  noise: {
-    src: asset('/images/noise/iterations/still-online-repeat.png', '/images/noise/still-online-repeat.png'),
-    href: '/work/noise/',
-  },
-};
