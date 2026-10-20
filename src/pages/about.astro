@@ -1,39 +1,192 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { links } from '../data/site';
+
+const info = [
+  {
+    label: 'Email',
+    text: links.email,
+    href: `mailto:${links.email}`,
+    icon: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+  },
+  {
+    label: 'LinkedIn',
+    text: 'linkedin.com/in/zeniarangwala',
+    href: links.linkedin,
+    icon: '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/>',
+  },
+  {
+    label: 'Resume',
+    text: 'resume.pdf',
+    href: links.resume,
+    icon: '<path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+  },
+];
+
+const experience = [
+  { role: 'Business Development and Marketing Intern', org: 'CrunchTimeZ', when: '2026' },
+  { role: 'Community and Brand Design Intern', org: 'She Hacks Purple', when: '2026' },
+  { role: 'Digital Marketing Coordinator', org: 'GoLime', when: '2024' },
+  { role: 'Product Designer', org: 'Goodself', when: '2024' },
+];
+
+const education = [
+  { role: 'MFA Graphic Design and Visual Experience', org: 'SCAD', when: '2026–Present' },
+  { role: 'BA Global Business and Digital Arts', org: 'University of Waterloo', when: '' },
+];
+
+// The running route in "Off the clock". Ends at the finish flag (FINISH).
+const route = 'M12 92 C 60 92, 70 30, 120 34 S 180 110, 230 88 S 290 20, 340 40 S 400 96, 448 52';
+const FINISH = { x: 448, y: 52 };
 ---
 <BaseLayout
   title="About — Zenia Rangwala"
-  description="About Zenia Rangwala: a University of Waterloo Global Business and Digital Arts graduate working in UX, branding and accessibility-focused design."
+  description="About Zenia Rangwala: a graphic and UX designer doing an MFA at SCAD, with a background in business, digital marketing and brand design."
 >
-  <div class="prose">
-    <h1>About</h1>
+  <div class="wrap">
+    <header class="about-hero">
+      <h1>About me</h1>
+      <figure class="polaroid">
+        {/* TODO: Zenia to confirm — replace this placeholder with your photo */}
+        <div class="polaroid-photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <path d="M4 8h3l2-2.5h6L17 8h3v11H4z" /><circle cx="12" cy="13" r="3.5" />
+          </svg>
+          <span>Photo coming soon</span>
+        </div>
+      </figure>
+    </header>
 
-    <p>
-      Hey! I'm Zenia. I recently graduated from the University of Waterloo, where I studied Global
-      Business and Digital Arts.
-    </p>
+    <div class="about-cols">
+      <section class="about-block" aria-labelledby="bio-heading">
+        <h2 id="bio-heading">Bio</h2>
+        <p>
+          I'm a graphic and UX designer doing my MFA at SCAD, with a background in business, digital
+          marketing and brand design. I've been the user that products weren't built for, so I notice
+          the small things that shut people out. Now I design so they don't.
+        </p>
+        <p>
+          My work moves between brand identity, editorial and UX, but it always starts with the same
+          question: who are we leaving out?
+        </p>
+      </section>
 
-    <p>
-      I'm really curious about how people experience the world around them, and how design,
-      technology and storytelling can make those experiences more thoughtful. Over the past few
-      years I've explored UX/UI, branding, accessibility-focused projects and interactive media.
-    </p>
+      <section class="about-block" aria-labelledby="info-heading">
+        <h2 id="info-heading">Info</h2>
+        <ul class="info-list">
+          {info.map((row) => (
+            <li class="info-row">
+              <span class="icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={row.icon} />
+              </span>
+              <span class="info-label" aria-hidden="true">{row.label}</span>
+              <a href={row.href}>
+                <span class="visually-hidden">{row.label}: </span>{row.text} <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
 
-    <p>
-      Accessibility is where I start. I know what it's like to be overlooked by design, and that
-      shapes how I design for other people.
-      <strong>TODO: Zenia to confirm — add a sentence or two about that experience, in your own words, if you want to share it.</strong>
-    </p>
+    <section class="about-section reveal" aria-labelledby="exp-heading">
+      <h2 id="exp-heading">Experience</h2>
+      <ul class="rows">
+        {experience.map((e) => (
+          <li>
+            <span class="role">{e.role}, <span class="org">{e.org}</span></span>
+            <span class="when">{e.when}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
 
-    <p>
-      I love experimenting with ideas, learning new tools, and making work that feels intentional,
-      clear and human.
-      <strong>TODO: Zenia to confirm — your digital marketing experience (roles, what you worked on).</strong>
-    </p>
+    <section class="about-section reveal" aria-labelledby="edu-heading">
+      <h2 id="edu-heading">Education</h2>
+      <ul class="rows">
+        {education.map((e) => (
+          <li>
+            <span class="role">{e.role}, <span class="org">{e.org}</span></span>
+            {e.when && <span class="when">{e.when}</span>}
+          </li>
+        ))}
+      </ul>
+    </section>
 
-    <p>
-      Outside of design, I love running and dancing. They help me disconnect from the digital
-      world, reset creatively and stay grounded.
-    </p>
+    <section class="about-section" aria-labelledby="clock-heading">
+      <h2 id="clock-heading">Off the clock</h2>
+      <div class="clock">
+        <p>
+          You'll usually find me running. It's the one part of my day with no notifications and no
+          pixels to nudge, just me, a playlist and wherever the route goes. I always come back with
+          clearer ideas than I left with. I'm currently training for my first half marathon in March
+          2027. When I'm not running, I'm behind a camera; my photography on the UN Sustainable
+          Development Goals has been shown at the Aga Khan Museum and Queen's Park in Toronto.
+        </p>
+        <div class="run-card" aria-hidden="true">
+          <svg viewBox="0 0 460 120" data-run>
+            <path d={route} fill="none" stroke="var(--line)" stroke-width="3" stroke-linecap="round" stroke-dasharray="0 9" />
+            <path data-run-line d={route} fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" />
+            <circle cx="12" cy="92" r="5" fill="var(--surface)" stroke="var(--text)" stroke-width="2" />
+            <g data-flag transform={`translate(${FINISH.x} ${FINISH.y})`}>
+              <path d="M0 0V-34" stroke="var(--text)" stroke-width="2" stroke-linecap="round" />
+              <path d="M0 -34h18l-5 6 5 6H0z" fill="var(--accent)" />
+            </g>
+            <circle data-runner cx={FINISH.x} cy={FINISH.y} r="7" fill="var(--text)" stroke="var(--surface)" stroke-width="3" />
+          </svg>
+          <div class="run-meta"><span>Start</span><span>21.1 km · March 2027</span></div>
+        </div>
+      </div>
+    </section>
   </div>
 </BaseLayout>
+
+<script>
+  // The runner "finishes" the route when this section scrolls into view.
+  // Without motion (OS setting or the panel) it simply sits at the finish.
+  const svg = document.querySelector<SVGSVGElement>('[data-run]');
+  const root = document.documentElement;
+  const reduce = () =>
+    matchMedia('(prefers-reduced-motion: reduce)').matches || root.dataset.motion === 'reduce';
+
+  if (svg && !reduce() && 'IntersectionObserver' in window) {
+    const line = svg.querySelector<SVGPathElement>('[data-run-line]')!;
+    const runner = svg.querySelector<SVGCircleElement>('[data-runner]')!;
+    const flag = svg.querySelector<SVGGElement>('[data-flag]')!;
+    const total = line.getTotalLength();
+    const place = (t: number) => {
+      const pt = line.getPointAtLength(total * t);
+      runner.setAttribute('cx', String(pt.x));
+      runner.setAttribute('cy', String(pt.y));
+      line.style.strokeDashoffset = String(1 - t);
+    };
+    place(0);
+    flag.style.opacity = '0';
+
+    const run = () => {
+      const start = performance.now();
+      const duration = 2600;
+      const step = (now: number) => {
+        const t = Math.min(1, (now - start) / duration);
+        place(reduce() ? 1 : 1 - Math.pow(1 - t, 3));
+        if (t < 1 && !reduce()) requestAnimationFrame(step);
+        else {
+          place(1);
+          flag.style.opacity = '1';
+        }
+      };
+      requestAnimationFrame(step);
+    };
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          io.disconnect();
+          run();
+        }
+      },
+      { threshold: 0.6 },
+    );
+    io.observe(svg);
+  }
+</script>

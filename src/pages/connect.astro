@@ -1,15 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { links } from '../data/site';
 ---
 <BaseLayout title="Connect — Zenia Rangwala" description="Get in touch with Zenia Rangwala: email, LinkedIn and résumé.">
-  <div class="prose">
+  <div class="wrap case-header prose">
     <h1>Connect</h1>
     <p>Want to work together or just say hi? Here's where to find me.</p>
     <!-- Real links only. No contact form: there is no delivery mechanism. -->
-    <ul>
-      <li>Email: <a href="mailto:zeniarangwala@gmail.com">zeniarangwala@gmail.com</a></li>
-      <li>LinkedIn: <a href="https://www.linkedin.com/in/zeniarangwala">linkedin.com/in/zeniarangwala</a></li>
-      <li>Résumé: <strong>TODO: Zenia to confirm — résumé PDF</strong></li>
+    <ul class="footer-links">
+      <li><a class="btn" href={`mailto:${links.email}`}>{links.email}</a></li>
+      <li><a class="btn btn-ghost" href={links.linkedin}>LinkedIn <span aria-hidden="true">↗</span></a></li>
+      <li><a class="btn btn-ghost" href={links.resume}>Resume <span aria-hidden="true">↗</span></a></li>
     </ul>
   </div>
 </BaseLayout>

@@ -1,0 +1,14 @@
+---
+import { links } from '../data/site';
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <h2 class="footer-line">Let's make something people actually feel included in.</h2>
+    <ul class="footer-links">
+      <li><a class="btn" href={`mailto:${links.email}`}>{links.email}</a></li>
+      <li><a class="btn btn-ghost" href={links.linkedin}>LinkedIn <span aria-hidden="true">↗</span></a></li>
+      <li><a class="btn btn-ghost" href={links.resume}>Resume <span aria-hidden="true">↗</span></a></li>
+    </ul>
+    <p class="footer-credit">Built with accessibility in mind. Designed by me, built with Claude Code.</p>
+  </div>
+</footer>
