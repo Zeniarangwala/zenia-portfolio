@@ -4,11 +4,11 @@ order: 3
 name: Arrival to Approval
 title: Making Canadian credit make sense for newcomers
 discipline: Service design · IBM capstone, University of Waterloo
-problem: "Newcomers are expected to understand Canadian credit almost right away, but nobody really teaches them how it works."
-role: "UX designer (group capstone). TODO: Zenia to confirm — what you personally designed vs. the team"
+problem: "A multilingual financial education platform helping newcomers to Canada better understand credit scores, financial systems and building credit history, through accessible learning and AI-supported guidance."
+role: "UX designer (group capstone project). TODO: Zenia to confirm — what you personally designed vs. the team"
 team: "Group project. TODO: Zenia to confirm — team size and members’ roles"
 tools: "Figma, Canva"
-timeline: "January–April 2025"
+timeline: "January 2025 – April 2025"
 inclusion:
   audience: "Newcomers to Canada who don't have a Canadian credit history yet. We designed around Priya, a persona who just moved here for grad school, has savings and a part-time job, and keeps getting turned down for housing and phone plans."
   decisions:
@@ -36,21 +36,67 @@ import Gallery from '../../components/Gallery.astro';
   caption="Arrival to Approval: a multilingual platform for learning how Canadian credit works."
 />
 
-## Why this one was personal
+As part of our 4th-year IBM service design capstone, we designed Arrival to Approval, a multilingual financial education platform that helps newcomers to Canada better understand credit scores, financial systems and building credit history, through accessible learning and AI-supported guidance.
 
-I immigrated to Canada too, and I remember how confusing and stressful the financial system felt at first. Credit scores, loans and banking expectations get treated like common knowledge. When you're new, it feels like everyone else already understands a system nobody taught you.
+## Problem
 
-For our 4th-year IBM service design capstone, our team designed Arrival to Approval. It's a multilingual learning platform that helps newcomers understand credit scores, how the system works and how to build credit history, with AI-supported guidance along the way.
+This project felt personal to me because I also immigrated to Canada, and I remember how confusing and stressful a lot of financial systems felt at first. Credit scores, loans, credit history and banking expectations are treated like common knowledge. For many newcomers, it can feel like everyone else already understands a system you were never taught how to navigate.
 
-## What we found
+As we researched further, we found that many newcomers struggle to access important financial services because they don't have a Canadian credit history yet. That can affect housing, loans, education and overall financial stability. We also noticed that a lot of financial education resources feel overwhelming, overly formal or hard to navigate for people who are still adjusting to a new country and financial system.
 
-Lots of newcomers can't access important financial services because they don't have a Canadian credit history yet. That affects housing, loans, education and overall stability.
+With Arrival to Approval, we wanted to explore how UX design could make financial education feel more accessible, supportive and easier to understand, through multilingual learning, conversational guidance and approachable onboarding.
 
-We also noticed that most financial education resources assume you already know banking terms and how things work in Canada. They lean on long explanations, formal language and information-heavy layouts, so learning ends up feeling intimidating instead of supportive.
+## Research and insights
 
-## Designing around Priya
+Our research focused on the challenges newcomers face in understanding Canadian financial systems, building credit history and finding financial education resources.
 
-We built a persona, Priya, to think through what this actually feels like. She just moved to Canada for grad school, has savings and a part-time job, and keeps getting rejected for housing and phone plans because she has no Canadian credit score. She doesn't know where to start, so she relies on friends, Reddit and social media.
+### Credit systems can feel unfamiliar and overwhelming for newcomers
+
+Many newcomers are expected to understand Canadian credit systems very quickly, without ever really being taught how they work. Credit scores affect things like housing, loans and financial stability, but many people arrive without knowing how scores are calculated or why credit history matters so much.
+
+Looking deeper, we noticed that many financial education resources assume you already understand banking terms and financial expectations in Canada. That insight pushed us to focus on clearer information, accessible design and more supportive onboarding throughout the platform.
+
+<Figure
+  src="/images/arrival-to-approval/research-credit-score-range.png"
+  width={687}
+  height={592}
+  alt="Infographic. The Canadian credit score range: very poor 300 to 500, poor 501 to 579, fair 580 to 619, average 620 to 679, good 680 to 724, very good 725 to 759, excellent 760 to 900. Canada has two credit bureaus, TransUnion and Equifax. Five factors go into your score: history of payments 35%, amount of debt 30%, credit length 15%, diversity of accounts 10% and new inquiries 10%."
+  caption="The Canadian credit score range (Wood, 2021)."
+/>
+
+### Financial education often feels intimidating instead of supportive
+
+Another thing that kept coming up was how intimidating financial education can feel when you're still adjusting to a new country. Many existing resources rely on long explanations, formal language and information-heavy layouts that make learning stressful and hard to follow.
+
+This shaped a lot of our design decisions. We wanted the platform to feel simpler, more approachable and easier to navigate, so we broke information into smaller lessons, used more conversational language and added AI-supported guidance throughout.
+
+<Figure
+  src="/images/arrival-to-approval/research-improve-credit.png"
+  width={740}
+  height={818}
+  alt="Infographic. Who can use your credit score: prospective lenders, utility companies, potential landlords and future employers. How to improve your credit score quickly: increase your credit limit, set up automatic payments, dispute errors, get a secured credit card, and request a copy of your credit report."
+  caption="How to improve your credit score quickly (Wood, 2021)."
+/>
+
+## Designing around real experiences
+
+As we kept researching, we started thinking more carefully about what navigating financial systems actually feels like for someone adjusting to life in a new country.
+
+### Meet Priya
+
+- Recently moved to Canada for graduate school
+- Adjusting to living independently in a new country
+- Has savings and a part-time job
+- Doesn't fully understand Canadian credit history
+- Struggles with approvals for housing and phone plans because she has no Canadian credit score
+- Feels overwhelmed comparing banks, credit cards and financial advice
+- Finds financial information too formal, or written for people already familiar with the system
+- Relies on friends, Reddit or social media because she doesn't know where to start
+- Wants to feel financially confident while building a stable life in Canada
+
+## Priya's user journey
+
+We mapped the challenges Priya faces while trying to understand financial systems, build credit history and adjust to life in a new country.
 
 <Figure
   src="/images/arrival-to-approval/journey-map-priya.png"
@@ -60,22 +106,18 @@ We built a persona, Priya, to think through what this actually feels like. She j
   caption="Priya's journey. Her confidence drops when she hits roadblocks and only recovers once she has clear, step-by-step guidance."
 />
 
-## Turning research into design
+## Translating research into design
 
-We landed on four things the platform had to do:
+After mapping Priya's experience, we thought more carefully about how the platform should feel for someone using it for the first time.
 
-1. **Make information easier to understand.** Break things into smaller lessons that are easier to follow.
-2. **Make it feel supportive.** Onboarding should feel guided, not like you're expected to already know the system.
-3. **Accessibility and language.** Newcomers come from all kinds of backgrounds, so it has to be clear and easy to navigate for a wide range of people.
-4. **Help people feel progress.** It should build confidence over time instead of making people feel stressed or behind.
+1. **Making information easier to understand.** A lot of financial information felt too formal and overwhelming during our research. We wanted to break things into smaller lessons that are easier to follow.
+2. **Making the experience feel supportive.** Many platforms assume you already understand the system. We wanted onboarding to feel more guided and less intimidating.
+3. **Accessibility and language.** Newcomers come from diverse backgrounds, so we wanted the platform to feel accessible, clear and easy to navigate for a wide range of people.
+4. **Helping users feel progress.** Instead of making people feel stressed or behind, we wanted the experience to feel encouraging and build confidence over time.
 
-## Directions explored
+## User flow
 
-**TODO: Zenia to confirm — were there two or three real alternative directions the team considered (for example a different structure, or no AI chat)? What were the trade-offs and why did you pick this one?**
-
-### From wireframes to the final screens
-
-We mapped the flow first: a dashboard, a lesson page, AI support and progress tracking.
+We mapped the user flow to understand how newcomers would move through the platform, from onboarding and learning about credit history to building financial confidence over time.
 
 <Gallery>
   <Figure
@@ -83,37 +125,45 @@ We mapped the flow first: a dashboard, a lesson page, AI support and progress tr
     width={719}
     height={393}
     alt="Wireframe of the dashboard: logo, navigation, a title with call-to-action buttons, a hero image placeholder and three topic cards."
-    caption="Dashboard: featured lessons, financial topics and quick access to learning."
+    caption="Dashboard: a homepage with featured lessons, financial topics and quick access to learning sections."
   />
   <Figure
     src="/images/arrival-to-approval/wireframe-lesson.png"
     width={740}
     height={432}
     alt="Wireframe of a lesson page: lesson title, text blocks and an image on the left, a lessons list with the current lesson highlighted on the right, and Previous and Next buttons."
-    caption="Lesson page: a structured layout with guided navigation."
+    caption="Lesson page: a structured lesson layout with guided navigation, visuals and section-based learning."
   />
   <Figure
     src="/images/arrival-to-approval/wireframe-ai-support.png"
     width={817}
     height={446}
     alt="Wireframe of AI support: lesson context on the left, a chat with bot and user messages, quick replies and an input field on the right."
-    caption="AI support: ask questions and get simpler answers."
+    caption="AI support: a conversational space where you can ask financial questions and get simplified guidance."
   />
   <Figure
     src="/images/arrival-to-approval/wireframe-progress.png"
     width={740}
     height={432}
     alt="Wireframe of the progress page: rating, streak and badge boxes, progress bars for each section, and a row of badge circles."
-    caption="Progress: completed lessons, milestones and activity."
+    caption="Progress tracking: a personal dashboard showing completed lessons, milestones and learning activity."
   />
 </Gallery>
 
-## Final design
+## High-fidelity mockups
+
+<Figure
+  src="/images/arrival-to-approval/hifi-homepage-laptop.png"
+  width={760}
+  height={520}
+  alt="The homepage on a laptop: “Credit Awareness for a Better Start” with a “Discover How Credit Can Work For You” panel, cards for “Your Credit Score” and “Improve Your Credit Score”, and a search bar."
+  caption="Homepage."
+/>
 
 <Figure
   src="/images/arrival-to-approval/hifi-sign-in.png"
   width={1286}
-  height={666}
+  height={659}
   alt="Sign-in page. Left: a dark blue panel with credit cards, “Welcome Back to a Better Start” and “Pick up where you left off in your credit learning path.” Right: email and password fields, a red Sign In button and Sign in with Google."
   caption="Sign in picks up where you left off in your learning path."
 />
@@ -122,14 +172,14 @@ We mapped the flow first: a dashboard, a lesson page, AI support and progress tr
   <Figure
     src="/images/arrival-to-approval/hifi-register.png"
     width={749}
-    height={434}
+    height={423}
     alt="Register page with “Join newcomers learning the Canadian credit system, in your language.” on the left and a Register Today form on the right."
     caption="Registering: “in your language” is part of the promise from the start."
   />
   <Figure
     src="/images/arrival-to-approval/hifi-lesson.png"
     width={723}
-    height={559}
+    height={565}
     alt="Lesson 1: Benefits of Credit, with short paragraphs and a photo of credit cards, a lesson list in a dark sidebar, and a “Use the Chat Bot, ask questions in your language” prompt above it."
     caption="Short lessons, with the chat one click away."
   />
@@ -138,29 +188,56 @@ We mapped the flow first: a dashboard, a lesson page, AI support and progress tr
 <Gallery>
   <Figure
     src="/images/arrival-to-approval/hifi-ai-chat.png"
-    width={1128}
-    height={638}
+    width={1022}
+    height={590}
     alt="AI Chat page: “What can I help with?” with a search box reading “What is Credit Score” and the hint “Try asking about credit scores, loans, or any banking term you don't get.”"
     caption="AI chat: ask about any banking term you don't get."
   />
   <Figure
     src="/images/arrival-to-approval/hifi-ai-chat-answer.png"
     width={794}
-    height={447}
+    height={458}
     alt="AI Chat answering “What is Credit Score?” in plain language, explaining the 300 to 900 range, and linking to Lesson 2: Credit Score."
     caption="Answers stay short and point back to the matching lesson."
   />
   <Figure
     src="/images/arrival-to-approval/hifi-progress.png"
     width={772}
-    height={427}
+    height={429}
     alt="Your Progress page for Priya: 4 of 12 lessons completed, a 3-day streak, 2 of 4 badges, progress bars for three sections, and “Up next: Lesson 3: Building Credit” with a Continue button."
     caption="Progress shows what's done and what's next."
   />
 </Gallery>
 
-## Outcome and reflection
-
-**TODO: Zenia to confirm — any real feedback from IBM, your instructors or classmates, and what you learned working as a team.**
-
-What I'd test or improve next: **TODO: Zenia to confirm.**
+<Gallery>
+  <Figure
+    src="/images/arrival-to-approval/monitor-sign-in.png"
+    width={422}
+    height={241}
+    alt="The Sign In page shown on a desktop monitor."
+  />
+  <Figure
+    src="/images/arrival-to-approval/monitor-register.png"
+    width={422}
+    height={241}
+    alt="The Register Today page shown on a desktop monitor."
+  />
+  <Figure
+    src="/images/arrival-to-approval/monitor-lesson-1.png"
+    width={422}
+    height={241}
+    alt="Lesson 1: Benefits of Credit on a desktop monitor, with a photo of someone reviewing bills and a calculator, and the lesson list in a dark sidebar."
+  />
+  <Figure
+    src="/images/arrival-to-approval/monitor-lesson-2.png"
+    width={422}
+    height={220}
+    alt="Lesson 2: Credit Scores on a desktop monitor, with a semicircle chart of credit score ranges from Poor (300 to 574) to Excellent (741 to 900)."
+  />
+  <Figure
+    src="/images/arrival-to-approval/monitor-progress.png"
+    width={422}
+    height={245}
+    alt="The Your Progress page for Priya on a desktop monitor: 4 of 12 lessons, a 3-day streak, 2 badges earned and Lesson 3: Building Credit up next."
+  />
+</Gallery>
