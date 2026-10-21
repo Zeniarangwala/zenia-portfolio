@@ -2,7 +2,8 @@ import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 // One MDX file per project in src/content/projects/.
-// Anything not yet known is written as "TODO: Zenia to confirm" so it stays visible.
+// Anything not yet known is written as "TODO: Zenia to confirm". The case study page
+// hides those notes from visitors, so search the MDX for TODO to find what is left.
 const projects = defineCollection({
   loader: glob({ pattern: '**/*.mdx', base: './src/content/projects' }),
   schema: z.object({

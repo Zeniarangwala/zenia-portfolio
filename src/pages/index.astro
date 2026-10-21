@@ -1,49 +1,32 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import WorkCard from '../components/WorkCard.astro';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 ---
 <BaseLayout
-  title="Zenia Rangwala — UX + Graphic Designer"
-  description="Zenia Rangwala is a UX and graphic designer with a digital marketing background. I've been the user nobody designed for. Now I design for them."
+  title="Zenia Rangwala — Graphic + UX Designer"
+  description="Zenia Rangwala is a graphic and UX designer doing an MFA at SCAD. I've been the user nobody designed for. Now I design for them."
 >
-  <section class="hero" aria-labelledby="hero-name">
-    <h1 id="hero-name">Zenia Rangwala</h1>
-    <p class="punchline">I've been the user nobody designed for. Now I design for them.</p>
-    <p>UX + Graphic Designer · Digital Marketing Enthusiast · AI-Curious Creative</p>
-    <p><a href="#work">Explore my work ↓</a></p>
+  <section class="hero wrap" aria-labelledby="hero-title">
+    {/* Line 1 starts faint and blurred (overlooked), then sharpens (seen). The text is
+        always in the page, so screen readers get both lines straight away. */}
+    <h1 class="hero-title" id="hero-title">
+      <span class="hero-line hero-line-1">I've been the user nobody designed for.</span>
+      <span class="hero-line hero-line-2">Now I design for <span class="hero-mark">them</span>.</span>
+    </h1>
+    <p class="hero-meta">UX + UI Designer · Digital Marketing Enthusiast · AI-Curious Creative</p>
+    <p class="hero-cta"><a href="#work">Explore my work <span aria-hidden="true">↓</span></a></p>
   </section>
 
-  <section id="work" aria-labelledby="work-heading" tabindex="-1">
-    <h2 id="work-heading">Selected work</h2>
-    <ol class="project-list">
-      {projects.map((project, i) => (
-        <li>
-          <article>
-            {project.data.cover ? (
-              <img
-                src={project.data.cover.src}
-                alt={project.data.coverAlt}
-                width={project.data.cover.width}
-                height={project.data.cover.height}
-                loading={i === 0 ? 'eager' : 'lazy'}
-                decoding="async"
-              />
-            ) : (
-              <div class="placeholder-box">
-                <p><strong>Cover image placeholder</strong></p>
-                <p>TODO: Zenia to confirm — supply cover image</p>
-              </div>
-            )}
-            <p>{project.data.name} · {project.data.discipline}</p>
-            <h3>
-              <a href={`/work/${project.data.slug}/`}>{project.data.title}</a>
-            </h3>
-            <p>{project.data.problem}</p>
-          </article>
-        </li>
-      ))}
+  <section id="work" class="section wrap" aria-labelledby="work-heading" tabindex="-1">
+    <div class="section-head">
+      <h2 id="work-heading">Selected work</h2>
+      <p class="label">{String(projects.length).padStart(2, '0')} projects</p>
+    </div>
+    <ol class="work-grid">
+      {projects.map((project, i) => <WorkCard project={project} eager={i === 0} />)}
     </ol>
   </section>
 </BaseLayout>
