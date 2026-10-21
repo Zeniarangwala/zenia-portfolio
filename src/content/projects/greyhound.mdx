@@ -23,20 +23,14 @@ cover:
   src: /images/greyhound/final/cover-bus.jpg
   width: 1812
   height: 1080
-coverAlt: "A Greyhound coach parked on a road, with the rebranded Greyhound wordmark and the line “The Great American Road Trip” on the left."
+coverAlt: "The Greyhound print-at-home ticket from Atlanta to New York next to two luggage tags, one white and one black reading “Peach to Apple”, on dark blue."
 assetRequest: "Tools and timeline. No motion footage supplied."
 ---
 import Figure from '../../components/Figure.astro';
 import Gallery from '../../components/Gallery.astro';
-
-<Figure
-  src="/images/greyhound/final/cover-bus.jpg"
-  width={1812}
-  height={1080}
-  eager
-  alt="A Greyhound coach parked on a road, with the rebranded Greyhound wordmark and the line “The Great American Road Trip” on the left."
-  caption="Greyhound: The Great American Road Trip."
-/>
+import Swatches from '../../components/Swatches.astro';
+import Steps from '../../components/Steps.astro';
+import TypeSpecimen from '../../components/TypeSpecimen.astro';
 
 ## The Greyhound we know
 
@@ -95,19 +89,19 @@ Colour, type and logo. Lots of versions, lots of feedback, and one rule I never 
 
 ### Logo: same dog, three tries
 
-<Figure
-  src="/images/greyhound/process/slide-logo-three-tries.jpg"
-  width={1920}
-  height={1080}
-  alt="Process book slide “Same dog, three tries”. Try 1: the chrome dog on sunset backgrounds with italic type. Try 2: the dog in a blue-to-orange sunset gradient with a blue wordmark. Final: a cream dog and wordmark on Majestic Mountain Blue."
-  caption="All three logo tries side by side, from my process book."
-/>
-
 1. **Try 1:** the chrome dog on sunset backgrounds with italic type. It still looked like the old brand.
 2. **Try 2:** the dog in a blue-to-orange sunset gradient with a blue wordmark.
 3. **Final:** a cream dog and wordmark on Majestic Mountain Blue. Simpler, warmer, and it works on everything.
 
 <Gallery>
+  <Figure
+    src="/images/greyhound/process/logo-try1-chrome.webp"
+    width={576}
+    height={212}
+    variant="cutout"
+    alt="Logo try 1: four tiles with the chrome greyhound and italic Greyhound wordmark, on dark teal and on orange sunset backgrounds with leaf shadows."
+    caption="Try 1: the chrome dog on sunsets."
+  />
   <Figure
     src="/images/greyhound/process/logo-try2-gradient.jpg"
     width={591}
@@ -115,29 +109,22 @@ Colour, type and logo. Lots of versions, lots of feedback, and one rule I never 
     alt="Logo try 2: a running greyhound filled with a blue-to-orange gradient above a dark blue Greyhound wordmark, on cream."
     caption="Try 2: the gradient dog."
   />
-  <Figure
-    src="/images/greyhound/process/logo-try2-icon.jpg"
-    width={326}
-    height={326}
-    alt="Logo try 2 as an app-style icon: the gradient greyhound on a cream rounded square."
-    caption="Try 2 as an icon."
-  />
 </Gallery>
 
 The final Greyhound 2.0 logo keeps the same running dog, redrawn in cream with a new wordmark, and the dog works on its own as an icon.
 
 <Gallery>
   <Figure
-    src="/images/greyhound/final/logo-final.jpg"
-    width={480}
-    height={600}
+    src="/images/greyhound/final/logo-final.webp"
+    width={1400}
+    height={1750}
     alt="The final Greyhound 2.0 logo: a cream running greyhound above a cream Greyhound wordmark on Majestic Mountain Blue."
     caption="Final: cream on Majestic Mountain Blue."
   />
   <Figure
-    src="/images/greyhound/final/logo-dog-icon.jpg"
-    width={480}
-    height={480}
+    src="/images/greyhound/final/logo-dog-icon.webp"
+    width={1200}
+    height={1200}
     alt="The cream running greyhound on its own, on a Majestic Mountain Blue square."
     caption="The dog on its own, as an icon."
   />
@@ -148,32 +135,38 @@ The final Greyhound 2.0 logo keeps the same running dog, redrawn in cream with a
 I tried italic and sporty sans serifs next to the old chrome script. The italics felt too fast and too much like a sports brand. I wanted something steady and wide, like a bus on the highway.
 
 <Figure
-  src="/images/greyhound/process/slide-type-exploration.jpg"
-  width={1920}
-  height={1080}
-  alt="Process book slide “Finding a wordmark that moves”: eight Greyhound wordmarks in italic and sporty sans serifs next to the old chrome script, and the final wordmark in Archivo Expanded on blue."
+  src="/images/greyhound/process/type-wordmark-tests.webp"
+  width={806}
+  height={314}
+  variant="cutout"
+  alt="Eight Greyhound wordmark tests in italic and sporty sans serifs, next to the old chrome script logo."
   caption="Wordmark tests next to the old chrome script."
 />
 
-- **Archivo Expanded SemiBold** for headings. It's wide and steady, and it still feels friendly next to the dog.
-- **Inter** for body text, so everything is easy to read on tickets and phones.
+<TypeSpecimen />
 
 ### Colour: five colours became a whole road trip
 
-Version 1 had generic names (Heritage Blue, Sunset Orange, Sand, Sage Green, Road Grey), and Road Grey felt dull. I dropped it and renamed everything to follow a trip, from the overnight ride to the Georgia peach. Then I added a sunset gradient called The Long Way.
+Version 1 had generic names, and Road Grey felt dull.
 
-<Figure
-  src="/images/greyhound/process/slide-colour-v1-to-final.jpg"
-  width={1920}
-  height={1080}
-  alt="Process book slide “Five colours became a whole road trip”: the five version 1 colours on the left, and the final named palette on the right."
-  caption="From five generic colours to a palette named after the trip."
+<Swatches
+  label="Version 1 palette"
+  colours={[
+    { name: 'Heritage Blue', hex: '#28576b' },
+    { name: 'Sunset Orange', hex: '#ca6b3f' },
+    { name: 'Sand', hex: '#eedfc8' },
+    { name: 'Sage Green', hex: '#77836b' },
+    { name: 'Road Grey', hex: '#393b3a' },
+  ]}
 />
 
+I dropped Road Grey and renamed everything to follow a trip, from the overnight ride to the Georgia peach. Then I added a sunset gradient called The Long Way.
+
 <Figure
-  src="/images/greyhound/final/colour-palette.png"
-  width={1000}
-  height={446}
+  src="/images/greyhound/final/colour-palette.webp"
+  width={2000}
+  height={937}
+  variant="cutout"
   alt="The final palette: Majestic Mountain Blue, Amber Wave White, Red-Eye Ride, Window Seat Dusk, Diner Booth, Gas Station Glow, Georgia Peach and Roadside Sage, with The Long Way sunset gradient running from dark blue through dusky purple to peach."
   caption="The final palette, with The Long Way gradient."
 />
@@ -199,17 +192,20 @@ This is how the logo, photos and patterns work together, and it's the part that 
     alt="Before: the same desert road photo with the small logo placed lower."
     caption="Before, another placement."
   />
+</Gallery>
+
+<Gallery>
   <Figure
-    src="/images/greyhound/final/photo-road-with-logo.jpg"
-    width={974}
-    height={548}
+    src="/images/greyhound/final/photo-road-with-logo.webp"
+    width={2000}
+    height={1125}
     alt="After: a desert highway at sunset with a bigger cream Greyhound logo sitting on the horizon."
     caption="After: a bigger logo on the road."
   />
   <Figure
-    src="/images/greyhound/final/photo-diner-with-dog.jpg"
-    width={1029}
-    height={579}
+    src="/images/greyhound/final/photo-diner-with-dog.webp"
+    width={2000}
+    height={1125}
     alt="After: a neon “Arlington Diner” sign with just the cream greyhound flying above it."
     caption="After: just the dog, flying over the diner sign."
   />
@@ -223,26 +219,22 @@ Soft leaf shadows were pretty, but they could be any brand. I tried speed signs,
 
 <Gallery>
   <Figure
-    src="/images/greyhound/process/pattern-before-leaf-shadow.jpg"
-    width={438}
-    height={546}
+    src="/images/greyhound/process/pattern-before-leaf-shadow-2.webp"
+    width={2000}
+    height={1125}
     alt="Before: leaf shadows falling across a cream background, with the gradient greyhound and blue Greyhound wordmark."
     caption="Before: leaf shadows."
   />
   <Figure
-    src="/images/greyhound/process/pattern-before-leaf-shadow-2.jpg"
-    width={885}
-    height={498}
-    alt="Before: a wider version of the leaf-shadow layout with the Greyhound logo."
-    caption="Before, wide."
-  />
-  <Figure
-    src="/images/greyhound/process/photo-road-speed-limits.jpg"
-    width={438}
-    height={548}
+    src="/images/greyhound/process/photo-road-speed-limits.webp"
+    width={1400}
+    height={1750}
     alt="A desert road at sunset with a row of speed limit signs counting up from 20 to 75 across the sky, and a small cream greyhound in the corner."
     caption="Next: speed signs along the road."
   />
+</Gallery>
+
+<Gallery>
   <Figure
     src="/images/greyhound/final/pattern-after-peaches.jpg"
     width={888}
@@ -251,11 +243,18 @@ Soft leaf shadows were pretty, but they could be any brand. I tried speed signs,
     caption="After: peaches turning into apples along a route."
   />
   <Figure
-    src="/images/greyhound/final/pattern-after-texas.jpg"
-    width={881}
-    height={499}
+    src="/images/greyhound/final/pattern-texas.webp"
+    width={2000}
+    height={1125}
     alt="After: the final greyhound logo on burnt orange, surrounded by cowboy hats, boots, cacti and stars."
     caption="After: Texas boots, cacti and hats."
+  />
+  <Figure
+    src="/images/greyhound/final/pattern-palms.webp"
+    width={2000}
+    height={1125}
+    alt="After: the greyhound logo on Majestic Mountain Blue between rows of small palm trees."
+    caption="After: palms for the coast."
   />
 </Gallery>
 
@@ -263,65 +262,36 @@ Soft leaf shadows were pretty, but they could be any brand. I tried speed signs,
 
 At first it was a leaf shadow on the road, and you could barely see the pattern. So I dropped the borders and side panels, put the pattern right on the photo, and made each region different.
 
+<Figure
+  src="/images/greyhound/process/photo-pattern-before.jpg"
+  width={1279}
+  height={488}
+  alt="Before: desert road photos with a faint leaf shadow across the road."
+  caption="Before: you could barely see the pattern."
+/>
+
+<Figure
+  src="/images/greyhound/final/photo-pattern-after.jpg"
+  width={1920}
+  height={852}
+  alt="After: peaches rolling down a desert road at sunset, a checkerboard of coast symbols and photos, and Texas cut-outs filled with diner photography."
+  caption="After: peaches rolling down the road, a checkerboard for the coast and Texas cut-outs over the diner."
+/>
+
 <Gallery>
   <Figure
-    src="/images/greyhound/process/photo-pattern-before.jpg"
-    width={1279}
-    height={488}
-    alt="Before: desert road photos with a faint leaf shadow across the road."
-    caption="Before: you could barely see the pattern."
-  />
-  <Figure
-    src="/images/greyhound/final/photo-pattern-after.jpg"
-    width={1920}
-    height={852}
-    alt="After: peaches rolling down a desert road at sunset, a checkerboard of coast symbols and photos, and Texas cut-outs filled with diner photography."
-    caption="After: peaches rolling down the road, a checkerboard for the coast and Texas cut-outs over the diner."
-  />
-  <Figure
-    src="/images/greyhound/final/photo-coast-palm-shadows.jpg"
-    width={438}
-    height={548}
+    src="/images/greyhound/final/photo-coast-palm-shadows.webp"
+    width={1400}
+    height={1750}
     alt="A coastal street at sunset lined with palm trees, with palm-leaf shadows falling across the top of the photo."
     caption="The coast, with palm shadows over the photo."
   />
-</Gallery>
-
-<Gallery>
   <Figure
     src="/images/greyhound/final/region-texas-overlay.jpg"
     width={832}
     height={649}
     alt="Close-up of Texas pattern shapes, a star, cactus, boot and hats, filled with diner photography."
     caption="Texas cut-outs over the diner."
-  />
-  <Figure
-    src="/images/greyhound/final/pattern-palms-and-road.jpg"
-    width={621}
-    height={351}
-    alt="Greyhound logo above an illustrated road stretching toward palm trees, a cactus and mountains."
-    caption="Palms and road."
-  />
-  <Figure
-    src="/images/greyhound/final/pattern-peaches.jpg"
-    width={1040}
-    height={585}
-    alt="Greyhound logo on blue with scattered peaches."
-    caption="Peaches."
-  />
-  <Figure
-    src="/images/greyhound/final/pattern-texas.jpg"
-    width={622}
-    height={350}
-    alt="Greyhound logo on burnt orange with cowboy hats, boots, cacti and stars."
-    caption="Texas."
-  />
-  <Figure
-    src="/images/greyhound/final/pattern-palms.jpg"
-    width={622}
-    height={350}
-    alt="Greyhound logo on Majestic Mountain Blue between rows of small palm trees."
-    caption="Palms."
   />
 </Gallery>
 
@@ -342,9 +312,9 @@ I chose simple symbols for each region, then turned them into the patterns: peac
 The ticket is the clearest example of how much the components changed.
 
 <Figure
-  src="/images/greyhound/process/ticket-v1-boarding-pass.jpg"
-  width={1018}
-  height={573}
+  src="/images/greyhound/process/ticket-v1-boarding-pass.webp"
+  width={2000}
+  height={1125}
   alt="Ticket version 1: a wide boarding-pass layout from ATL to NYC with a gradient header, seat 12C, gate 7 and a barcode stub."
   caption="1: a “Boarding Pass” with a gate number."
 />
@@ -352,9 +322,10 @@ The ticket is the clearest example of how much the components changed.
 **1. Boarding pass.** My first ticket said “Boarding Pass” and “Gate 7”, which is airline language. It looked nice, but it's a bus, not a plane: no gates, no boarding pass.
 
 <Figure
-  src="/images/greyhound/process/ticket-v2-stub.png"
-  width={900}
-  height={352}
+  src="/images/greyhound/process/ticket-v2-stub.webp"
+  width={2000}
+  height={838}
+  variant="cutout"
   alt="Ticket version 2: a black-and-white bus ticket from ATL to NYC with a tear-off stub, seat 14 and a QR code."
   caption="2: black and white, but shaped like a stub."
 />
@@ -362,9 +333,10 @@ The ticket is the clearest example of how much the components changed.
 **2. Stub.** Black and white this time, which fixed the printing problem. But it was shaped like a stub nobody would actually print.
 
 <Figure
-  src="/images/greyhound/final/ticket-v3-final.png"
-  width={900}
-  height={650}
+  src="/images/greyhound/final/ticket-v3-final.webp"
+  width={2000}
+  height={1425}
+  variant="cutout"
   alt="Ticket version 3: a printable letter-size e-ticket from ATL to NYC with a QR code, a route timeline, a fold line, a “Before you go” checklist, a “Good to know” section and a “Your trip, mile by mile” section to fill in."
   caption="3 (final): a real letter-size page you'd print at home and keep."
 />
@@ -391,10 +363,10 @@ My first set was a road card, a stamp card, a boarding pass and an Instagram pos
     caption="v1 stamp card."
   />
   <Figure
-    src="/images/greyhound/process/v1-instagram-post.jpg"
-    width={880}
-    height={495}
-    alt="Version 1 Instagram post from Greyhound with the gradient logo on cream."
+    src="/images/greyhound/process/v1-instagram-post.webp"
+    width={2000}
+    height={1125}
+    alt="Version 1 Instagram post from Greyhound with the gradient logo on cream, shown on a phone."
     caption="v1 Instagram post."
   />
 </Gallery>
@@ -412,36 +384,47 @@ The critique changed everything that came after:
 This is everything a rider would hold, scan, hear or hang on their bag, told as one trip from Atlanta to New York.
 
 <Figure
-  src="/images/greyhound/process/slide-13-components.jpg"
-  width={1920}
+  src="/images/greyhound/final/cover-bus.jpg"
+  width={1812}
   height={1080}
-  alt="Process book slide “13 components for one trip”: print-at-home ticket, wallet pass, luggage tag, Window Seat Guide, departure board, Songs for the Long Way, Stories from the Road, sleep kit, postcards, colouring books, Road Trip Crayons, bus window decal and sticker sheet."
-  caption="All 13: print-at-home ticket, wallet pass, luggage tag, Window Seat Guide, departure board, Songs for the Long Way, Stories from the Road, sleep kit, postcards, colouring books, Road Trip Crayons, bus window decal and sticker sheet."
+  alt="A Greyhound coach parked on a road, with the rebranded Greyhound wordmark and the line “The Great American Road Trip” on the left."
+  caption="Greyhound: The Great American Road Trip."
 />
 
-<Figure
-  src="/images/greyhound/process/slide-final-presentation.jpg"
-  width={1920}
-  height={1080}
-  alt="Process book slide “The components, stop by stop”: five presentation slides titled Book it, Let's get out of here, Tag your bag, Find your window seat and Press play."
-  caption="The final presentation, stop by stop: Book it. Let's get out of here. Tag your bag. Find your window seat. Press play."
+<Steps
+  label="The 13 components"
+  items={[
+    'Print-at-home ticket',
+    'Wallet pass',
+    'Luggage tag',
+    'Window Seat Guide',
+    'Departure board',
+    'Songs for the Long Way',
+    'Stories from the Road',
+    'Sleep kit',
+    'Postcards',
+    'Colouring books',
+    'Road Trip Crayons',
+    'Bus window decal',
+    'Sticker sheet',
+  ]}
 />
+
+### Stop 1: Book it
+
+Print it, fold it, don't lose it. Or just keep it on your phone. The letter-size ticket above is the paper version, with a wallet pass for riders who'd rather not print.
+
+### Stop 2: “Let's get out of here.”
 
 <Figure
   src="/images/greyhound/final/departure-board.jpg"
   width={1470}
   height={693}
   alt="A Greyhound departure board reading “Let's get out of here.”, listing departures to New York, Savannah, Nashville, Charlotte and Miami with bay numbers and statuses."
-  caption="“Let's get out of here.” The departure board says what everyone's thinking."
+  caption="The departure board at the station says what everyone's thinking."
 />
 
-<Figure
-  src="/images/greyhound/final/seat-back-card.png"
-  width={900}
-  height={666}
-  alt="A two-sided seat-back card. Front: “What you'll pass today”, a timeline from Atlanta at 6:30 PM through Charlotte, Richmond, Washington DC, the Susquehanna River and Philadelphia to New York at 12:55 PM, about 870 miles and 9 states. Back: “Make yourself at home.” with free Wi-Fi, power, seatbelts, emergency exits, restroom and quiet hours."
-  caption="Find your window seat: what you'll pass today, and how to make yourself at home."
-/>
+### Stop 3: Tag your bag
 
 <Gallery>
   <Figure
@@ -449,54 +432,73 @@ This is everything a rider would hold, scan, hear or hang on their bag, told as 
     width={649}
     height={757}
     alt="Two Greyhound luggage tags, one white and one black reading “Peach to Apple”."
-    caption="Tag your bag: “Peach to Apple”."
+    caption="“Peach to Apple”, for the Atlanta to New York route."
   />
   <Figure
-    src="/images/greyhound/final/luggage-tag-mountain-route.png"
-    width={649}
-    height={717}
+    src="/images/greyhound/final/luggage-tag-mountain-route.webp"
+    width={1400}
+    height={1435}
+    variant="cutout"
     alt="A blue luggage tag with a name and route form on one side, and “Mountain Route” over a pine-forest photo on the other."
     caption="Mountain Route tag."
   />
 </Gallery>
 
+### Stop 4: Find your window seat
+
+<Figure
+  src="/images/greyhound/final/seat-back-card.webp"
+  width={2000}
+  height={1489}
+  variant="cutout"
+  alt="A two-sided seat-back card. Front: “What you'll pass today”, a timeline from Atlanta at 6:30 PM through Charlotte, Richmond, Washington DC, the Susquehanna River and Philadelphia to New York at 12:55 PM, about 870 miles and 9 states. Back: “Make yourself at home.” with free Wi-Fi, power, seatbelts, emergency exits, restroom and quiet hours."
+  caption="The Window Seat Guide: what you'll pass today, and how to make yourself at home."
+/>
+
+### Stop 5: Press play
+
 <Gallery>
   <Figure
-    src="/images/greyhound/final/playlist-songs-for-the-long-way.png"
-    width={800}
-    height={709}
+    src="/images/greyhound/final/playlist-songs-for-the-long-way.webp"
+    width={2000}
+    height={1728}
+    variant="cutout"
     alt="A phone playing “Songs for the Long Way”, an ATL to NYC route mix of nine songs from Midnight Train to Georgia to Empire State of Mind, next to its peach-to-blue cover art."
-    caption="Press play: Songs for the Long Way, one song for every state on the route."
+    caption="Songs for the Long Way: one song for every state on the route."
   />
   <Figure
     src="/images/greyhound/final/app-stories-from-the-road.jpg"
     width={307}
     height={642}
     alt="A dark app screen titled “Stories from the Road” with a list of short episodes."
-    caption="Stories from the Road."
+    caption="Stories from the Road: one short story for every state line you cross."
   />
 </Gallery>
 
+### Along the way
+
 <Figure
-  src="/images/greyhound/final/region-card-northeast.png"
-  width={900}
-  height={272}
+  src="/images/greyhound/final/region-card-northeast.webp"
+  width={2000}
+  height={663}
+  variant="cutout"
   alt="A two-sided Northeast region card: a blue front with greyhound stamps and a progress circle, and a back with “Northeast” over a photo with leaf shadows and a barcode."
   caption="Northeast region card, front and back."
 />
 
 <Gallery>
   <Figure
-    src="/images/greyhound/final/postcards.png"
-    width={800}
-    height={466}
+    src="/images/greyhound/final/postcards.webp"
+    width={2000}
+    height={1151}
+    variant="cutout"
     alt="Greyhound postcards: “Hello from the Pacific.” over a coastal photo, “Greetings from the Coast” with photos inside the letters, and a back reading “Sent from Seat 14. 2,000+ miles of road. One window seat. Zero regrets.” with a greyhound stamp."
     caption="Postcards, “Sent from Seat 14.”"
   />
   <Figure
-    src="/images/greyhound/final/postcard-front-road.jpg"
-    width={800}
-    height={533}
+    src="/images/greyhound/final/postcard-front-road.webp"
+    width={2000}
+    height={1333}
     alt="A postcard front: a desert highway at sunset under a dramatic sky, with a small cream Greyhound logo in the corner."
     caption="Postcard: the open road."
   />
@@ -504,9 +506,10 @@ This is everything a rider would hold, scan, hear or hang on their bag, told as 
 
 <Gallery>
   <Figure
-    src="/images/greyhound/final/colouring-books.png"
-    width={800}
-    height={402}
+    src="/images/greyhound/final/colouring-books.webp"
+    width={2000}
+    height={1052}
+    variant="cutout"
     alt="Three “Are We There Yet?” kids' colouring books: The Northeast (New York to Maine) in blue with an apple and skyline, The Southeast (Georgia to Florida) in peach with a peach and palm tree, and The Mountains (Colorado, Utah, Montana) in sage with mountains, a pine and a bus."
     caption="“Are We There Yet?” colouring books, one per region."
   />

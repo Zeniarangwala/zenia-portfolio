@@ -12,7 +12,18 @@ const card = cards[data.slug];
 ---
 <li class="card reveal">
   <div class="card-media">
-    {data.cover ? (
+    {card?.thumb ? (
+      <img
+        class="card-img"
+        data-fit={card.fit}
+        src={card.thumb}
+        alt={data.coverAlt}
+        width="1200"
+        height="750"
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+      />
+    ) : data.cover ? (
       <img
         class="card-img"
         data-fit={card?.fit ?? 'cover'}

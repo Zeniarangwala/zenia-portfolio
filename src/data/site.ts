@@ -1,6 +1,3 @@
-import { existsSync } from 'node:fs';
-import { join } from 'node:path';
-
 export const links = {
   email: 'zeniarangwala@gmail.com',
   linkedin: 'https://www.linkedin.com/in/zeniarangwala',
@@ -8,18 +5,13 @@ export const links = {
   resume: '/resume.pdf',
 };
 
-// Some image folders are being reorganised (e.g. greyhound/ → greyhound/final/).
-// Returns the first path that exists in public/, so links work before and after.
-export function asset(...candidates: string[]): string {
-  const found = candidates.find((p) => existsSync(join(process.cwd(), 'public', p)));
-  return found ?? candidates[0];
-}
-
 // Home page card details, keyed by project slug. Titles, covers and alt text
 // come from each case study's frontmatter; this only adds the card extras.
+// thumb is the designed 16:10 card image shown at rest; hover crossfades to hover.src.
 // fit: 'cover' fills the card (photos), 'contain' shows the whole image (screens).
 interface Card {
   tags: string[];
+  thumb: string;
   fit: 'cover' | 'contain';
   hover: { src: string; fit: 'cover' | 'contain' };
 }
@@ -27,30 +19,32 @@ interface Card {
 export const cards: Record<string, Card> = {
   greyhound: {
     tags: ['Brand Identity', 'Strategy'],
+    thumb: '/images/thumbs/greyhound.webp',
     fit: 'cover',
-    hover: {
-      src: asset('/images/greyhound/final/postcards.jpg', '/images/greyhound/postcards.jpg'),
-      fit: 'cover',
-    },
+    hover: { src: '/images/greyhound/final/postcards.webp', fit: 'contain' },
   },
   clearspace: {
     tags: ['UX/UI', 'Mobile app'],
-    fit: 'contain',
+    thumb: '/images/thumbs/clearspace.webp',
+    fit: 'cover',
     hover: { src: '/images/clearspace/form-after-step3.png', fit: 'contain' },
   },
   'arrival-to-approval': {
     tags: ['Service Design', 'IBM Capstone'],
-    fit: 'contain',
+    thumb: '/images/thumbs/arrival-to-approval.webp',
+    fit: 'cover',
     hover: { src: '/images/arrival-to-approval/hifi-lesson.png', fit: 'contain' },
   },
   noise: {
     tags: ['Editorial', 'Typography'],
-    fit: 'contain',
+    thumb: '/images/thumbs/noise.webp',
+    fit: 'cover',
     hover: { src: '/images/noise/read-this-now-layered.png', fit: 'contain' },
   },
   kidcash: {
     tags: ['UX/UI', 'Mobile app'],
-    fit: 'contain',
+    thumb: '/images/thumbs/kidcash.webp',
+    fit: 'cover',
     hover: { src: '/images/kidcash/screen-goals-and-games.png', fit: 'contain' },
   },
 };

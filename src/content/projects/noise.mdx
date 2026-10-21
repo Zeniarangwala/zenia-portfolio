@@ -20,20 +20,12 @@ cover:
   src: /images/noise/visual-direction.png
   width: 858
   height: 945
-coverAlt: "Visual direction board on black: the words “Noise. Stop scrolling.” in heavy type with “ing.” in red, above a palette of white, ink, red, lime, indigo, magenta, amber and grey, and two type samples."
+coverAlt: "Three Noise posters on black: “Still online?” repeated down the page, “You are not the product.” and “Read this now. Now.”"
 assetRequest: "Photos or spreads of the final editorial, its format and page count, the trade-offs between iterations, and any critique."
 ---
 import Figure from '../../components/Figure.astro';
 import Gallery from '../../components/Gallery.astro';
-
-<Figure
-  src="/images/noise/visual-direction.png"
-  width={858}
-  height={945}
-  eager
-  alt="Visual direction board on black: the words “Noise. Stop scrolling.” in heavy type with “ing.” in red, above a palette of white, ink, red, lime, indigo, magenta, amber and grey, and two type samples."
-  caption="Noise: a typographic editorial on digital distraction and overstimulation."
-/>
+import Swatches from '../../components/Swatches.astro';
 
 ## Problem
 
@@ -94,8 +86,29 @@ I used bold type, repetition, layered text, strong contrast and crowded layouts 
 
 Archivo Black is used for the bold, urgent text, while Bodoni Moda is used for the slower reading sections. Together with the high-contrast colours, I wanted the publication to feel loud, repetitive and anxious, but still clear enough to read and move through.
 
-- **Type:** Archivo Black and Bodoni Moda.
-- **Colour:** White #FFFFFF, Ink #0A0A0A, Red #FF3B16, Lime #D4FF3A, Indigo #1C1066, Magenta #FF2BD6, Amber #FFB700 and Grey #8B8B8B.
+**Type:** Archivo Black and Bodoni Moda.
+
+<Swatches
+  label="Noise palette"
+  colours={[
+    { name: 'White', hex: '#FFFFFF' },
+    { name: 'Ink', hex: '#0A0A0A' },
+    { name: 'Red', hex: '#FF3B16' },
+    { name: 'Lime', hex: '#D4FF3A' },
+    { name: 'Indigo', hex: '#1C1066' },
+    { name: 'Magenta', hex: '#FF2BD6' },
+    { name: 'Amber', hex: '#FFB700' },
+    { name: 'Grey', hex: '#8B8B8B' },
+  ]}
+/>
+
+<Figure
+  src="/images/noise/visual-direction.png"
+  width={858}
+  height={945}
+  alt="Visual direction board on black: the words “Noise. Stop scrolling.” in heavy type with “ing.” in red, above a palette of white, ink, red, lime, indigo, magenta, amber and grey, and two type samples."
+  caption="The visual direction board: type, palette and tone."
+/>
 
 ## Expanded editorial thesis
 

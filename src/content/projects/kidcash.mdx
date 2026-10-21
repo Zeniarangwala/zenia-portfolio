@@ -22,20 +22,12 @@ cover:
   src: /images/kidcash/screen-home.png
   width: 432
   height: 888
-coverAlt: "KidCash home screen: “Hello, Zenia!” with savings, checking and goals balances shown as piggy banks, and a Savings Tree below."
+coverAlt: "The KidCash home screen saying “Hello, Zenia!” with savings balances and a Savings Tree, between cards for the Savings Tree and Goals, on pale yellow."
 assetRequest: "Real alternative directions with trade-offs, the kids' age range, and any testing. A wider cover image would help the home page layout."
 ---
 import Figure from '../../components/Figure.astro';
 import Gallery from '../../components/Gallery.astro';
-
-<Figure
-  src="/images/kidcash/screen-home.png"
-  width={432}
-  height={888}
-  eager
-  alt="KidCash home screen: “Hello, Zenia!” with savings, checking and goals balances shown as piggy banks, and a Savings Tree below."
-  caption="KidCash: teaching kids about money through play."
-/>
+import Swatches from '../../components/Swatches.astro';
 
 KidCash is a mobile app that helps kids learn how to earn, save and spend money through fun, interactive tasks. With a digital allowance system, kids complete chores to earn virtual cash they can spend, save or donate, all while learning real-world money habits.
 
@@ -102,7 +94,17 @@ I took inspiration from gamified banking and savings app designs I found on Pint
 
 ### Colour palette
 
-Teal #2A7F8E, yellow #F4C660, pink #F4A2A2, white #FFFFFF, cream #FBEFD9 and dark navy #1B2A33.
+<Swatches
+  label="KidCash palette"
+  colours={[
+    { name: 'Teal', hex: '#2A7F8E' },
+    { name: 'Yellow', hex: '#F4C660' },
+    { name: 'Pink', hex: '#F4A2A2' },
+    { name: 'White', hex: '#FFFFFF' },
+    { name: 'Cream', hex: '#FBEFD9' },
+    { name: 'Dark navy', hex: '#1B2A33' },
+  ]}
+/>
 
 ### Typography
 
