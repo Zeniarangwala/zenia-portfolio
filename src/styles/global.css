@@ -57,7 +57,7 @@ html[data-contrast='high'] {
   --shadow-md: none;
 }
 html[data-contrast='high']
-  :is(.card-media, .case-hero, .inclusion, .contact-btn, .chips li, .tags li, .figure img, .arch, .miles, .prefs, .pref) {
+  :is(.card-media, .case-hero, .inclusion, .contact-btn, .tags li, .figure img, .arch, .miles, .prefs, .pref) {
   border: 2px solid #000;
 }
 
@@ -719,20 +719,6 @@ main:focus {
   .about-grid {
     grid-template-columns: minmax(0, 1fr);
   }
-}
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  list-style: none;
-  padding: 0;
-}
-.chips li {
-  padding: 0.45rem 1rem;
-  border-radius: 999px;
-  background: var(--tint);
-  font-size: var(--fs-label);
-  font-weight: 600;
 }
 .about-section {
   padding-block: clamp(2.5rem, 6vw, 3.5rem) 0;

@@ -2,8 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { links } from '../data/site';
 
-const facts = ['Based in Atlanta', 'Originally from Toronto', 'MFA at SCAD', 'Training for my first half marathon'];
-
 const experience = [
   { role: 'Business Development and Marketing Intern', org: 'CrunchTimeZ CFO Services', when: '2026' },
   { role: 'Community and Brand Design Intern', org: 'She Hacks Purple Consulting', when: '2026' },
@@ -39,9 +37,6 @@ const route = 'M8 120 C 120 120, 150 50, 260 60 S 400 140, 520 104 S 660 30, 780
           underrepresented communities. With a background in business, marketing and UX, I love design
           that looks good and actually works for the people using it.
         </p>
-        <ul class="chips" aria-label="Quick facts">
-          {facts.map((fact) => <li>{fact}</li>)}
-        </ul>
       </div>
       <figure class="arch">
         <img src="/images/about/zenia.webp" alt="Zenia smiling in a cream top, standing in a bright hallway." width="320" height="400" loading="eager" />
