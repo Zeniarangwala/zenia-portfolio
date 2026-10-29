@@ -4,7 +4,7 @@ order: 3
 name: Arrival to Approval
 title: Making Canadian credit make sense for newcomers
 discipline: Service design · IBM capstone, University of Waterloo
-problem: "A multilingual financial education platform helping newcomers to Canada better understand credit scores, financial systems and building credit history, through accessible learning and AI-supported guidance."
+problem: "Newcomers are expected to understand Canadian credit almost right away, but nobody really teaches them how it works."
 role: "UX designer (group capstone project). TODO: Zenia to confirm — what you personally designed vs. the team"
 team: "Group project. TODO: Zenia to confirm — team size and members’ roles"
 tools: "Figma, Canva"
@@ -23,25 +23,19 @@ assetRequest: "Your individual contributions vs. the team's, team size, real alt
 import Figure from '../../components/Figure.astro';
 import Gallery from '../../components/Gallery.astro';
 
-As part of our 4th-year IBM service design capstone, we designed Arrival to Approval, a multilingual financial education platform that helps newcomers to Canada better understand credit scores, financial systems and building credit history, through accessible learning and AI-supported guidance.
-
 ## Problem
 
-This project felt personal to me because I also immigrated to Canada, and I remember how confusing and stressful a lot of financial systems felt at first. Credit scores, loans, credit history and banking expectations are treated like common knowledge. For many newcomers, it can feel like everyone else already understands a system you were never taught how to navigate.
+This one was personal. I immigrated to Canada too, and I remember how confusing the money side was at first. Credit scores, credit history and what banks expect are treated like common knowledge, and it feels like everyone else learned a system you were never taught.
 
-As we researched further, we found that many newcomers struggle to access important financial services because they don't have a Canadian credit history yet. That can affect housing, loans, education and overall financial stability. We also noticed that a lot of financial education resources feel overwhelming, overly formal or hard to navigate for people who are still adjusting to a new country and financial system.
+Without a Canadian credit history, newcomers get turned down for apartments, loans and even phone plans. And most of the resources meant to help are long, formal and written for people who already know the terms.
 
-With Arrival to Approval, we wanted to explore how UX design could make financial education feel more accessible, supportive and easier to understand, through multilingual learning, conversational guidance and approachable onboarding.
+Arrival to Approval was our 4th-year IBM service design capstone: a multilingual learning platform that explains credit in plain language, with an AI chat for anything the lessons don't cover.
 
 ## Research and insights
 
-Our research focused on the challenges newcomers face in understanding Canadian financial systems, building credit history and finding financial education resources.
+### Nobody explains how the score works
 
-### Credit systems can feel unfamiliar and overwhelming for newcomers
-
-Many newcomers are expected to understand Canadian credit systems very quickly, without ever really being taught how they work. Credit scores affect things like housing, loans and financial stability, but many people arrive without knowing how scores are calculated or why credit history matters so much.
-
-Looking deeper, we noticed that many financial education resources assume you already understand banking terms and financial expectations in Canada. That insight pushed us to focus on clearer information, accessible design and more supportive onboarding throughout the platform.
+Your score decides where you can live and what you can borrow, but a lot of people arrive not knowing how it's calculated or why history matters so much. The resources we found assumed you already knew the banking terms. So we started from zero: what a score is, who looks at it, and what moves it.
 
 <Figure
   src="/images/arrival-to-approval/research-credit-score-range.png"
@@ -51,11 +45,9 @@ Looking deeper, we noticed that many financial education resources assume you al
   caption="The Canadian credit score range (Wood, 2021)."
 />
 
-### Financial education often feels intimidating instead of supportive
+### The help that exists is intimidating
 
-Another thing that kept coming up was how intimidating financial education can feel when you're still adjusting to a new country. Many existing resources rely on long explanations, formal language and information-heavy layouts that make learning stressful and hard to follow.
-
-This shaped a lot of our design decisions. We wanted the platform to feel simpler, more approachable and easier to navigate, so we broke information into smaller lessons, used more conversational language and added AI-supported guidance throughout.
+Most existing resources lean on long explanations and formal language. When you're already adjusting to a new country, that makes learning stressful. That's why we went with short lessons, conversational language and a chat you can ask anything.
 
 <Figure
   src="/images/arrival-to-approval/research-improve-credit.png"
@@ -66,8 +58,6 @@ This shaped a lot of our design decisions. We wanted the platform to feel simple
 />
 
 ## Designing around real experiences
-
-As we kept researching, we started thinking more carefully about what navigating financial systems actually feels like for someone adjusting to life in a new country.
 
 ### Meet Priya
 
@@ -83,7 +73,7 @@ As we kept researching, we started thinking more carefully about what navigating
 
 ## Priya's user journey
 
-We mapped the challenges Priya faces while trying to understand financial systems, build credit history and adjust to life in a new country.
+We mapped Priya's first months, from landing in Canada to feeling in control.
 
 <Figure
   src="/images/arrival-to-approval/journey-map-priya.png"
@@ -95,16 +85,16 @@ We mapped the challenges Priya faces while trying to understand financial system
 
 ## Translating research into design
 
-After mapping Priya's experience, we thought more carefully about how the platform should feel for someone using it for the first time.
+The journey map turned into four decisions:
 
-1. **Making information easier to understand.** A lot of financial information felt too formal and overwhelming during our research. We wanted to break things into smaller lessons that are easier to follow.
-2. **Making the experience feel supportive.** Many platforms assume you already understand the system. We wanted onboarding to feel more guided and less intimidating.
-3. **Accessibility and language.** Newcomers come from diverse backgrounds, so we wanted the platform to feel accessible, clear and easy to navigate for a wide range of people.
-4. **Helping users feel progress.** Instead of making people feel stressed or behind, we wanted the experience to feel encouraging and build confidence over time.
+1. **Small lessons.** Priya hit a wall of formal text, so lessons are short, one idea each, with a Next button.
+2. **Guided onboarding.** Most sites assume you know the system. Ours starts from the basics, like what a credit score even is.
+3. **Your language.** Newcomers come from everywhere, so the promise is in the sign-up line (“in your language”) and the chat answers in the language you ask in.
+4. **Visible progress.** Her confidence only came back once she could see she was getting somewhere, so lessons, streaks and badges track it.
 
 ## User flow
 
-We mapped the user flow to understand how newcomers would move through the platform, from onboarding and learning about credit history to building financial confidence over time.
+Four main screens: a dashboard, lessons, the AI chat and progress. We wireframed them before any visual design.
 
 <Gallery>
   <Figure
@@ -138,6 +128,8 @@ We mapped the user flow to understand how newcomers would move through the platf
 </Gallery>
 
 ## High-fidelity mockups
+
+The chat is one click away from every lesson, so you can ask about a word the moment you hit it. Answers stay short and link back to the matching lesson.
 
 <Figure
   src="/images/arrival-to-approval/hifi-homepage-laptop.png"

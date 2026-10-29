@@ -4,7 +4,7 @@ order: 2
 name: Clearspace
 title: Designing a task app for brains that get overwhelmed
 discipline: UX and UI design
-problem: "I created Clearspace to explore how design can make digital experiences feel less overwhelming and easier to navigate, with a focus on clarity, structure and accessibility for people with ADHD, dyslexia and different cognitive needs."
+problem: "When an interface is cluttered or hard to follow, even a simple task can start to feel like too much. What would a task app look like if it was designed for brains that get overwhelmed?"
 role: "UX designer, UX researcher"
 team: "Solo project"
 tools: "Figma"
@@ -26,33 +26,31 @@ import Swatches from '../../components/Swatches.astro';
 
 ## The problem
 
-I've experienced how frustrating it can be when digital products don't consider the different ways people think, focus and process information. When an interface feels cluttered or hard to follow, even a simple task can start to feel overwhelming.
+I know how frustrating it is when an app doesn't account for the way you think or focus. When a screen is cluttered, even a simple task starts to feel like too much.
 
-For people with ADHD, dyslexia or cognitive overload, things like dense layouts, unclear hierarchy and too many choices can create stress instead of clarity.
-
-This project came from wanting to explore accessibility beyond technical standards, and to design an experience that feels calmer, more intuitive and easier to move through.
+For people with ADHD, dyslexia or cognitive overload, dense layouts, unclear hierarchy and too many choices add stress. Passing a contrast checker doesn't fix that, so I wanted to design for how a screen feels to use, not just whether it meets the standard.
 
 ## Understanding cognitive overload
 
-What the research found:
+What I took from the reading:
 
-- Cluttered layouts, dense interfaces and inconsistent navigation can make information harder to process.
-- Many digital products are still designed around “average” users, even though neurodiverse people may process information differently.
-- Clearer hierarchy, simpler layouts and shorter sections can help reduce cognitive overload and improve usability.
-- Research on decision fatigue showed that constant choices, notifications and interruptions can make digital spaces feel mentally exhausting over time.
+- Clutter, dense screens and inconsistent navigation make information harder to process.
+- Most products are still designed around an “average” user, and neurodivergent people often process information differently.
+- Clear hierarchy, simpler layouts and shorter sections reduce the load.
+- Constant choices, notifications and interruptions wear people down over time. That's decision fatigue.
 
 Sources: Earth Coaching, UXPA Magazine, “Cognitive Load Optimization in User Interface Design for Info Services”, and “Decision Fatigue in the Digital Era”.
 
 ## Design principles
 
-1. **Keep things simple.** I tried not to add features or visuals just because I could. Keeping things simple helped reduce visual overwhelm and made it easier to focus on one task at a time.
-2. **Structure makes things easier to follow.** I wanted the interface to feel structured and consistent, so you don't have to keep stopping to figure out where things are or what to do next.
-3. **Make things easy to read.** I focused on spacing, hierarchy and readability so the interface feels less mentally tiring and easier to move through.
-4. **Guide attention instead of competing for it.** Instead of everything demanding attention at once, the design guides you through the experience with hierarchy, spacing and small visual cues.
+1. **Keep it simple.** No features or visuals just because I could. One task at a time.
+2. **Add structure.** Things stay in the same place, so you never stop to figure out where you are or what's next.
+3. **Make it easy to read.** Spacing, hierarchy and type that don't tire you out.
+4. **Guide attention, don't compete for it.** One thing on the screen should be clearly first.
 
 ## Typography
 
-I realised how much typography affects readability and focus. I wanted the text to feel clear, open and easy to move through, so the interface felt less overwhelming to process.
+Type ended up mattering more than I expected. Some fonts I tried got tiring after a few paragraphs, so I chose for open shapes and lots of space.
 
 <Gallery>
   <Figure src="/images/clearspace/body-font.png" width={650} height={156} alt="Spec: body font, Atkinson Hyperlegible." />
@@ -62,15 +60,15 @@ I realised how much typography affects readability and focus. I wanted the text 
   <Figure src="/images/clearspace/letter-spacing.png" width={524} height={130} alt="Spec: letter spacing, +0.01–0.04em." />
 </Gallery>
 
-- **Body font, Atkinson Hyperlegible:** it felt really clear and easy to read. Some fonts started to feel tiring after a while, but this one felt more open and easier to follow, especially in text-heavy sections.
-- **Heading font, Plus Jakarta Sans:** clean and modern without feeling too heavy. It creates structure while keeping the interface light and easy to read.
-- **Line length, 55–75 characters:** long lines started to feel harder to focus on. Shorter lines made the interface easier to scan and less overwhelming.
-- **Line height (body), 1.7×:** more breathing room, so everything feels less crowded.
-- **Letter spacing, +0.01–0.04em:** slightly increased to help with clarity.
+- **Body, Atkinson Hyperlegible:** built by the Braille Institute so similar letters (like I, l and 1) don't get mixed up. It stayed easy to read in the longer text.
+- **Headings, Plus Jakarta Sans:** clean, and light enough that headings add structure without shouting.
+- **Line length, 55–75 characters:** longer lines were harder to keep my place in.
+- **Line height, 1.7× for body:** more room between lines, so paragraphs don't look like a block.
+- **Letter spacing, +0.01–0.04em:** a little extra so letters don't run together.
 
 ## Colour palette
 
-Colour can quickly change how an interface feels to use. I wanted this palette to feel calm, soft and easy on the eyes while still guiding attention. I avoided overly bright colours and focused on balance, so the interface supports the content instead of competing with it.
+I wanted the palette to be calm without being washed out. Nothing neon, and only one colour (blue) means “do this”.
 
 <Swatches
   label="Clearspace palette"
@@ -85,19 +83,16 @@ Colour can quickly change how an interface feels to use. I wanted this palette t
   ]}
 />
 
-- **Background #EDF1F7:** a softer off-white instead of pure white, because bright white screens started to feel harsh after a while.
-- **Text primary #1A2B3C:** the main text colour. Dark enough to stay readable, but softer than pure black so it doesn't feel too intense.
-- **Text secondary #3D5468:** for smaller text like labels and descriptions. It separates information without making everything feel too heavy.
-- **Blue #0074A5:** buttons and important actions. It stands out enough to guide attention without taking over the screen.
-- **Sage #0B764D:** positive actions and confirmation states, because it feels softer and calmer than a bright green.
-- **Amber #BE7C1C:** when something needs attention or checking. It catches the eye without feeling stressful or harsh.
-- **Border #D3DCE8:** kept really light, so content feels separated and organised without making the interface busy.
+- **Background #EDF1F7:** off-white, because pure white got harsh after a while.
+- **Text #1A2B3C and #3D5468:** a dark navy instead of black for main text, and a lighter one for labels and hints.
+- **Blue #0074A5:** buttons and main actions only.
+- **Sage #0B764D:** success and confirmation. Calmer than a bright green.
+- **Amber #BE7C1C:** “check this”. It gets noticed without the panic of red.
+- **Border #D3DCE8:** light enough to separate things without adding lines everywhere.
 
 ## UI components
 
-This part of the project looks at how small UI decisions affect usability. Even simple things like buttons, labels and spacing can change how easy something feels to move through.
-
-I designed buttons to feel clear and easy to understand. The main action stands out, while less important actions stay visible without competing for attention.
+Buttons say exactly what they do. There's one main action per screen, and anything you can't undo is labelled plainly.
 
 <Gallery>
   <Figure src="/images/clearspace/button-save-continue.png" width={561} height={183} alt="A blue button reading “Save and continue”." caption="The main action stands out." />
@@ -105,7 +100,7 @@ I designed buttons to feel clear and easy to understand. The main action stands 
   <Figure src="/images/clearspace/button-remove.png" width={512} height={147} alt="A red button reading “Remove from account”." caption="Labels say exactly what will happen." />
 </Gallery>
 
-I kept form inputs simple and clear, so you always know what to enter. Labels stay visible while you type, which makes the form easier to follow. Clear progress indicators show where you are and what's left, which makes longer tasks feel less overwhelming.
+Labels sit above the field and stay there while you type, so you never lose track of what a field was asking. Progress bars say which step you're on and how many are left.
 
 <Gallery>
   <Figure
@@ -138,7 +133,7 @@ I kept form inputs simple and clear, so you always know what to enter. Labels st
   />
 </Gallery>
 
-I wanted feedback messages to be clear and easy to understand. Instead of relying only on colour, the messages explain what happened and what to do next.
+Messages never rely on colour alone. Each one says what happened and what to do next.
 
 <Gallery>
   <Figure
@@ -159,7 +154,7 @@ I wanted feedback messages to be clear and easy to understand. Instead of relyin
 
 ## Applied example
 
-Here's a real example of how these ideas come together. I took a standard account creation form and explored how small design choices can make something feel easier or more overwhelming to use. The goal wasn't to change what the form does, but how it feels to move through it.
+To test the system on something real, I took a standard create-account form and redesigned it. It asks for the same information. Only the experience changes.
 
 <Figure
   src="/images/clearspace/form-before.png"
@@ -171,11 +166,11 @@ Here's a real example of how these ideas come together. I took a standard accoun
 
 What wasn't working before:
 
-1. Pure white backgrounds can feel harsh on the eyes. The contrast is very strong and can be uncomfortable for some people.
-2. Labels aren't very clear or specific, so you may have to pause and think about what each field is asking.
-3. All the fields appear at once, which is a lot to take in. There's no clear starting point.
-4. Errors rely only on red, which doesn't work for everyone, especially people with colour vision differences. There's also no clear guidance on how to fix the issue.
-5. The consent text is small and placed at the end, so it's easy to skip over without really reading it.
+1. Pure white background with very strong contrast, which is uncomfortable for some people to read on.
+2. Vague labels, so you stop to work out what each field wants.
+3. Every field at once, with no clear place to start.
+4. Errors shown only in red, which doesn't work for people with colour vision differences, and nothing says how to fix them.
+5. Tiny consent text at the very end, easy to skip.
 
 <Gallery>
   <Figure
@@ -201,6 +196,4 @@ What wasn't working before:
   />
 </Gallery>
 
-In the updated version, I redesigned the form into a step-by-step flow, so you only focus on one thing at a time. Each screen has a clearer purpose, which makes the process feel more guided and less overwhelming.
-
-I also added visible progress indicators, clearer labels, helper text and real-time feedback, so you always know where you are and what to do next.
+The new version splits it into three steps with one question each, written the way you'd ask a person (“What should we call you?”). Each step has helper text and a progress bar, and the password field tells you it's strong enough before you hit the button.
