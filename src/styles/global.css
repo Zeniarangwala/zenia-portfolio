@@ -57,7 +57,7 @@ html[data-contrast='high'] {
   --shadow-md: none;
 }
 html[data-contrast='high']
-  :is(.card-media, .case-hero, .inclusion, .contact-btn, .tags li, .figure img, .arch, .miles, .prefs, .pref) {
+  :is(.card-media, .case-hero, .tldr, .contact-btn, .tags li, .figure img, .arch, .miles, .prefs, .pref) {
   border: 2px solid #000;
 }
 
@@ -852,8 +852,8 @@ main:focus {
 }
 
 /* ---------- Case studies ---------- */
-/* Every case study shares one frame: header, hero, facts strip, inclusion
-   note, then numbered sections. */
+/* Every case study shares one frame: header, hero, facts strip, TL;DR
+   box, then numbered sections. */
 .case-header {
   padding-block: clamp(3rem, 8vw, 5rem) 2rem;
   display: grid;
@@ -893,38 +893,23 @@ main:focus {
 .facts dd {
   margin: 0;
 }
-.inclusion {
+.tldr {
   margin-top: 2rem;
   padding: clamp(1.25rem, 3vw, 2rem);
   border-radius: var(--radius);
   background: var(--tint);
 }
-.inclusion h2 {
+.tldr h2 {
   font-size: var(--fs-body);
   letter-spacing: 0;
   line-height: 1.4;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
-.inclusion-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
-  gap: 1.5rem 2.5rem;
-}
-@media (max-width: 52rem) {
-  .inclusion-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-.inclusion-status {
-  margin-top: 1rem;
-  color: var(--muted);
-  font-size: var(--fs-label);
-}
-.inclusion ul {
+.tldr ul {
   margin: 0;
   padding-left: 1.2rem;
 }
-.inclusion li + li {
+.tldr li + li {
   margin-top: 0.4rem;
 }
 
