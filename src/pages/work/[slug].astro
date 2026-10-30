@@ -25,8 +25,6 @@ const facts = [
 ]
   .map(([label, value]) => [label, clean(value)])
   .filter(([, value]) => value);
-const audience = clean(data.inclusion.audience);
-const status = clean(data.inclusionStatus);
 const hero = cards[data.slug]?.thumb;
 ---
 <BaseLayout title={`${data.name} — Zenia Rangwala`} description={`${data.title}. ${data.problem}`}>
@@ -50,17 +48,11 @@ const hero = cards[data.slug]?.thumb;
       ))}
     </dl>
 
-    <section class="inclusion" aria-labelledby="inclusion-heading">
-      <h2 id="inclusion-heading">Who this design includes and how</h2>
-      <div class="inclusion-grid">
-        <div>
-          {audience && <p>{audience}</p>}
-          {status && <p class="inclusion-status"><strong>Evidence:</strong> {status}</p>}
-        </div>
-        <ul>
-          {data.inclusion.decisions.map((d) => <li>{d}</li>)}
-        </ul>
-      </div>
+    <section class="tldr" aria-labelledby="tldr-heading">
+      <h2 id="tldr-heading">TL;DR</h2>
+      <ul>
+        {data.tldr.map((point) => <li>{point}</li>)}
+      </ul>
     </section>
 
     <div class="case-body">

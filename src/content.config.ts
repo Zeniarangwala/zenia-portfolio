@@ -17,12 +17,8 @@ const projects = defineCollection({
     team: z.string(),
     tools: z.string(),
     timeline: z.string(),
-    inclusion: z.object({
-      audience: z.string(),
-      decisions: z.array(z.string()),
-    }),
-    // "Intention" (designed for, not tested) vs "Tested" (with evidence), or a TODO.
-    inclusionStatus: z.string(),
+    // Three short bullets shown in the TL;DR box at the top of the case study.
+    tldr: z.array(z.string()).min(1),
     cover: z
       .object({ src: z.string(), width: z.number(), height: z.number() })
       .optional(),
