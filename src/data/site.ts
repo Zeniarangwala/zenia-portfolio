@@ -1,7 +1,6 @@
 export const links = {
   email: 'zeniarangwala@gmail.com',
   linkedin: 'https://www.linkedin.com/in/zeniarangwala',
-  // TODO: Zenia to confirm — add the file at public/resume.pdf
   resume: '/resume.pdf',
 };
 
