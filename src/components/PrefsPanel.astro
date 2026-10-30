@@ -1,0 +1,118 @@
+---
+// "View this site your way": four independent reading preferences.
+// Each one sets a data attribute on <html>; global.css does the rest.
+const prefs = [
+  {
+    key: 'text',
+    value: 'large',
+    name: 'Larger text',
+    hint: 'Makes all text on the site about 25% bigger.',
+  },
+  {
+    key: 'font',
+    value: 'dyslexic',
+    name: 'Dyslexia-friendly font',
+    hint: 'Switches to OpenDyslexic. Some dyslexic readers find it easier to read; it doesn’t help everyone.',
+  },
+  {
+    key: 'contrast',
+    value: 'high',
+    name: 'High contrast',
+    hint: 'Pure black on white, with stronger outlines.',
+  },
+  {
+    key: 'motion',
+    value: 'reduce',
+    name: 'Reduce motion',
+    hint: 'Stops animations. Your device’s reduced-motion setting is always respected too.',
+  },
+];
+---
+<button class="btn prefs-toggle" type="button" aria-haspopup="dialog" aria-controls="prefs">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+    <circle cx="12" cy="4.5" r="1.6" /><path d="M5 8.5l7 1.5 7-1.5M12 10v5l-3 6M12 15l3 6" />
+  </svg>
+  View your way
+</button>
+
+<dialog id="prefs" class="prefs" aria-labelledby="prefs-title">
+  <div class="prefs-head">
+    <h2 id="prefs-title">View this site your way</h2>
+    <button class="btn btn-ghost" type="button" data-close>Close</button>
+  </div>
+  <p class="muted">Your choices are saved in this browser.</p>
+  <fieldset>
+    <legend class="visually-hidden">Reading preferences</legend>
+    {prefs.map((p) => (
+      <label class="pref">
+        <input type="checkbox" data-key={p.key} data-value={p.value} aria-describedby={`hint-${p.key}`} />
+        <span class="pref-name">{p.name}</span>
+        <span class="pref-hint" id={`hint-${p.key}`}>{p.hint}</span>
+      </label>
+    ))}
+  </fieldset>
+  <div class="prefs-foot">
+    <button class="btn btn-ghost" type="button" data-reset>Reset to default</button>
+    <p class="visually-hidden" role="status" aria-live="polite" data-announce></p>
+  </div>
+</dialog>
+
+<script>
+  const root = document.documentElement;
+  const dialog = document.querySelector<HTMLDialogElement>('#prefs')!;
+  const toggle = document.querySelector<HTMLButtonElement>('.prefs-toggle')!;
+  const boxes = dialog.querySelectorAll<HTMLInputElement>('input[data-key]');
+  const announce = dialog.querySelector<HTMLElement>('[data-announce]')!;
+  const KEY = 'zr-prefs';
+
+  const read = (): Record<string, string> => {
+    try {
+      return JSON.parse(localStorage.getItem(KEY) || '{}');
+    } catch {
+      return {};
+    }
+  };
+  const save = (prefs: Record<string, string>) => {
+    try {
+      localStorage.setItem(KEY, JSON.stringify(prefs));
+    } catch {
+      // Storage blocked: preferences still apply for this page view.
+    }
+  };
+  const sync = () => {
+    boxes.forEach((box) => (box.checked = root.dataset[box.dataset.key!] === box.dataset.value));
+  };
+
+  sync();
+  toggle.addEventListener('click', () => {
+    sync();
+    dialog.showModal();
+  });
+  dialog.querySelector('[data-close]')!.addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) dialog.close(); // click on the backdrop
+  });
+  dialog.addEventListener('close', () => toggle.focus());
+
+  boxes.forEach((box) =>
+    box.addEventListener('change', () => {
+      const prefs = read();
+      const key = box.dataset.key!;
+      if (box.checked) {
+        root.dataset[key] = box.dataset.value!;
+        prefs[key] = box.dataset.value!;
+      } else {
+        delete root.dataset[key];
+        delete prefs[key];
+      }
+      save(prefs);
+    }),
+  );
+
+  dialog.querySelector('[data-reset]')!.addEventListener('click', () => {
+    boxes.forEach((box) => delete root.dataset[box.dataset.key!]);
+    save({});
+    sync();
+    announce.textContent = 'Preferences reset to default.';
+  });
+</script>

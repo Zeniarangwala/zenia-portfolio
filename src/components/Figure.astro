@@ -1,4 +1,6 @@
 ---
+// variant: 'card' (default) frames screenshots and photos on a white card.
+// 'cutout' is for transparent mockups and objects: no frame, no background.
 interface Props {
   src: string;
   alt: string;
@@ -6,10 +8,12 @@ interface Props {
   height: number;
   caption?: string;
   eager?: boolean;
+  variant?: 'card' | 'cutout';
 }
-const { src, alt, width, height, caption, eager = false } = Astro.props;
+const { src, alt, width, height, caption, eager = false, variant = 'card' } = Astro.props;
+const portrait = height > width * 1.1;
 ---
-<figure class="figure">
+<figure class:list={['figure', `figure--${variant}`, { 'figure--portrait': portrait }]}>
   <img
     src={src}
     alt={alt}

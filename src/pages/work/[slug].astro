@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { cards } from '../../data/site';
 
 export async function getStaticPaths() {
   const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
@@ -13,45 +14,62 @@ export async function getStaticPaths() {
 const { project, prev, next } = Astro.props;
 const { data } = project;
 const { Content } = await render(project);
+
+// Open questions stay as "TODO: Zenia to confirm" in the MDX, but never reach the page.
+const clean = (text: string) => text.replace(/\.?\s*TODO\b.*$/s, '').trim();
+const facts = [
+  ['Role', data.role],
+  ['Team', data.team],
+  ['Tools', data.tools],
+  ['Timeline', data.timeline],
+]
+  .map(([label, value]) => [label, clean(value)])
+  .filter(([, value]) => value);
+const audience = clean(data.inclusion.audience);
+const status = clean(data.inclusionStatus);
+const hero = cards[data.slug]?.thumb;
 ---
 <BaseLayout title={`${data.name} — Zenia Rangwala`} description={`${data.title}. ${data.problem}`}>
-  <article>
-    <header>
-      <p>{data.name} · {data.discipline}</p>
+  <article class="wrap">
+    <header class="case-header">
+      <p class="label">{data.name} · {data.discipline}</p>
       <h1>{data.title}</h1>
-      <p class="prose">{data.problem}</p>
+      <p class="problem">{data.problem}</p>
     </header>
 
-    <section aria-labelledby="facts-heading">
-      <h2 id="facts-heading">Quick facts</h2>
-      <dl class="facts">
-        <dt>My role</dt>
-        <dd>{data.role}</dd>
-        <dt>Team</dt>
-        <dd>{data.team}</dd>
-        <dt>Tools</dt>
-        <dd>{data.tools}</dd>
-        <dt>Timeline</dt>
-        <dd>{data.timeline}</dd>
-      </dl>
-    </section>
+    {hero && (
+      <img class="case-hero" src={hero} alt={data.coverAlt} width="1200" height="750" loading="eager" />
+    )}
+
+    <dl class="facts">
+      {facts.map(([label, value]) => (
+        <div>
+          <dt>{label}</dt>
+          <dd>{value}</dd>
+        </div>
+      ))}
+    </dl>
 
     <section class="inclusion" aria-labelledby="inclusion-heading">
       <h2 id="inclusion-heading">Who this design includes and how</h2>
-      <p><strong>Who:</strong> {data.inclusion.audience}</p>
-      <ul>
-        {data.inclusion.decisions.map((d) => <li>{d}</li>)}
-      </ul>
-      <p><strong>Evidence status:</strong> {data.inclusionStatus}</p>
+      <div class="inclusion-grid">
+        <div>
+          {audience && <p>{audience}</p>}
+          {status && <p class="inclusion-status"><strong>Evidence:</strong> {status}</p>}
+        </div>
+        <ul>
+          {data.inclusion.decisions.map((d) => <li>{d}</li>)}
+        </ul>
+      </div>
     </section>
 
-    <div class="prose-wrap">
+    <div class="case-body">
       <Content />
     </div>
-  </article>
 
-  <nav class="case-nav" aria-label="More projects">
-    {prev ? <a href={`/work/${prev.data.slug}/`}>← Previous: {prev.data.name}</a> : <span />}
-    {next ? <a href={`/work/${next.data.slug}/`}>Next: {next.data.name} →</a> : <a href="/#work">Back to all work</a>}
-  </nav>
+    <nav class="case-nav" aria-label="More projects">
+      {prev ? <a class="btn btn-ghost" href={`/work/${prev.data.slug}/`}><span aria-hidden="true">←</span> Previous: {prev.data.name}</a> : <span />}
+      {next ? <a class="btn" href={`/work/${next.data.slug}/`}>Next: {next.data.name} <span aria-hidden="true">→</span></a> : <a class="btn" href="/#work">Back to all work</a>}
+    </nav>
+  </article>
 </BaseLayout>

@@ -1,0 +1,11 @@
+---
+// Numbered list of short items, laid out as a grid of tiles.
+interface Props {
+  items: string[];
+  label: string;
+}
+const { items, label } = Astro.props;
+---
+<ol class="steps" aria-label={label}>
+  {items.map((item) => <li>{item}</li>)}
+</ol>

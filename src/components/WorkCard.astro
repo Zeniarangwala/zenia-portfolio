@@ -1,0 +1,59 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { cards } from '../data/site';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  eager?: boolean;
+}
+const { project, eager = false } = Astro.props;
+const { data } = project;
+const card = cards[data.slug];
+---
+<li class="card reveal">
+  <div class="card-media">
+    {card?.thumb ? (
+      <img
+        class="card-img"
+        data-fit={card.fit}
+        src={card.thumb}
+        alt={data.coverAlt}
+        width="1200"
+        height="750"
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+      />
+    ) : data.cover ? (
+      <img
+        class="card-img"
+        data-fit={card?.fit ?? 'cover'}
+        src={data.cover.src}
+        alt={data.coverAlt}
+        width={data.cover.width}
+        height={data.cover.height}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+      />
+    ) : (
+      <div class="placeholder-box">
+        <p><strong>Cover image placeholder</strong></p>
+        <p>TODO: Zenia to confirm — supply cover image</p>
+      </div>
+    )}
+    {card?.hover && (
+      <img class="card-img card-img-alt" data-fit={card.hover.fit} src={card.hover.src} alt="" loading="lazy" decoding="async" />
+    )}
+  </div>
+  <div class="card-body">
+    <h3 class="card-title">
+      <a class="card-link" href={`/work/${data.slug}/`}>{data.name}</a>
+      <span class="card-arrow" aria-hidden="true">→</span>
+    </h3>
+    {card?.tags && (
+      <ul class="tags" aria-label="Disciplines">
+        {card.tags.map((tag) => <li>{tag}</li>)}
+      </ul>
+    )}
+    <p class="card-desc">{data.title}</p>
+  </div>
+</li>

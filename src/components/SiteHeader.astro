@@ -1,0 +1,56 @@
+---
+import { links } from '../data/site';
+
+const path = Astro.url.pathname;
+const nav = [
+  { href: '/#work', label: 'Work', current: path.startsWith('/work') },
+  { href: '/about/', label: 'About', current: path.startsWith('/about') },
+];
+---
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/">Zenia Rangwala</a>
+    <button class="menu-toggle btn btn-ghost" type="button" aria-expanded="false" aria-controls="site-menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h16" />
+      </svg>
+      Menu
+    </button>
+    <div class="site-menu" id="site-menu">
+      <nav aria-label="Main">
+        <ul>
+          {nav.map((item) => (
+            <li>
+              <a href={item.href} aria-current={item.current ? 'page' : undefined}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <p class="status">
+        <span class="status-dot" aria-hidden="true"></span>
+        Open to internships
+      </p>
+      <a class="btn" href={links.resume}>Resume <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu: a disclosure button. Escape closes it and returns focus.
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle')!;
+  const menu = document.querySelector<HTMLElement>('#site-menu')!;
+  const setOpen = (open: boolean) => {
+    toggle.setAttribute('aria-expanded', String(open));
+    menu.classList.toggle('is-open', open);
+  };
+  toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  menu.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).closest('a')) setOpen(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+</script>

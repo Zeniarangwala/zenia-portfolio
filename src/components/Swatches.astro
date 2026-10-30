@@ -1,0 +1,17 @@
+---
+// A row of colour chips with names, drawn in HTML so it stays sharp at any size.
+interface Props {
+  colours: { name: string; hex: string }[];
+  label: string;
+}
+const { colours, label } = Astro.props;
+---
+<ul class="swatches" aria-label={label}>
+  {colours.map((c) => (
+    <li>
+      <span class="swatch-chip" style={`background:${c.hex}`} />
+      <span class="swatch-name">{c.name}</span>
+      <span class="swatch-hex">{c.hex.toUpperCase()}</span>
+    </li>
+  ))}
+</ul>
