@@ -24,21 +24,21 @@ import Figure from '../../components/Figure.astro';
 import Gallery from '../../components/Gallery.astro';
 import Swatches from '../../components/Swatches.astro';
 
-## Why I created KidCash
+## The problem
 
 I've always wished I had learned how to manage money earlier. Growing up, I spent without thinking and saved without really understanding why, mostly because no one ever taught me how money actually works.
 
 KidCash is the app I wish I'd had. Kids do chores to earn a digital allowance, then decide what to spend, save or give. I wanted it to be fun without being childish or boring.
 
-## Understanding the problem
+## Research
 
-What I found:
+I looked at research on how kids learn about money. What I found:
 
 - Kids start forming attitudes about money very young, and those habits stick.
 - When money is mostly taps and cards, it stops feeling real.
 - A TD survey found 86% of Canadian parents think games that teach money would make it more fun for kids.
 
-So saving had to be something you can see (a tree that grows, bars that fill up), and learning had to be a game.
+**What it meant for the design:** saving had to be something you can see (a tree that grows, bars that fill up), and learning had to be a game.
 
 Sources: TD Stories, “Your Kid's Digital Spending Habits”; Michigan Ross, “New Research Shows Children Form Attitudes About Money at a Young Age”; Benjamin Talks, “Spendthrift or Penny Pincher? The Psychology Behind Your Kid and Money”.
 
@@ -50,11 +50,17 @@ Sources: TD Stories, “Your Kid's Digital Spending Habits”; Michigan Ross, �
   caption="Three insights that shaped KidCash. They led me to reward-based motivation, visual savings goals, interactive learning tasks and accessible design."
 />
 
-## Designing the experience
+## Design decisions
 
-### Moodboard
+### Borrowing from what already works
 
-I took inspiration from gamified banking and savings app designs I found on Pinterest.
+I studied three apps kids and parents already use, and took one idea from each:
+
+- **Greenlight:** the spend / save / give system.
+- **GoHenry:** earning through chores.
+- **Duolingo:** a friendly mascot and progress loops that bring you back.
+
+I also collected gamified banking and savings app designs for the look and feel.
 
 <Gallery>
   <Figure
@@ -93,7 +99,7 @@ I took inspiration from gamified banking and savings app designs I found on Pint
 
 ### Typography
 
-Nunito is the primary font.
+Nunito is the primary font. Its rounded letters feel friendly and easy to read for kids, without looking babyish.
 
 <Figure
   src="/images/kidcash/heading-font.png"
@@ -103,13 +109,9 @@ Nunito is the primary font.
   caption="Heading font."
 />
 
-### Reference apps
-
-- **Greenlight:** the spend / save / give system.
-- **GoHenry:** chore rewards and earning.
-- **Duolingo:** a friendly mascot and progress loops.
-
 ## Key features
+
+Each feature answers one of the research insights: goals and the Savings Tree make saving visible, and games make learning interactive.
 
 <Gallery>
   <Figure
@@ -167,3 +169,11 @@ Nunito is the primary font.
     caption="Log in, or ask a parent to set up an account."
   />
 </Gallery>
+
+## Takeaways
+
+- **Make the abstract visible.** A growing tree says more to a kid than a balance ever will.
+- **Fun has to serve the goal.** Every game and reward ties back to earning, saving or spending well.
+- **Design for two users.** Kids use it, but parents set it up, so the login flow starts with “Ask a parent”.
+
+**Next, I'd** test it with kids and parents together, to see whether the Savings Tree actually changes how often kids choose to save.

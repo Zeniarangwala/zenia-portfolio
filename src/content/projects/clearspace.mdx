@@ -30,9 +30,9 @@ I know how frustrating it is when an app doesn't account for the way you think o
 
 For people with ADHD, dyslexia or cognitive overload, dense layouts, unclear hierarchy and too many choices add stress. Passing a contrast checker doesn't fix that, so I wanted to design for how a screen feels to use, not just whether it meets the standard.
 
-## Understanding cognitive overload
+## Research: what causes cognitive overload
 
-What I took from the reading:
+I started with secondary research on cognitive load, neurodivergence and decision fatigue. What I took from it:
 
 - Clutter, dense screens and inconsistent navigation make information harder to process.
 - Most products are still designed around an “average” user, and neurodivergent people often process information differently.
@@ -48,7 +48,19 @@ Sources: Earth Coaching, UXPA Magazine, “Cognitive Load Optimization in User I
 3. **Make it easy to read.** Spacing, hierarchy and type that don't tire you out.
 4. **Guide attention, don't compete for it.** One thing on the screen should be clearly first.
 
-## Typography
+Here's what that looks like on the main task screen. A standard task list shows everything at once. Clearspace opens on one focus task and a short list of what's next.
+
+<Figure
+  src="/images/clearspace/before-after.png"
+  width={1041}
+  height={839}
+  alt="Two Clearspace phone screens on a pale lavender background: a busy task list, and a calm screen that says “Good morning, Jordan.” with one focus task."
+  caption="Left: a typical task list, where everything competes. Right: Clearspace leads with one focus task."
+/>
+
+## Design decisions
+
+### Typography
 
 Type ended up mattering more than I expected. Some fonts I tried got tiring after a few paragraphs, so I chose for open shapes and lots of space.
 
@@ -66,7 +78,7 @@ Type ended up mattering more than I expected. Some fonts I tried got tiring afte
 - **Line height, 1.7× for body:** more room between lines, so paragraphs don't look like a block.
 - **Letter spacing, +0.01–0.04em:** a little extra so letters don't run together.
 
-## Colour palette
+### Colour
 
 I wanted the palette to be calm without being washed out. Nothing neon, and only one colour (blue) means “do this”.
 
@@ -90,7 +102,7 @@ I wanted the palette to be calm without being washed out. Nothing neon, and only
 - **Amber #BE7C1C:** “check this”. It gets noticed without the panic of red.
 - **Border #D3DCE8:** light enough to separate things without adding lines everywhere.
 
-## UI components
+### Components
 
 Buttons say exactly what they do. There's one main action per screen, and anything you can't undo is labelled plainly.
 
@@ -152,9 +164,9 @@ Messages never rely on colour alone. Each one says what happened and what to do 
   />
 </Gallery>
 
-## Applied example
+## Testing the system: redesigning a sign-up form
 
-To test the system on something real, I took a standard create-account form and redesigned it. It asks for the same information. Only the experience changes.
+To see whether the system held up on something real, I took a standard create-account form and redesigned it. It asks for exactly the same information. Only the experience changes.
 
 <Figure
   src="/images/clearspace/form-before.png"
@@ -197,3 +209,11 @@ What wasn't working before:
 </Gallery>
 
 The new version splits it into three steps with one question each, written the way you'd ask a person (“What should we call you?”). Each step has helper text and a progress bar, and the password field tells you it's strong enough before you hit the button.
+
+## Takeaways
+
+- **Accessible isn't the same as compliant.** The old form would pass a contrast check and still be stressful to fill in.
+- **Constraints made it calmer.** One blue for actions, one question per step and one focus task did more than any single visual choice.
+- **Type is part of accessibility.** Line length, spacing and letterforms changed how tiring the screens felt more than I expected.
+
+**Next, I'd** design the full task flow (adding, finishing and rescheduling a task) and test it with people who have ADHD or dyslexia, comparing time and stress against a standard task app.

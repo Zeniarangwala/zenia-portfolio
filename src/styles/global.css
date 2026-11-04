@@ -945,6 +945,55 @@ main:focus {
 .case-body li + li {
   margin-top: 0.35rem;
 }
+/* Tables in case studies (research to design, old vs new story). */
+.case-body table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.case-body :is(th, td) {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+}
+.case-body th {
+  font-size: var(--fs-label);
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--tint);
+}
+.case-body tr:last-child td {
+  border-bottom: 0;
+}
+@media (max-width: 44rem) {
+  /* Three-column tables stack into one card per row; two-column tables still fit. */
+  .case-body table:has(th:nth-child(3)) thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  .case-body table:has(th:nth-child(3)) :is(tbody, tr, td) {
+    display: block;
+  }
+  .case-body table:has(th:nth-child(3)) tr {
+    border-bottom: 1px solid var(--line);
+    padding-block: 0.5rem;
+  }
+  .case-body table:has(th:nth-child(3)) tr:last-child {
+    border-bottom: 0;
+  }
+  .case-body table:has(th:nth-child(3)) td {
+    border-bottom: 0;
+    padding-block: 0.3rem;
+  }
+}
 .case-body blockquote {
   margin-inline: 0;
   padding-left: 1.25rem;
