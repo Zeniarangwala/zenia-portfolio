@@ -6,7 +6,7 @@
   flipped while the page is open, so every effect checks `calm()` as it runs
   and puts things back to rest when motion is turned off.
 
-  Pointer effects (tile parallax, card tilt, view cursor) only run with a fine
+  Pointer effects (pattern glow, card tilt, view cursor) only run with a fine
   pointer, so phones and tablets get the static page plus scroll effects.
 */
 
@@ -55,82 +55,176 @@ if (mark) {
   });
 }
 
-/* ---------- Hero tiles: drift with the pointer and scroll, by depth ---------- */
-const collage = document.querySelector<HTMLElement>('[data-collage]');
-if (collage) {
-  const tiles = Array.from(collage.querySelectorAll<HTMLElement>('.tile'));
-  const target = { x: 0, y: 0 };
-  const current = { x: 0, y: 0 };
-  let scrollOffset = 0;
-  let frame = 0;
+/* ---------- Motion toggle beside the hero pattern (WCAG 2.2.2 pause control) ---------- */
+// Shares the panel's saved "Reduce motion" choice, so both controls always agree.
+const PREFS_KEY = 'zr-prefs';
+const setPanelMotion = (reduce: boolean) => {
+  let prefs: Record<string, string> = {};
+  try {
+    prefs = JSON.parse(localStorage.getItem(PREFS_KEY) || '{}');
+  } catch {}
+  if (reduce) {
+    root.dataset.motion = 'reduce';
+    prefs.motion = 'reduce';
+  } else {
+    delete root.dataset.motion;
+    delete prefs.motion;
+  }
+  try {
+    localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
+  } catch {
+    // Storage blocked: the choice still applies to this page view.
+  }
+};
+const motionToggle = document.querySelector<HTMLButtonElement>('[data-motion-toggle]');
+if (motionToggle) {
+  const label = motionToggle.querySelector<HTMLElement>('[data-motion-label]')!;
+  const syncToggle = () => {
+    // With the device set to reduce motion nothing moves, so there is nothing to pause.
+    motionToggle.hidden = reducedQuery.matches;
+    const paused = root.dataset.motion === 'reduce';
+    label.textContent = paused ? 'Play motion' : 'Pause motion';
+    motionToggle.classList.toggle('is-paused', paused);
+  };
+  motionToggle.addEventListener('click', () => setPanelMotion(root.dataset.motion !== 'reduce'));
+  onMotionChange(syncToggle);
+  syncToggle();
+}
 
-  const paint = () => {
-    tiles.forEach((tile) => {
-      const depth = Number(tile.dataset.depth || 0.5);
-      const x = current.x * depth;
-      const y = current.y * depth - scrollOffset * depth;
-      tile.style.translate = `${x.toFixed(2)}px ${y.toFixed(2)}px`;
-    });
+/* ---------- Hero pattern: a quiet field of dots and sparkles ---------- */
+const canvas = document.querySelector<HTMLCanvasElement>('[data-pattern]');
+const ctx = canvas?.getContext('2d');
+if (canvas && ctx) {
+  const GAP = 30; // px between marks
+  const REACH = 150; // px around the mouse that lights up
+  let width = 0;
+  let height = 0;
+  let frame = 0;
+  let inView = true;
+  let time = 0;
+  let last = 0;
+  const mouse = { x: -9999, y: -9999, on: 0, target: 0 };
+  let colors = { mark: '92 87 106', accent: '46 70 209' };
+
+  const readColors = () => {
+    const css = getComputedStyle(root);
+    const rgb = (name: string, fallback: string) => {
+      const hex = css.getPropertyValue(name).trim().replace('#', '');
+      if (hex.length !== 6) return fallback;
+      return [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16)).join(' ');
+    };
+    colors = { mark: rgb('--muted', colors.mark), accent: rgb('--accent', colors.accent) };
   };
 
-  const tick = () => {
-    current.x = lerp(current.x, target.x, 0.08);
-    current.y = lerp(current.y, target.y, 0.08);
-    paint();
-    const settled = Math.abs(current.x - target.x) < 0.05 && Math.abs(current.y - target.y) < 0.05;
-    frame = settled ? 0 : requestAnimationFrame(tick);
+  const resize = () => {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    width = rect.width;
+    height = rect.height;
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    draw();
+  };
+
+  const sparkle = (x: number, y: number, r: number, turn: number) => {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(turn);
+    ctx.beginPath();
+    for (let k = 0; k < 4; k++) {
+      ctx.rotate(Math.PI / 2);
+      ctx.moveTo(0, -r);
+      ctx.quadraticCurveTo(r * 0.12, -r * 0.12, r, 0);
+    }
+    ctx.fill();
+    ctx.restore();
+  };
+
+  const draw = () => {
+    ctx.clearRect(0, 0, width, height);
+    const wide = width >= 1000;
+    const cols = Math.ceil(width / GAP) + 1;
+    const rows = Math.ceil(height / GAP) + 1;
+    const offX = (width - (cols - 1) * GAP) / 2;
+    for (let j = 0; j < rows; j++) {
+      for (let i = 0; i < cols; i++) {
+        const x = offX + i * GAP;
+        const y = j * GAP;
+        // Keep the headline side quieter; the pattern grows toward the right.
+        const fade = wide ? 0.3 + 0.7 * clamp((x / width - 0.35) / 0.4, 0, 1) : 0.55;
+        // Fade out at the top and bottom edges so the field has no hard border.
+        const edge = Math.min(1, y / 60, (height - y) / 60);
+        if (edge <= 0) continue;
+        // A slow diagonal wave.
+        const wave = (Math.sin(i * 0.35 + j * 0.25 - time * 0.6) + 1) / 2;
+        // Mouse glow.
+        const d = Math.hypot(x - mouse.x, y - mouse.y);
+        const glow = mouse.on * Math.max(0, 1 - d / REACH) ** 2 * (0.3 + 0.7 * fade);
+        const alpha = (0.1 + wave * 0.16) * fade * edge + glow * 0.6;
+        const color = glow > 0.02 ? colors.accent : colors.mark;
+        ctx.fillStyle = `rgb(${color} / ${alpha.toFixed(3)})`;
+        const isSparkle = (i + j * 3) % 11 === 0;
+        if (isSparkle) {
+          sparkle(x, y, 3.2 + wave * 1.6 + glow * 3, time * 0.25 + i);
+        } else {
+          ctx.beginPath();
+          ctx.arc(x, y, 1.1 + wave * 0.7 + glow * 1.6, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+    }
+  };
+
+  const tick = (now: number) => {
+    frame = 0;
+    if (calm() || !inView || document.hidden) return draw();
+    const dt = last ? Math.min(now - last, 100) / 1000 : 0;
+    last = now;
+    time += dt;
+    mouse.on = lerp(mouse.on, mouse.target, 0.08);
+    draw();
+    frame = requestAnimationFrame(tick);
   };
   const start = () => {
-    if (!frame) frame = requestAnimationFrame(tick);
+    if (frame || calm() || !inView) return;
+    last = 0;
+    frame = requestAnimationFrame(tick);
   };
 
-  addEventListener(
+  canvas.parentElement!.addEventListener(
     'pointermove',
     (e) => {
-      if (calm() || !finePointer.matches || e.pointerType !== 'mouse') return;
-      // ±22px at the screen edges, scaled per tile by depth.
-      target.x = (e.clientX / innerWidth - 0.5) * 44;
-      target.y = (e.clientY / innerHeight - 0.5) * 44;
-      start();
+      if (e.pointerType !== 'mouse') return;
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+      mouse.target = 1;
     },
     { passive: true },
   );
-  document.addEventListener('mouseleave', () => {
-    if (calm()) return;
-    target.x = 0;
-    target.y = 0;
+  canvas.parentElement!.addEventListener('pointerleave', () => (mouse.target = 0));
+
+  new ResizeObserver(resize).observe(canvas);
+  new IntersectionObserver(([entry]) => {
+    inView = entry.isIntersecting;
     start();
-  });
-
-  scrollEffects.push(() => {
+  }).observe(canvas);
+  document.addEventListener('visibilitychange', start);
+  // Contrast changes swap the colours; motion changes stop or restart the wave.
+  new MutationObserver(() => {
+    readColors();
+    draw();
+  }).observe(root, { attributes: true, attributeFilter: ['data-contrast'] });
+  onMotionChange(() => {
     if (calm()) {
-      cancelAnimationFrame(frame);
-      frame = 0;
-      target.x = target.y = current.x = current.y = scrollOffset = 0;
-      tiles.forEach((tile) => (tile.style.translate = ''));
-      return;
-    }
-    // Tiles rise at different speeds as the hero scrolls away.
-    scrollOffset = clamp(scrollY, 0, innerHeight) * 0.12;
-    paint();
+      mouse.on = mouse.target = 0;
+      draw();
+    } else start();
   });
-}
-
-/* ---------- Ticker: slides sideways with scroll ---------- */
-const ticker = document.querySelector<HTMLElement>('[data-ticker]');
-const track = document.querySelector<HTMLElement>('[data-ticker-track]');
-if (ticker && track) {
-  scrollEffects.push(() => {
-    if (calm()) {
-      track.style.translate = '';
-      return;
-    }
-    const rect = ticker.getBoundingClientRect();
-    if (rect.bottom < 0 || rect.top > innerHeight) return;
-    // Moves about a third of a screen width while it crosses the viewport.
-    const progress = (innerHeight - rect.top) / (innerHeight + rect.height);
-    track.style.translate = `${(-progress * innerWidth * 0.35).toFixed(1)}px 0`;
-  });
+  readColors();
+  resize();
+  start();
 }
 
 /* ---------- Footer line: words fill in as it scrolls into view ---------- */

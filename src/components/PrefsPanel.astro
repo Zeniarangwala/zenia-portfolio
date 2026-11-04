@@ -24,7 +24,7 @@ const prefs = [
     key: 'motion',
     value: 'reduce',
     name: 'Reduce motion',
-    hint: 'Stops animations. Your device’s reduced-motion setting is always respected too.',
+    hint: 'Stops all movement: the hero pattern, hover effects and scroll animations. Turn it off to bring them back.',
   },
 ];
 ---
@@ -79,9 +79,25 @@ const prefs = [
       // Storage blocked: preferences still apply for this page view.
     }
   };
+  // If the device itself asks for reduced motion, motion stays off whatever this
+  // panel says (the site always respects that setting), so the switch shows as
+  // on and locked, and its hint explains why instead of pretending it can change.
+  const deviceCalm = matchMedia('(prefers-reduced-motion: reduce)');
+  const motionHint = dialog.querySelector<HTMLElement>('#hint-motion')!;
+  const motionHintText = motionHint.textContent;
   const sync = () => {
-    boxes.forEach((box) => (box.checked = root.dataset[box.dataset.key!] === box.dataset.value));
+    boxes.forEach((box) => {
+      const locked = box.dataset.key === 'motion' && deviceCalm.matches;
+      box.checked = locked || root.dataset[box.dataset.key!] === box.dataset.value;
+      box.disabled = locked;
+    });
+    motionHint.textContent = deviceCalm.matches
+      ? 'On, because your device is set to reduce motion. Change that in your device settings to see motion here.'
+      : motionHintText;
   };
+  deviceCalm.addEventListener('change', sync);
+  // The pause button in the hero flips the same setting, so keep the switch in step.
+  new MutationObserver(sync).observe(root, { attributes: true, attributeFilter: ['data-motion'] });
 
   sync();
   toggle.addEventListener('click', () => {

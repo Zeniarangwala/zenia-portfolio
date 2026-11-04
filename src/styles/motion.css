@@ -1,5 +1,5 @@
 /*
-  Motion and interactive graphics: hero tiles, ticker band, card tilt and
+  Motion and interactive graphics: the hero pattern and its pause button, card tilt and
   sheen, the "View" cursor, the footer word fill and the header mark.
   Driven by src/scripts/motion.ts.
 
@@ -29,7 +29,12 @@
   }
 }
 
-/* ---------- Hero tiles ---------- */
+/* Keeps "them." together so the full stop never wraps onto its own line. */
+.nowrap {
+  white-space: nowrap;
+}
+
+/* ---------- Hero pattern ---------- */
 .hero {
   position: relative;
 }
@@ -39,125 +44,90 @@
   position: relative;
   z-index: 1;
 }
-.collage {
+/* Full-bleed behind the hero; the canvas itself keeps the headline side quiet. */
+.hero-pattern {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  translate: -50% 0;
+  z-index: 0;
+  pointer-events: none;
+}
+html[data-contrast='high'] .hero-pattern {
   display: none;
 }
-@media (min-width: 64rem) {
-  .hero {
-    --collage-w: min(30%, 21rem);
-  }
-  .collage {
-    display: block;
-    position: absolute;
-    top: clamp(3rem, 10vh, 6rem);
-    right: var(--gutter);
-    width: var(--collage-w);
-    aspect-ratio: 1 / 1.1;
-    pointer-events: none;
-  }
-  /* Keep the headline clear of the tiles. */
-  .hero-title {
-    max-width: min(18ch, calc(100% - var(--collage-w) - 2rem));
-  }
-}
-.tile {
+
+/* Pause / play: a real, labelled button next to the moving pattern. */
+.motion-toggle {
   position: absolute;
-  left: var(--x);
-  top: var(--y);
-  width: var(--w);
-  pointer-events: auto;
-  z-index: 0;
-}
-.tile:hover {
-  z-index: 2;
-}
-.tile-inner {
-  position: relative;
-  display: block;
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  background: var(--well);
-  box-shadow: var(--shadow-md);
-  transform: rotate(var(--r));
-  transition:
-    transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1),
-    box-shadow 0.5s ease;
-}
-.tile img {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-}
-.tile-label {
-  position: absolute;
-  left: 0.5rem;
-  bottom: 0.5rem;
-  padding: 0.1rem 0.6rem;
+  z-index: 1;
+  right: var(--gutter);
+  bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--surface);
   color: var(--text);
+  font: inherit;
   font-size: var(--fs-label);
-  font-weight: 650;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  font-weight: 600;
+  cursor: pointer;
 }
-.tile:hover .tile-label {
-  opacity: 1;
+.motion-toggle[hidden] {
+  display: none;
 }
-html[data-contrast='high'] .tile-inner {
+.motion-toggle:hover {
+  border-color: var(--accent);
+  background: var(--tint);
+}
+.motion-toggle-icon {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.motion-toggle .icon-play,
+.motion-toggle.is-paused .icon-pause {
+  display: none;
+}
+.motion-toggle.is-paused .icon-play {
+  display: inline;
+}
+html[data-contrast='high'] .motion-toggle {
   border: 2px solid #000;
 }
-@media (prefers-reduced-motion: no-preference) {
-  html:not([data-motion='reduce']) .tile {
-    will-change: translate;
-  }
-  /* Tiles settle in one by one while the headline sharpens. */
-  html:not([data-motion='reduce']) .tile-inner {
-    animation: tile-in 1s cubic-bezier(0.2, 0.7, 0.2, 1) calc(0.3s + var(--i) * 0.12s) backwards;
-  }
-  html:not([data-motion='reduce']) .tile:hover .tile-inner {
-    transform: rotate(0deg) scale(1.06);
-    box-shadow: 0 4px 8px rgb(31 27 46 / 0.06), 0 24px 48px rgb(31 27 46 / 0.16);
-  }
-}
-@keyframes tile-in {
-  from {
-    opacity: 0;
-    transform: translateY(48px) rotate(calc(var(--r) * 3)) scale(0.9);
+@media (max-width: 40rem) {
+  /* On phones the button sits under the call to action instead of over the text. */
+  .motion-toggle {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    margin-top: 1.5rem;
   }
 }
 
-/* ---------- Ticker band ---------- */
-.ticker {
-  overflow: hidden;
-  background: var(--accent);
-  color: var(--on-accent);
-  padding-block: clamp(0.75rem, 2vw, 1.25rem);
-  font-size: var(--fs-display);
-  font-weight: 650;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+/* Reduce motion locked on by the device setting (see PrefsPanel). */
+.pref:has(input:disabled) {
+  cursor: default;
 }
-.ticker-track {
-  display: flex;
-  width: max-content;
-  white-space: nowrap;
-  padding-left: var(--gutter);
+
+/* The fixed "View your way" button must never cover content or a focused
+   control (WCAG 2.4.11), so leave room for it at the page end and keep
+   keyboard focus scrolled clear of it. */
+html {
+  scroll-padding-bottom: 5rem;
 }
-.ticker-item {
-  display: inline-flex;
-  align-items: center;
-}
-.ticker-star {
-  width: 0.5em;
-  height: 0.5em;
-  margin-inline: 0.5em;
-  flex: none;
-}
-@media (prefers-reduced-motion: no-preference) {
-  html:not([data-motion='reduce']) .ticker-track {
-    will-change: translate;
-  }
+.site-footer {
+  padding-bottom: 6rem;
 }
 
 /* ---------- Work cards: tilt and sheen ---------- */
