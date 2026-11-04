@@ -1,0 +1,321 @@
+/*
+  Motion and interactive graphics: the hero pattern, card tilt and
+  sheen, the "View" cursor, the footer word fill and the header mark.
+  Driven by src/scripts/motion.ts.
+
+  Everything here is calm by default. Movement only happens inside
+  `prefers-reduced-motion: no-preference` and when the site panel's
+  "Reduce motion" is off, and global.css stops every transition and
+  animation as a backstop.
+*/
+
+/* ---------- Header mark ---------- */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.brand-mark {
+  width: 0.85em;
+  height: 0.85em;
+  flex: none;
+  color: var(--accent);
+  rotate: var(--spin, 0deg);
+  transition: transform 0.6s cubic-bezier(0.3, 0, 0.2, 1);
+}
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion='reduce']) .brand:hover .brand-mark {
+    transform: rotate(90deg) scale(1.15);
+  }
+}
+
+/* Keeps "them." together so the full stop never wraps onto its own line. */
+.nowrap {
+  white-space: nowrap;
+}
+
+/* ---------- Hero pattern ---------- */
+.hero {
+  position: relative;
+}
+.hero-title,
+.hero-meta,
+.hero-cta {
+  position: relative;
+  z-index: 1;
+}
+/* Full-bleed behind the hero; the canvas itself keeps the headline side quiet. */
+.hero-pattern {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  translate: -50% 0;
+  z-index: 0;
+  pointer-events: none;
+}
+html[data-contrast='high'] .hero-pattern {
+  display: none;
+}
+
+/* Reduce motion locked on by the device setting (see PrefsPanel). */
+.pref:has(input:disabled) {
+  cursor: default;
+}
+
+/* The fixed "View your way" button must never cover content or a focused
+   control (WCAG 2.4.11), so leave room for it at the page end and keep
+   keyboard focus scrolled clear of it. */
+html {
+  scroll-padding-bottom: 5rem;
+}
+.site-footer {
+  padding-bottom: 6rem;
+}
+
+/* ---------- Work cards: tilt and sheen ---------- */
+.card-media {
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition:
+    box-shadow 0.35s ease,
+    transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.card.is-tilting .card-media {
+  transition:
+    box-shadow 0.35s ease,
+    transform 0.15s linear;
+}
+.card-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at var(--gx, 50%) var(--gy, 50%),
+    rgb(255 255 255 / 0.32),
+    rgb(255 255 255 / 0) 55%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.card.is-tilting .card-glare {
+  opacity: 1;
+}
+html[data-contrast='high'] .card-glare {
+  display: none;
+}
+
+/* ---------- "View" cursor ---------- */
+.view-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 60;
+  width: 5.5rem;
+  height: 5.5rem;
+  margin: -2.75rem 0 0 -2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: var(--fs-label);
+  font-weight: 650;
+  box-shadow: var(--shadow-md);
+  pointer-events: none;
+  transform: scale(0);
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.view-cursor.is-visible {
+  transform: scale(1);
+}
+/* The bubble takes over from the arrow while it is showing. */
+.card.is-viewing .card-link::after {
+  cursor: none;
+}
+html[data-contrast='high'] .view-cursor {
+  border: 2px solid #fff;
+  outline: 2px solid #000;
+}
+
+/* ---------- Footer line: word fill ---------- */
+.footer-line.is-filling .word {
+  opacity: calc(0.16 + var(--fill, 0) * 0.84);
+}
+
+/* ---------- About ---------- */
+.about-hero {
+  position: relative;
+}
+.about-hero-text,
+.arch-frame {
+  position: relative;
+  z-index: 1;
+}
+
+/* Photo: a cobalt outline arch sits behind it, with a sparkle at the corner.
+   With motion on, the outline drifts against the mouse (motion.ts sets --ax/--ay)
+   and the sparkle turns as you scroll (--spark). */
+.arch-frame {
+  position: relative;
+  isolation: isolate;
+}
+.arch-echo {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border: 2px solid var(--accent);
+  border-radius: 999px 999px var(--radius) var(--radius);
+  translate: calc(14px + var(--ax, 0px)) calc(14px + var(--ay, 0px));
+}
+.arch-spark {
+  position: absolute;
+  top: 6%;
+  left: -1.4rem;
+  width: 2rem;
+  height: 2rem;
+  color: var(--accent);
+  rotate: var(--spark, 0deg);
+}
+.arch img {
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion='reduce']) .arch-frame:hover .arch img {
+    transform: scale(1.04);
+  }
+  /* The photo rises into its arch on load. */
+  html:not([data-motion='reduce']) .arch {
+    animation: arch-rise 1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s backwards;
+  }
+  html:not([data-motion='reduce']) .arch-echo {
+    animation: appear 0.8s ease-out 0.7s backwards;
+  }
+}
+@keyframes arch-rise {
+  from {
+    clip-path: inset(100% 0 0 0 round 999px 999px var(--radius) var(--radius));
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 999px 999px var(--radius) var(--radius));
+  }
+}
+@media (max-width: 40rem) {
+  /* Photo first on phones, as before the frame was added. */
+  .about-hero .arch-frame {
+    grid-row: 1;
+    justify-self: start;
+    margin-left: 1.4rem;
+  }
+}
+html[data-contrast='high'] .arch-echo {
+  border-color: #000;
+}
+
+/* Timeline: with motion on, the line draws down with scroll and each stop
+   fills in as the line reaches it. With motion off it shows as designed. */
+.timeline.is-tracking::before {
+  transform-origin: top;
+  transform: scaleY(var(--line, 0));
+}
+/* Text stays at full contrast; only the position eases in. */
+.timeline.is-tracking li {
+  translate: 0.5rem 0;
+  transition: translate 0.5s ease;
+}
+.timeline.is-tracking li::before {
+  transition: background-color 0.3s ease;
+}
+.timeline.is-tracking li.is-reached {
+  translate: 0 0;
+}
+.timeline.is-tracking li.is-reached::before {
+  background: var(--accent);
+}
+
+/* Contact cards: lift and nudge the arrow toward where it goes. */
+.contact-btn .arrow {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion='reduce']) .contact-btn {
+    transition:
+      border-color 0.25s ease,
+      box-shadow 0.25s ease,
+      translate 0.25s ease;
+  }
+  html:not([data-motion='reduce']) .contact-btn:hover {
+    translate: 0 -3px;
+  }
+  html:not([data-motion='reduce']) .contact-btn:is(:hover, :focus-visible) .arrow {
+    transform: translate(3px, -3px);
+  }
+}
+
+/* Mile Markers: distance counter, kilometre marks, runner and finish flag. */
+.miles-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+  margin-bottom: 1rem;
+}
+.miles-head h2 {
+  margin-bottom: 0;
+}
+.miles-odometer {
+  font-size: var(--fs-label);
+  font-weight: 650;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+.mile-mark circle {
+  fill: var(--tint);
+  stroke: var(--muted);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  transition:
+    fill 0.3s ease,
+    stroke 0.3s ease;
+}
+.mile-mark text {
+  font: 650 13px var(--font);
+  fill: var(--muted);
+  transition: fill 0.3s ease;
+}
+.mile-mark.is-passed circle {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+.mile-mark.is-passed text {
+  fill: var(--accent);
+}
+/* The runner is always on the route: at the start before you scroll, at the
+   flag once you finish. It glows while it is moving. */
+.miles-runner {
+  transition: filter 0.3s ease;
+}
+/* The finish flag is always shown in full; it gives one short wave when the
+   runner reaches it (well under five seconds, so no pause control needed). */
+.flag-cloth {
+  transform-box: fill-box;
+  transform-origin: left center;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion='reduce']) .miles-runner.is-running {
+    filter: drop-shadow(0 0 6px rgb(46 70 209 / 0.5));
+  }
+  html:not([data-motion='reduce']) .miles-flag.is-up .flag-cloth {
+    animation: flag-wave 0.6s ease-in-out 2;
+  }
+}
+@keyframes flag-wave {
+  50% {
+    transform: skewY(-12deg) scaleX(0.85);
+  }
+}

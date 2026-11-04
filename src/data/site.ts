@@ -1,7 +1,7 @@
 export const links = {
   email: 'zeniarangwala@gmail.com',
   linkedin: 'https://www.linkedin.com/in/zeniarangwala',
-  resume: '/resume.pdf',
+  resume: '/Rangwala_Zenia_Resume.pdf',
 };
 
 // Home page card details, keyed by project slug. Titles, covers and alt text

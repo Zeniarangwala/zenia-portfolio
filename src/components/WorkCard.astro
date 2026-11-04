@@ -43,6 +43,7 @@ const card = cards[data.slug];
     {card?.hover && (
       <img class="card-img card-img-alt" data-fit={card.hover.fit} src={card.hover.src} alt="" loading="lazy" decoding="async" />
     )}
+    <span class="card-glare" aria-hidden="true"></span>
   </div>
   <div class="card-body">
     <h3 class="card-title">

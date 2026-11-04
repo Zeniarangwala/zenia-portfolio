@@ -828,20 +828,7 @@ main:focus {
   margin-top: 1.5rem;
   overflow: visible;
 }
-@media (prefers-reduced-motion: no-preference) {
-  html.js:not([data-motion='reduce']) .miles .route-draw {
-    transition: stroke-dashoffset 2.8s ease-in-out;
-  }
-  html.js:not([data-motion='reduce']) .miles:not(.is-drawn) .route-draw {
-    stroke-dashoffset: 1;
-  }
-  html.js:not([data-motion='reduce']) .miles-flag {
-    transition: opacity 0.4s ease 2.6s;
-  }
-  html.js:not([data-motion='reduce']) .miles:not(.is-drawn) .miles-flag {
-    opacity: 0;
-  }
-}
+/* The route is drawn by scroll in src/scripts/motion.ts (About section). */
 @media (max-width: 40rem) {
   .about-hero {
     grid-template-columns: minmax(0, 1fr);
