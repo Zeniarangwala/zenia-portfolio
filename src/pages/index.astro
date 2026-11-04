@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WorkCard from '../components/WorkCard.astro';
+import HeroCollage from '../components/HeroCollage.astro';
+import Ticker from '../components/Ticker.astro';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 ---
@@ -19,7 +21,11 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
     </h1>
     <p class="hero-meta">UX Designer · Digital storyteller · AI enthusiast</p>
     <p class="hero-cta"><a href="#work">Explore my work <span aria-hidden="true">↓</span></a></p>
+
+    <HeroCollage />
   </section>
+
+  <Ticker />
 
   <section id="work" class="section wrap" aria-labelledby="work-heading" tabindex="-1">
     <div class="section-head">

@@ -1,0 +1,232 @@
+/*
+  Motion and interactive graphics: hero tiles, ticker band, card tilt and
+  sheen, the "View" cursor, the footer word fill and the header mark.
+  Driven by src/scripts/motion.ts.
+
+  Everything here is calm by default. Movement only happens inside
+  `prefers-reduced-motion: no-preference` and when the site panel's
+  "Reduce motion" is off, and global.css stops every transition and
+  animation as a backstop.
+*/
+
+/* ---------- Header mark ---------- */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.brand-mark {
+  width: 0.85em;
+  height: 0.85em;
+  flex: none;
+  color: var(--accent);
+  rotate: var(--spin, 0deg);
+  transition: transform 0.6s cubic-bezier(0.3, 0, 0.2, 1);
+}
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion='reduce']) .brand:hover .brand-mark {
+    transform: rotate(90deg) scale(1.15);
+  }
+}
+
+/* ---------- Hero tiles ---------- */
+.hero {
+  position: relative;
+}
+.hero-title,
+.hero-meta,
+.hero-cta {
+  position: relative;
+  z-index: 1;
+}
+.collage {
+  display: none;
+}
+@media (min-width: 64rem) {
+  .hero {
+    --collage-w: min(32%, 23rem);
+  }
+  .collage {
+    display: block;
+    position: absolute;
+    top: clamp(3rem, 10vh, 6rem);
+    right: var(--gutter);
+    width: var(--collage-w);
+    aspect-ratio: 1 / 1.1;
+    pointer-events: none;
+  }
+  /* Keep the headline clear of the tiles. */
+  .hero-title {
+    max-width: min(18ch, calc(100% - var(--collage-w) - 3rem));
+  }
+}
+.tile {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  pointer-events: auto;
+  z-index: 0;
+}
+.tile:hover {
+  z-index: 2;
+}
+.tile-inner {
+  position: relative;
+  display: block;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--well);
+  box-shadow: var(--shadow-md);
+  transform: rotate(var(--r));
+  transition:
+    transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.5s ease;
+}
+.tile img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+.tile-label {
+  position: absolute;
+  left: 0.5rem;
+  bottom: 0.5rem;
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: var(--fs-label);
+  font-weight: 650;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.tile:hover .tile-label {
+  opacity: 1;
+}
+html[data-contrast='high'] .tile-inner {
+  border: 2px solid #000;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion='reduce']) .tile {
+    will-change: translate;
+  }
+  /* Tiles settle in one by one while the headline sharpens. */
+  html:not([data-motion='reduce']) .tile-inner {
+    animation: tile-in 1s cubic-bezier(0.2, 0.7, 0.2, 1) calc(0.3s + var(--i) * 0.12s) backwards;
+  }
+  html:not([data-motion='reduce']) .tile:hover .tile-inner {
+    transform: rotate(0deg) scale(1.06);
+    box-shadow: 0 4px 8px rgb(31 27 46 / 0.06), 0 24px 48px rgb(31 27 46 / 0.16);
+  }
+}
+@keyframes tile-in {
+  from {
+    opacity: 0;
+    transform: translateY(48px) rotate(calc(var(--r) * 3)) scale(0.9);
+  }
+}
+
+/* ---------- Ticker band ---------- */
+.ticker {
+  overflow: hidden;
+  background: var(--accent);
+  color: var(--on-accent);
+  padding-block: clamp(0.75rem, 2vw, 1.25rem);
+  font-size: var(--fs-display);
+  font-weight: 650;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+  padding-left: var(--gutter);
+}
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+}
+.ticker-star {
+  width: 0.5em;
+  height: 0.5em;
+  margin-inline: 0.5em;
+  flex: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion='reduce']) .ticker-track {
+    will-change: translate;
+  }
+}
+
+/* ---------- Work cards: tilt and sheen ---------- */
+.card-media {
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition:
+    box-shadow 0.35s ease,
+    transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.card.is-tilting .card-media {
+  transition:
+    box-shadow 0.35s ease,
+    transform 0.15s linear;
+}
+.card-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at var(--gx, 50%) var(--gy, 50%),
+    rgb(255 255 255 / 0.32),
+    rgb(255 255 255 / 0) 55%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.card.is-tilting .card-glare {
+  opacity: 1;
+}
+html[data-contrast='high'] .card-glare {
+  display: none;
+}
+
+/* ---------- "View" cursor ---------- */
+.view-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 60;
+  width: 5.5rem;
+  height: 5.5rem;
+  margin: -2.75rem 0 0 -2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: var(--fs-label);
+  font-weight: 650;
+  box-shadow: var(--shadow-md);
+  pointer-events: none;
+  transform: scale(0);
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.view-cursor.is-visible {
+  transform: scale(1);
+}
+/* The bubble takes over from the arrow while it is showing. */
+.card.is-viewing .card-link::after {
+  cursor: none;
+}
+html[data-contrast='high'] .view-cursor {
+  border: 2px solid #fff;
+  outline: 2px solid #000;
+}
+
+/* ---------- Footer line: word fill ---------- */
+.footer-line.is-filling .word {
+  opacity: calc(0.16 + var(--fill, 0) * 0.84);
+}

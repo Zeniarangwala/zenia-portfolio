@@ -3,7 +3,9 @@ import { links } from '../data/site';
 ---
 <footer class="site-footer">
   <div class="wrap">
-    <h2 class="footer-line">Let's design something everyone can use.</h2>
+    {/* Words fill in from faint to full as the footer scrolls into view (see motion.ts).
+        The heading text itself is unchanged for screen readers. */}
+    <h2 class="footer-line" data-words>Let's design something everyone can use.</h2>
     <ul class="footer-links">
       <li><a class="btn" href={`mailto:${links.email}`}>Email <span class="btn-detail">{links.email}</span></a></li>
       <li><a class="btn btn-ghost" href={links.linkedin}>LinkedIn <span aria-hidden="true">↗</span></a></li>

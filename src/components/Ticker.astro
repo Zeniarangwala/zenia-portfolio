@@ -1,0 +1,25 @@
+---
+// A cobalt band of disciplines between the hero and the work. It only moves
+// when the visitor scrolls, so there is nothing looping on its own to pause.
+// The words repeat the project tags below, so the band is hidden from screen readers.
+const words = [
+  'UX design',
+  'Brand identity',
+  'Service design',
+  'Editorial typography',
+  'Mobile apps',
+  'Designing for the overlooked',
+];
+// Enough copies to stay full across a wide screen while it slides.
+const run = [...words, ...words, ...words];
+---
+<div class="ticker" aria-hidden="true" data-ticker>
+  <div class="ticker-track" data-ticker-track>
+    {run.map((word) => (
+      <span class="ticker-item">
+        {word}
+        <svg class="ticker-star" viewBox="0 0 24 24"><use href="#zr-mark" /></svg>
+      </span>
+    ))}
+  </div>
+</div>
