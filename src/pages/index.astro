@@ -17,14 +17,14 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
       <span class="hero-line hero-line-1">I've been the user nobody designed for.</span>
       <span class="hero-line hero-line-2">Now I design for <span class="hero-mark">them</span>.</span>
     </h1>
-    <p class="hero-meta">UX Designer</p>
+    <p class="hero-meta">UX Designer · Digital storyteller · AI enthusiast</p>
     <p class="hero-cta"><a href="#work">Explore my work <span aria-hidden="true">↓</span></a></p>
   </section>
 
   <section id="work" class="section wrap" aria-labelledby="work-heading" tabindex="-1">
     <div class="section-head">
-      <h2 id="work-heading">Selected work</h2>
-      <p class="label">{String(projects.length).padStart(2, '0')} projects</p>
+      <h2 id="work-heading">Projects</h2>
+      <p class="label">{String(projects.length).padStart(2, '0')}</p>
     </div>
     <ol class="work-grid">
       {projects.map((project, i) => <WorkCard project={project} eager={i === 0} />)}
