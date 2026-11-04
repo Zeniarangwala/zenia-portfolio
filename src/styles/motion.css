@@ -44,7 +44,7 @@
 }
 @media (min-width: 64rem) {
   .hero {
-    --collage-w: min(32%, 23rem);
+    --collage-w: min(30%, 21rem);
   }
   .collage {
     display: block;
@@ -57,7 +57,7 @@
   }
   /* Keep the headline clear of the tiles. */
   .hero-title {
-    max-width: min(18ch, calc(100% - var(--collage-w) - 3rem));
+    max-width: min(18ch, calc(100% - var(--collage-w) - 2rem));
   }
 }
 .tile {
