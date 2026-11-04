@@ -5,14 +5,14 @@ name: Arrival to Approval
 title: Making Canadian credit make sense for newcomers
 discipline: Service design · IBM capstone, University of Waterloo
 problem: "Newcomers are expected to understand Canadian credit almost right away, but nobody really teaches them how it works."
-role: "UX designer (group capstone project). TODO: Zenia to confirm — what you personally designed vs. the team"
-team: "Group project. TODO: Zenia to confirm — team size and members’ roles"
+role: "UX designer"
+team: "Group capstone with IBM, University of Waterloo"
 tools: "Figma, Canva"
 timeline: "January 2025 – April 2025"
 tldr:
   - "An IBM service design capstone: a multilingual platform that helps newcomers to Canada understand credit and build a credit history."
-  - "We designed around Priya, a grad student with savings and a job who keeps getting turned down because she has no Canadian credit score."
-  - "Short lessons, plain language, a multilingual AI chat and progress tracking make financial learning feel supportive instead of intimidating."
+  - "Research showed two gaps: newcomers are expected to understand credit without being taught, and the help that exists is formal and intimidating."
+  - "We designed around Priya, a grad student turned down for housing and a phone plan, and answered with short lessons, guided onboarding, a multilingual AI chat and visible progress."
 cover:
   src: /images/arrival-to-approval/cover-homepage-monitor.png
   width: 924
@@ -23,7 +23,7 @@ assetRequest: "Your individual contributions vs. the team's, team size, real alt
 import Figure from '../../components/Figure.astro';
 import Gallery from '../../components/Gallery.astro';
 
-## Problem
+## The problem
 
 This one was personal. I immigrated to Canada too, and I remember how confusing the money side was at first. Credit scores, credit history and what banks expect are treated like common knowledge, and it feels like everyone else learned a system you were never taught.
 
@@ -33,64 +33,62 @@ Arrival to Approval was our 4th-year IBM service design capstone: a multilingual
 
 ## Research and insights
 
-### Nobody explains how the score works
+Our research looked at three things: how newcomers make sense of the Canadian financial system, how they build a credit history, and what financial education is already out there for them.
 
-Your score decides where you can live and what you can borrow, but a lot of people arrive not knowing how it's calculated or why history matters so much. The resources we found assumed you already knew the banking terms. So we started from zero: what a score is, who looks at it, and what moves it.
+### Insight 1: Credit is treated as common knowledge
+
+Your score decides where you can live and what you can borrow, but many newcomers arrive without knowing how it's calculated or why history matters. Most resources assume you already know the banking terms.
+
+**What it meant for the design:** start from zero. What a score is, who checks it, and what moves it, before anything else.
 
 <Figure
   src="/images/arrival-to-approval/research-credit-score-range.png"
   width={687}
   height={592}
   alt="Infographic. The Canadian credit score range: very poor 300 to 500, poor 501 to 579, fair 580 to 619, average 620 to 679, good 680 to 724, very good 725 to 759, excellent 760 to 900. Canada has two credit bureaus, TransUnion and Equifax. Five factors go into your score: history of payments 35%, amount of debt 30%, credit length 15%, diversity of accounts 10% and new inquiries 10%."
-  caption="The Canadian credit score range (Wood, 2021)."
+  caption="Research reference: the Canadian credit score range (Wood, 2021). Two bureaus, TransUnion and Equifax, calculate it."
 />
 
-### The help that exists is intimidating
+### Insight 2: The help that exists is intimidating
 
-Most existing resources lean on long explanations and formal language. When you're already adjusting to a new country, that makes learning stressful. That's why we went with short lessons, conversational language and a chat you can ask anything.
+Existing resources lean on long explanations, formal language and information-heavy layouts. When you're already adjusting to a new country, that makes learning stressful and hard to follow.
+
+**What it meant for the design:** smaller lessons, conversational language, and AI guidance available throughout instead of a wall of text.
 
 <Figure
   src="/images/arrival-to-approval/research-improve-credit.png"
   width={740}
   height={818}
   alt="Infographic. Who can use your credit score: prospective lenders, utility companies, potential landlords and future employers. How to improve your credit score quickly: increase your credit limit, set up automatic payments, dispute errors, get a secured credit card, and request a copy of your credit report."
-  caption="How to improve your credit score quickly (Wood, 2021)."
+  caption="Research reference: how to improve your credit score quickly (Wood, 2021). Useful advice, but dense for someone new to the terms."
 />
 
-## Designing around real experiences
+## Persona: Priya
 
-### Meet Priya
+Recently moved to Canada for graduate school. She has savings and a part-time job, but no Canadian credit score, so she keeps getting turned down for housing and phone plans.
 
-- Recently moved to Canada for graduate school
-- Adjusting to living independently in a new country
-- Has savings and a part-time job
-- Doesn't fully understand Canadian credit history
-- Struggles with approvals for housing and phone plans because she has no Canadian credit score
-- Feels overwhelmed comparing banks, credit cards and financial advice
-- Finds financial information too formal, or written for people already familiar with the system
-- Relies on friends, Reddit or social media because she doesn't know where to start
-- Wants to feel financially confident while building a stable life in Canada
+- **Frustrated by:** comparing banks and cards, and advice written for people who already know the system.
+- **Currently relies on:** friends, Reddit and social media, because she doesn't know where to start.
+- **Wants:** to feel financially confident while building a stable life here.
 
-## Priya's user journey
-
-We mapped Priya's first months, from landing in Canada to feeling in control.
+We mapped her first months, from landing to feeling in control.
 
 <Figure
   src="/images/arrival-to-approval/journey-map-priya.png"
   width={1383}
   height={922}
   alt="Priya's user journey in five stages: arrives in Canada, tries to understand credit, faces roadblocks, seeks guidance everywhere, uses Arrival to Approval. For each stage it lists what she's doing, how she feels (from hopeful but nervous, down to stressed and discouraged, then up to more confident and in control), pain points, opportunities and touchpoints."
-  caption="Priya's journey. Her confidence drops when she hits roadblocks and only recovers once she has clear, step-by-step guidance."
+  caption="Her confidence drops at the roadblocks and only recovers once she has clear, step-by-step guidance. That low point is where the platform needed to step in."
 />
 
-## Translating research into design
+## From research to design principles
 
-The journey map turned into four decisions:
-
-1. **Small lessons.** Priya hit a wall of formal text, so lessons are short, one idea each, with a Next button.
-2. **Guided onboarding.** Most sites assume you know the system. Ours starts from the basics, like what a credit score even is.
-3. **Your language.** Newcomers come from everywhere, so the promise is in the sign-up line (“in your language”) and the chat answers in the language you ask in.
-4. **Visible progress.** Her confidence only came back once she could see she was getting somewhere, so lessons, streaks and badges track it.
+| Research finding | Design principle | How it shows up |
+|---|---|---|
+| Financial information felt too formal and overwhelming | **Make it easier to understand** | Short lessons, one idea each, with a Next button |
+| Platforms assume users already understand the system | **Make it feel supportive** | Guided onboarding that starts with “what is a credit score?” |
+| Newcomers come from many backgrounds and languages | **Accessibility and language** | “In your language” on sign-up, and a chat that answers in the language you ask in |
+| Priya's confidence only returned once she saw progress | **Help users feel progress** | Lessons completed, streaks and badges, with what's next always visible |
 
 ## User flow
 
@@ -188,35 +186,10 @@ The chat is one click away from every lesson, so you can ask about a word the mo
   />
 </Gallery>
 
-<Gallery>
-  <Figure
-    src="/images/arrival-to-approval/monitor-sign-in.png"
-    width={422}
-    height={241}
-    alt="The Sign In page shown on a desktop monitor."
-  />
-  <Figure
-    src="/images/arrival-to-approval/monitor-register.png"
-    width={422}
-    height={241}
-    alt="The Register Today page shown on a desktop monitor."
-  />
-  <Figure
-    src="/images/arrival-to-approval/monitor-lesson-1.png"
-    width={422}
-    height={241}
-    alt="Lesson 1: Benefits of Credit on a desktop monitor, with a photo of someone reviewing bills and a calculator, and the lesson list in a dark sidebar."
-  />
-  <Figure
-    src="/images/arrival-to-approval/monitor-lesson-2.png"
-    width={422}
-    height={220}
-    alt="Lesson 2: Credit Scores on a desktop monitor, with a semicircle chart of credit score ranges from Poor (300 to 574) to Excellent (741 to 900)."
-  />
-  <Figure
-    src="/images/arrival-to-approval/monitor-progress.png"
-    width={422}
-    height={245}
-    alt="The Your Progress page for Priya on a desktop monitor: 4 of 12 lessons, a 3-day streak, 2 badges earned and Lesson 3: Building Credit up next."
-  />
-</Gallery>
+## Takeaways
+
+- **Research earns its place when it changes the design.** Each principle traces back to something we found, so no feature is there just because it seemed nice.
+- **Plain language is a design decision.** The hardest part wasn't the layout. It was explaining credit without the jargon that shuts newcomers out.
+- **This one was personal.** Having gone through it myself helped me see exactly where the existing resources lose people.
+
+**Next, I'd** test the lessons and the AI chat with recent newcomers, to see whether short lessons actually build enough confidence to apply for a first card.
