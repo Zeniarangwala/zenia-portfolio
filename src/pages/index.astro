@@ -23,8 +23,8 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 
   <section id="work" class="section wrap" aria-labelledby="work-heading" tabindex="-1">
     <div class="section-head">
-      <h2 id="work-heading">Selected work</h2>
-      <p class="label">{String(projects.length).padStart(2, '0')} projects</p>
+      <h2 id="work-heading">Projects</h2>
+      <p class="label">{String(projects.length).padStart(2, '0')}</p>
     </div>
     <ol class="work-grid">
       {projects.map((project, i) => <WorkCard project={project} eager={i === 0} />)}
