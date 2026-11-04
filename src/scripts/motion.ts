@@ -301,8 +301,8 @@ if (timeline) {
 }
 
 /* ---------- About: Mile Markers, a half marathon run by scrolling ---------- */
-// The route draws in, a runner travels it, and the 3, 6 and 9 mile markers
-// light up as it passes them, while the distance counts up to 13.1 miles. All of it is
+// The route draws in, a runner travels it, and 5K / 10K / 15K markers light up
+// as it passes them, while the distance counts up to 21.1 km. All of it is
 // tied to scroll position, so it moves only when the visitor scrolls. With
 // motion off, the route shows complete and every marker is lit.
 const miles = document.querySelector<HTMLElement>('[data-miles]');
@@ -313,9 +313,9 @@ const odometer = miles?.querySelector<HTMLElement>('[data-odometer]');
 if (miles && routeDraw && route && runner && odometer) {
   const svgNS = 'http://www.w3.org/2000/svg';
   const total = route.getTotalLength();
-  const HALF = 13.1; // miles
-  const marks = [3, 6, 9].map((mi) => {
-    const at = mi / HALF;
+  const HALF = 21.1; // km
+  const marks = [5, 10, 15].map((km) => {
+    const at = km / HALF;
     const p = route.getPointAtLength(at * total);
     const g = document.createElementNS(svgNS, 'g');
     g.setAttribute('class', 'mile-mark');
@@ -325,7 +325,7 @@ if (miles && routeDraw && route && runner && odometer) {
     const label = document.createElementNS(svgNS, 'text');
     label.setAttribute('y', '-14');
     label.setAttribute('text-anchor', 'middle');
-    label.textContent = `${mi} mi`;
+    label.textContent = `${km}K`;
     g.append(dot, label);
     route.after(g);
     return { g, at };

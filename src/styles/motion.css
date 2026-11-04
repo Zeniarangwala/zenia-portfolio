@@ -295,26 +295,27 @@ html[data-contrast='high'] .arch-echo {
 .mile-mark.is-passed text {
   fill: var(--accent);
 }
+/* The runner is always on the route: at the start before you scroll, at the
+   flag once you finish. It glows while it is moving. */
 .miles-runner {
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: filter 0.3s ease;
 }
-.miles-runner.is-running {
-  opacity: 1;
-}
+/* The finish flag is always shown in full; it gives one short wave when the
+   runner reaches it (well under five seconds, so no pause control needed). */
 .flag-cloth {
   transform-box: fill-box;
   transform-origin: left center;
 }
 @media (prefers-reduced-motion: no-preference) {
-  /* The runner's halo pulses only while it is moving, i.e. while you scroll. */
   html:not([data-motion='reduce']) .miles-runner.is-running {
-    filter: drop-shadow(0 0 6px rgb(46 70 209 / 0.45));
+    filter: drop-shadow(0 0 6px rgb(46 70 209 / 0.5));
   }
-  html:not([data-motion='reduce']) .flag-cloth {
-    transition: transform 0.5s cubic-bezier(0.3, 1.6, 0.5, 1);
+  html:not([data-motion='reduce']) .miles-flag.is-up .flag-cloth {
+    animation: flag-wave 0.6s ease-in-out 2;
   }
-  html:not([data-motion='reduce']) .miles-flag:not(.is-up) .flag-cloth {
-    transform: scaleX(0.15);
+}
+@keyframes flag-wave {
+  50% {
+    transform: skewY(-12deg) scaleX(0.85);
   }
 }
