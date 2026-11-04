@@ -176,23 +176,33 @@ if (canvas && ctx) {
     }
   };
 
+  // A "still" pattern (About) has no self-running wave: it only animates while
+  // the mouse is over it, then fades the glow out and stops.
+  const still = canvas.hasAttribute('data-still');
+  const area = canvas.closest<HTMLElement>('.hero, .about-hero') ?? canvas.parentElement!;
+
   const tick = (now: number) => {
     frame = 0;
     if (calm() || !inView || document.hidden) return draw();
     const dt = last ? Math.min(now - last, 100) / 1000 : 0;
     last = now;
-    time += dt;
+    if (!still) time += dt;
     mouse.on = lerp(mouse.on, mouse.target, 0.08);
     draw();
+    if (still && mouse.target === 0 && mouse.on < 0.01) {
+      mouse.on = 0;
+      return draw();
+    }
     frame = requestAnimationFrame(tick);
   };
   const start = () => {
     if (frame || calm() || !inView) return;
+    if (still && mouse.target === 0 && mouse.on === 0) return;
     last = 0;
     frame = requestAnimationFrame(tick);
   };
 
-  canvas.parentElement!.addEventListener(
+  area.addEventListener(
     'pointermove',
     (e) => {
       if (e.pointerType !== 'mouse') return;
@@ -200,10 +210,14 @@ if (canvas && ctx) {
       mouse.x = e.clientX - rect.left;
       mouse.y = e.clientY - rect.top;
       mouse.target = 1;
+      start();
     },
     { passive: true },
   );
-  canvas.parentElement!.addEventListener('pointerleave', () => (mouse.target = 0));
+  area.addEventListener('pointerleave', () => {
+    mouse.target = 0;
+    start();
+  });
 
   new ResizeObserver(resize).observe(canvas);
   new IntersectionObserver(([entry]) => {
@@ -259,6 +273,129 @@ document.querySelectorAll<HTMLElement>('[data-words]').forEach((line) => {
     });
   });
 });
+
+/* ---------- About: photo frame drifts with the mouse; sparkle turns with scroll ---------- */
+// Only reacts to the visitor (mouse or scroll), so nothing plays on its own.
+const archFrame = document.querySelector<HTMLElement>('[data-arch]');
+if (archFrame) {
+  const hero = archFrame.closest<HTMLElement>('.about-hero') ?? archFrame;
+  const target = { x: 0, y: 0 };
+  const current = { x: 0, y: 0 };
+  let frame = 0;
+  const paint = () => {
+    archFrame.style.setProperty('--ax', `${current.x.toFixed(2)}px`);
+    archFrame.style.setProperty('--ay', `${current.y.toFixed(2)}px`);
+  };
+  const tick = () => {
+    current.x = lerp(current.x, target.x, 0.1);
+    current.y = lerp(current.y, target.y, 0.1);
+    paint();
+    const settled = Math.abs(current.x - target.x) < 0.05 && Math.abs(current.y - target.y) < 0.05;
+    frame = settled ? 0 : requestAnimationFrame(tick);
+  };
+  hero.addEventListener('pointermove', (e) => {
+    if (calm() || e.pointerType !== 'mouse') return;
+    const r = archFrame.getBoundingClientRect();
+    // Up to 10px, opposite the mouse, so the outline feels like it sits behind.
+    target.x = clamp((r.left + r.width / 2 - e.clientX) / r.width, -1, 1) * 10;
+    target.y = clamp((r.top + r.height / 2 - e.clientY) / r.height, -1, 1) * 10;
+    if (!frame) frame = requestAnimationFrame(tick);
+  });
+  hero.addEventListener('pointerleave', () => {
+    target.x = target.y = 0;
+    if (!frame) frame = requestAnimationFrame(tick);
+  });
+  scrollEffects.push(() => {
+    if (calm()) {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      target.x = target.y = current.x = current.y = 0;
+      archFrame.style.removeProperty('--ax');
+      archFrame.style.removeProperty('--ay');
+      archFrame.style.removeProperty('--spark');
+      return;
+    }
+    archFrame.style.setProperty('--spark', `${(scrollY * 0.25).toFixed(1)}deg`);
+  });
+}
+
+/* ---------- About: experience timeline draws down as you scroll ---------- */
+const timeline = document.querySelector<HTMLElement>('[data-timeline]');
+if (timeline) {
+  const items = Array.from(timeline.querySelectorAll<HTMLElement>(':scope > li'));
+  scrollEffects.push(() => {
+    if (calm()) {
+      timeline.classList.remove('is-tracking');
+      timeline.style.removeProperty('--line');
+      items.forEach((li) => li.classList.remove('is-reached'));
+      return;
+    }
+    timeline.classList.add('is-tracking');
+    const r = timeline.getBoundingClientRect();
+    // The line's tip follows a point 80% down the screen.
+    const tip = clamp(innerHeight * 0.8 - r.top, 0, r.height);
+    const atBottom = innerHeight + scrollY >= root.scrollHeight - 4;
+    const progress = atBottom ? 1 : tip / Math.max(r.height, 1);
+    timeline.style.setProperty('--line', progress.toFixed(3));
+    items.forEach((li) => {
+      const dot = li.offsetTop + 8;
+      li.classList.toggle('is-reached', atBottom || dot <= tip);
+    });
+  });
+}
+
+/* ---------- About: Mile Markers, a half marathon run by scrolling ---------- */
+// The route draws in, a runner travels it, and 5K / 10K / 15K markers light up
+// as it passes them, while the distance counts up to 21.1 km. All of it is
+// tied to scroll position, so it moves only when the visitor scrolls. With
+// motion off, the route shows complete and every marker is lit.
+const miles = document.querySelector<HTMLElement>('[data-miles]');
+const routeDraw = miles?.querySelector<SVGPathElement>('.route-draw');
+const route = miles?.querySelector<SVGPathElement>('[data-route]');
+const runner = miles?.querySelector<SVGCircleElement>('[data-runner]');
+const odometer = miles?.querySelector<HTMLElement>('[data-odometer]');
+if (miles && routeDraw && route && runner && odometer) {
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const total = route.getTotalLength();
+  const HALF = 21.1;
+  const marks = [5, 10, 15].map((km) => {
+    const at = km / HALF;
+    const p = route.getPointAtLength(at * total);
+    const g = document.createElementNS(svgNS, 'g');
+    g.setAttribute('class', 'mile-mark');
+    g.setAttribute('transform', `translate(${p.x.toFixed(1)} ${p.y.toFixed(1)})`);
+    const dot = document.createElementNS(svgNS, 'circle');
+    dot.setAttribute('r', '5');
+    const label = document.createElementNS(svgNS, 'text');
+    label.setAttribute('y', '-14');
+    label.setAttribute('text-anchor', 'middle');
+    label.textContent = `${km}K`;
+    g.append(dot, label);
+    route.after(g);
+    return { g, at };
+  });
+  const flag = miles.querySelector<SVGGElement>('.miles-flag');
+
+  scrollEffects.push(() => {
+    let progress = 1;
+    if (!calm()) {
+      const r = (route.ownerSVGElement ?? miles).getBoundingClientRect();
+      const atBottom = innerHeight + scrollY >= root.scrollHeight - 4;
+      // Starts once the route peeks in at the bottom of the screen and finishes
+      // as it rises to about the middle; the page end always finishes the run.
+      progress = atBottom ? 1 : clamp((innerHeight * 0.9 - r.top) / (innerHeight * 0.4), 0, 1);
+    }
+    const moving = !calm();
+    routeDraw.style.strokeDashoffset = String(1 - progress);
+    const p = route.getPointAtLength(progress * total);
+    runner.setAttribute('cx', p.x.toFixed(1));
+    runner.setAttribute('cy', p.y.toFixed(1));
+    runner.classList.toggle('is-running', moving && progress > 0.01 && progress < 0.995);
+    marks.forEach((m) => m.g.classList.toggle('is-passed', progress >= m.at));
+    flag?.classList.toggle('is-up', progress >= 0.995);
+    odometer.textContent = (progress * HALF).toFixed(1);
+  });
+}
 
 /* ---------- Work cards: tilt toward the pointer, with a light sheen ---------- */
 const cards = Array.from(document.querySelectorAll<HTMLElement>('.card'));
