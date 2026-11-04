@@ -597,10 +597,6 @@ main:focus {
   padding: 0;
   margin: 2rem 0 3rem;
 }
-.footer-credit {
-  font-size: var(--fs-label);
-  color: var(--muted);
-}
 @media (max-width: 30rem) {
   .footer-links .btn {
     white-space: normal;
