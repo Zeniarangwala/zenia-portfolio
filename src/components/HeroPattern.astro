@@ -3,25 +3,8 @@
 // through it, and marks near the mouse gently turn cobalt: the overlooked,
 // noticed. It is drawn by src/scripts/motion.ts and is purely decorative.
 //
-// Because the wave moves on its own for more than five seconds, WCAG 2.2.2
-// needs a way to pause it, so the button below sits right next to it. It flips
-// the same "Reduce motion" setting as the "View your way" panel, so the two
-// always agree and the choice is saved.
-//
-// `still` (used on About) drops the self-running wave and the button: the
-// pattern only reacts while the mouse moves over it, so nothing plays on its own.
-interface Props {
-  still?: boolean;
-}
-const { still = false } = Astro.props;
+// It stops completely with the device's reduced-motion setting or the
+// "Reduce motion" switch in the "View your way" panel, which is on every page
+// and reachable by keyboard (the WCAG 2.2.2 way to stop it).
 ---
-<canvas class="hero-pattern" aria-hidden="true" data-pattern data-still={still ? '' : undefined}></canvas>
-{!still && (
-  <button class="motion-toggle" type="button" data-motion-toggle hidden>
-    <svg class="motion-toggle-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path class="icon-pause" d="M8 5v14M16 5v14" />
-      <path class="icon-play" d="M7 4.5v15l12-7.5z" />
-    </svg>
-    <span data-motion-label>Pause motion</span>
-  </button>
-)}
+<canvas class="hero-pattern" aria-hidden="true" data-pattern></canvas>

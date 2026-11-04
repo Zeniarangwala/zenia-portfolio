@@ -1,5 +1,5 @@
 /*
-  Motion and interactive graphics: the hero pattern and its pause button, card tilt and
+  Motion and interactive graphics: the hero pattern, card tilt and
   sheen, the "View" cursor, the footer word fill and the header mark.
   Driven by src/scripts/motion.ts.
 
@@ -57,62 +57,6 @@
 }
 html[data-contrast='high'] .hero-pattern {
   display: none;
-}
-
-/* Pause / play: a real, labelled button next to the moving pattern. */
-.motion-toggle {
-  position: absolute;
-  z-index: 1;
-  right: var(--gutter);
-  bottom: 1rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  min-height: 2.75rem;
-  padding: 0.5rem 0.9rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--surface);
-  color: var(--text);
-  font: inherit;
-  font-size: var(--fs-label);
-  font-weight: 600;
-  cursor: pointer;
-}
-.motion-toggle[hidden] {
-  display: none;
-}
-.motion-toggle:hover {
-  border-color: var(--accent);
-  background: var(--tint);
-}
-.motion-toggle-icon {
-  width: 1rem;
-  height: 1rem;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.motion-toggle .icon-play,
-.motion-toggle.is-paused .icon-pause {
-  display: none;
-}
-.motion-toggle.is-paused .icon-play {
-  display: inline;
-}
-html[data-contrast='high'] .motion-toggle {
-  border: 2px solid #000;
-}
-@media (max-width: 40rem) {
-  /* On phones the button sits under the call to action instead of over the text. */
-  .motion-toggle {
-    position: relative;
-    right: auto;
-    bottom: auto;
-    margin-top: 1.5rem;
-  }
 }
 
 /* Reduce motion locked on by the device setting (see PrefsPanel). */

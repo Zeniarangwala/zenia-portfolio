@@ -55,42 +55,6 @@ if (mark) {
   });
 }
 
-/* ---------- Motion toggle beside the hero pattern (WCAG 2.2.2 pause control) ---------- */
-// Shares the panel's saved "Reduce motion" choice, so both controls always agree.
-const PREFS_KEY = 'zr-prefs';
-const setPanelMotion = (reduce: boolean) => {
-  let prefs: Record<string, string> = {};
-  try {
-    prefs = JSON.parse(localStorage.getItem(PREFS_KEY) || '{}');
-  } catch {}
-  if (reduce) {
-    root.dataset.motion = 'reduce';
-    prefs.motion = 'reduce';
-  } else {
-    delete root.dataset.motion;
-    delete prefs.motion;
-  }
-  try {
-    localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
-  } catch {
-    // Storage blocked: the choice still applies to this page view.
-  }
-};
-const motionToggle = document.querySelector<HTMLButtonElement>('[data-motion-toggle]');
-if (motionToggle) {
-  const label = motionToggle.querySelector<HTMLElement>('[data-motion-label]')!;
-  const syncToggle = () => {
-    // With the device set to reduce motion nothing moves, so there is nothing to pause.
-    motionToggle.hidden = reducedQuery.matches;
-    const paused = root.dataset.motion === 'reduce';
-    label.textContent = paused ? 'Play motion' : 'Pause motion';
-    motionToggle.classList.toggle('is-paused', paused);
-  };
-  motionToggle.addEventListener('click', () => setPanelMotion(root.dataset.motion !== 'reduce'));
-  onMotionChange(syncToggle);
-  syncToggle();
-}
-
 /* ---------- Hero pattern: a quiet field of dots and sparkles ---------- */
 const canvas = document.querySelector<HTMLCanvasElement>('[data-pattern]');
 const ctx = canvas?.getContext('2d');
@@ -176,9 +140,6 @@ if (canvas && ctx) {
     }
   };
 
-  // A "still" pattern (About) has no self-running wave: it only animates while
-  // the mouse is over it, then fades the glow out and stops.
-  const still = canvas.hasAttribute('data-still');
   const area = canvas.closest<HTMLElement>('.hero, .about-hero') ?? canvas.parentElement!;
 
   const tick = (now: number) => {
@@ -186,18 +147,13 @@ if (canvas && ctx) {
     if (calm() || !inView || document.hidden) return draw();
     const dt = last ? Math.min(now - last, 100) / 1000 : 0;
     last = now;
-    if (!still) time += dt;
+    time += dt;
     mouse.on = lerp(mouse.on, mouse.target, 0.08);
     draw();
-    if (still && mouse.target === 0 && mouse.on < 0.01) {
-      mouse.on = 0;
-      return draw();
-    }
     frame = requestAnimationFrame(tick);
   };
   const start = () => {
     if (frame || calm() || !inView) return;
-    if (still && mouse.target === 0 && mouse.on === 0) return;
     last = 0;
     frame = requestAnimationFrame(tick);
   };
@@ -345,8 +301,8 @@ if (timeline) {
 }
 
 /* ---------- About: Mile Markers, a half marathon run by scrolling ---------- */
-// The route draws in, a runner travels it, and 5K / 10K / 15K markers light up
-// as it passes them, while the distance counts up to 21.1 km. All of it is
+// The route draws in, a runner travels it, and the 3, 6 and 9 mile markers
+// light up as it passes them, while the distance counts up to 13.1 miles. All of it is
 // tied to scroll position, so it moves only when the visitor scrolls. With
 // motion off, the route shows complete and every marker is lit.
 const miles = document.querySelector<HTMLElement>('[data-miles]');
@@ -357,9 +313,9 @@ const odometer = miles?.querySelector<HTMLElement>('[data-odometer]');
 if (miles && routeDraw && route && runner && odometer) {
   const svgNS = 'http://www.w3.org/2000/svg';
   const total = route.getTotalLength();
-  const HALF = 21.1;
-  const marks = [5, 10, 15].map((km) => {
-    const at = km / HALF;
+  const HALF = 13.1; // miles
+  const marks = [3, 6, 9].map((mi) => {
+    const at = mi / HALF;
     const p = route.getPointAtLength(at * total);
     const g = document.createElementNS(svgNS, 'g');
     g.setAttribute('class', 'mile-mark');
@@ -369,7 +325,7 @@ if (miles && routeDraw && route && runner && odometer) {
     const label = document.createElementNS(svgNS, 'text');
     label.setAttribute('y', '-14');
     label.setAttribute('text-anchor', 'middle');
-    label.textContent = `${km}K`;
+    label.textContent = `${mi} mi`;
     g.append(dot, label);
     route.after(g);
     return { g, at };
